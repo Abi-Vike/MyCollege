@@ -19,7 +19,7 @@ password:
 
 If you've any face in bugs related to this project then you can contact us via
 
-website:       www.codingcush.com
-WhatsApp no.:  +91-9905860878
-email id:      codingcush@gmail.com
+website:       www.rvudevgroup.com
+WhatsApp no.:  +251-996113866
+email:         tomy0abr@gmail.com
 
