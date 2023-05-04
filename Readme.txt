@@ -9,12 +9,12 @@ How to run the College  Admission management System  Project
 8. For admin panel http://localhost/mycollege/admin  (admin panel)
 
 Credential for admin panel :
-username: codingcush
-password: 12345678
+username: 
+password: 
 
 Credential for user panel.
-email: codingcush@gmail.com
-password: 12345678
+email: 
+password: 
 
 
 If you've any face in bugs related to this project then you can contact us via
