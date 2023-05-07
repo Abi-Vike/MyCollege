@@ -1,10 +1,19 @@
 <?php 
 session_start();
 error_reporting(0);
+
+use phpMailer\PHPMailer\PHPMailer;
+use phpMailer\PHPMailer\Exception;
+
+require 'includes/PHPMailer/src/Exception.php';
+require 'includes/PHPMailer/src/PHPMailer.php';
+require 'includes/PHPMailer/src/SMTP.php';
 include('includes/dbconnection.php');
+
 if(isset($_POST['submit']))
   {
     $fname=$_POST['firstname'];
+    $mname=$_POST['middlename'];
     $lname=$_POST['lastname'];
     $email=$_POST['email'];
     $password=md5($_POST['password']);
@@ -14,14 +23,53 @@ if(isset($_POST['submit']))
       echo "<script>alert('This email-address is associated with another user');</script>";
     }
     else{
-      $query = mysqli_query($con, "insert into tbluser(FirstName, LastName, Email, Password) value('$fname', '$lname', '$email', '$password' )");
+      $token = bin2hex(random_bytes(16));
+      $query = mysqli_query($con, "insert into tbluser(FirstName, MiddleName, LastName, Email, Password, Token) value('$fname', '$mname', '$lname', '$email', '$password', '$token' )");
       if ($query) {
-        echo "<script>alert('You have been registered successfully');</script>";
-        header("Location: ./login.php");
+        //echo "<script>alert('You have been registered successfully');</script>";
+        //header("Location: ./login.php");
+        $mail = new PHPMailer(true);
+        $mail -> isSMTP();
+        $mail -> Host = 'smtp.gmail.com';
+        $mail -> SMTPAuth = true;
+        $mail -> Username = 'riftvalleyuniversity0@gmail.com';  // sender email
+        $mail -> Password = 'jneqfubiqenuzhsm';  // sender's gmail app password
+        $mail -> Port = 465;
+        $mail -> SMTPSecure = 'ssl';
+        $mail -> isHTML(true);
+        //$mail -> setFrom($email, $name);
+        $mail -> setFrom($email, "RVU Registrar office");
+        $mail -> addAddress($email);  // receiver's email
+        $mail -> Subject = "Please confirm your email address";
+        $mail -> Body = "Hi $fname,\n\nPlease click the following link to confirm your email address:\n\nhttp://localhost/mycollege/user/email-confirmation.php?email=$email&token=$token";
+
+        $mail -> SMTPOptions = array(   // to bypass the unable to connect to SMTP server thing
+            'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+          )
+        );
+
+        if($mail -> send()){
+          ?>
+          <script>
+            alert("Confirmation link has been sent to your email. Please check Spam box if you couldn't find it in the inbox.")
+            window.location.href = "login.php";
+          </script>';
+          <?php
+
+        }else{
+          ?>
+            <script>alert('Error.<?php $mail->ErrorInfo ?>')</script>';
+          <?php
+        }
       }
       else
       {
-        echo "<script>alert('Something Went Wrong. Please try again');</script>";
+        ?>
+            <script>alert('Something Went Wrong. Please try again.')</script>';
+        <?php
       }
     }
   }
@@ -42,7 +90,7 @@ if(isset($_POST['submit']))
 function checkpass(){
   if(document.signup.password.value!=document.signup.repeatpassword.value)
   {
-    alert('Password and Repeat Password field does not match');
+    alert('Password and Repeat Password field do not match');
     document.signup.repeatpassword.focus();
     return false;
   }
@@ -143,25 +191,26 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
               <div class="card-content">
                 <div class="card-body">
                   <form  method="post" name="signup" onSubmit="return checkpass();">
-                    <div class="row">
-                      <div class="col-12 col-sm-6 col-md-6">
-                        <fieldset class="form-group position-relative has-icon-left">
-                          <input type="text" name="firstname" id="firstname" required="true" class="form-control input-lg" placeholder="First Name" tabindex="1">
-                          <div class="form-control-position">
-                            <i class="ft-user"></i>
-                          </div>
-                        </fieldset>
+                    <fieldset class="form-group position-relative has-icon-left">
+                      <input type="text" name="firstname" id="firstname" required="true" class="form-control input-lg" placeholder="First Name" tabindex="1">
+                      <div class="form-control-position">
+                        <i class="ft-user"></i>
                       </div>
-                       
-                      <div class="col-12 col-sm-6 col-md-6">
-                        <fieldset class="form-group position-relative has-icon-left">
-                          <input type="text" name="lastname" id="lastname" required="true" class="form-control input-lg" placeholder="Last Name" tabindex="2">
-                          <div class="form-control-position">
-                            <i class="ft-user"></i>
-                          </div>
-                        </fieldset>
+                    </fieldset>
+
+                    <fieldset class="form-group position-relative has-icon-left">
+                      <input type="text" name="middlename" id="middlename" required="true" class="form-control input-lg" placeholder="Middle Name" tabindex="2">
+                      <div class="form-control-position">
+                        <i class="ft-user"></i>
                       </div>
-                    </div>
+                    </fieldset>
+                    
+                    <fieldset class="form-group position-relative has-icon-left">
+                      <input type="text" name="lastname" id="lastname" required="true" class="form-control input-lg" placeholder="Last Name" tabindex="3">
+                      <div class="form-control-position">
+                        <i class="ft-user"></i>
+                      </div>
+                    </fieldset>
                       
                     <fieldset class="form-group position-relative has-icon-left">
                       <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" required="true" required data-validation-required-message="Please enter email address.">

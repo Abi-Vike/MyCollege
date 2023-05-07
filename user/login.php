@@ -7,7 +7,7 @@ if(isset($_POST['login']))
   {
     $emailcon=$_POST['emailcont'];
     $password=md5($_POST['password']);
-    $query=mysqli_query($con,"select ID from tbluser where Email='$emailcon' && Password='$password' ");
+    $query=mysqli_query($con,"select ID from tbluser where Email='$emailcon' && Password='$password' AND status='confirmed'");
     $ret=mysqli_fetch_array($query);
     
     if($ret>0){
@@ -131,14 +131,14 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
                     
                     <form class="form-horizontal" action="" name="login"  method="post">  
                       <fieldset class="form-group position-relative has-icon-left">
-                        <input type="text" name="emailcont" id="email" class="form-control input-lg" placeholder="Email" required="true" >
+                        <input type="text" name="emailcont" id="email" class="form-control input-lg" placeholder="Email" tabindex="1" required="true" >
                         <div class="form-control-position">
                           <i class="ft-mail"></i>
                         </div>
                         <div class="help-block font-small-3"></div>
                         </fieldset>
                         <fieldset class="form-group position-relative has-icon-left">
-                          <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5" required>
+                          <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="2" required>
                           <div class="form-control-position">
                             <i class="la la-key"></i>
                           </div>
@@ -146,10 +146,10 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
                         </fieldset> 
                         <div class="row">
                           <div class="col-12 col-sm-12 col-md-12">
-                            <button type="submit" name="login" class="btn btn-info btn-lg btn-block"><i class="ft-user"></i> Login</button>
+                            <button type="submit" name="login" class="btn btn-info btn-lg btn-block" tabindex="3"><i class="ft-user"></i> Login</button>
                           </div>
                         </div>
-                        <div class="col-6 col-sm-6 col-md-6">
+                        <div class="col-6 col-sm-6 col-md-6" tabindex="4">
                           <p><a href="forget-password.php">Forgot password?</a></p>
                         </div>
                     </form>

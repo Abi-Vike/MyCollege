@@ -105,7 +105,7 @@ if(strlen($_SESSION['uid'])==0){
             <?php 
           } else{?>
             <div class="row" >
-              <div class="col-xl-10 col-lg-6 col-12">
+              <div class="col-xl-10 col-lg-12 col-12">
                 <div class="card pull-up">
                   <div class="card-content">
                     <a href="addmission-form.php">

@@ -1023,7 +1023,7 @@ only screen and (min-resolution: 2dppx) {
 }
 
 .probootstrap-section.probootstrap-section-colored {
-    background: #6a41ed;
+    background: crimson;
 }
 
 .probootstrap-section.probootstrap-section-colored .section-heading h2 {
@@ -1101,7 +1101,7 @@ only screen and (min-resolution: 2dppx) {
 
 .probootstrap-cta {
     padding: 3em 0;
-    background: #6a41ed;
+    background: crimson;
     color: #ffffff;
 }
 

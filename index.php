@@ -41,7 +41,7 @@ include_once('user/includes/dbconnection.php');
           <div class="row">
             <div class="col-lg-9 col-md-9 col-sm-9 probootstrap-top-quick-contact-info">
               <span><i class="icon-location2"></i>Gotera, AA 000, Ethiopia</span>
-              <span><i class="icon-phone2"></i>+251-999-999-99</span>
+              <span><i class="icon-phone2"></i>+251-11-111-1111</span>
               <span><i class="icon-mail"></i>info@rvu.com</span>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3 probootstrap-top-social">

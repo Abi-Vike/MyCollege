@@ -10,10 +10,6 @@
      
   <li class=" nav-item"><a href="upload-doc.php"><i class="la la-file"></i><span class="menu-title" data-i18n="nav.dash.main">Upload Docs</span></a>
         </li>
-
-
-
-
    
       </ul>
     </div>

@@ -24,11 +24,7 @@ include('includes/dbconnection.php');
       $query=mysqli_query($con, "update  tbladmapplications set AdminRemark='$admrmk',AdminStatus='$admsta' where ID='$cid'");
       if ($query) 
       {
-        //$name = htmlentities($_POST['name']);
-        //$email = htmlentities($_POST['email']);
-        //$subject = htmlentities($_POST['subject']);
-        //$message = htmlentities($_POST['message']);
-
+        
         $mail = new PHPMailer(true);
         $mail -> isSMTP();
         $mail -> Host = 'smtp.gmail.com';
