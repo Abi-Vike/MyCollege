@@ -121,13 +121,13 @@ $sdata=$_POST['searchdata'];
 <table class="table mb-0">
  <thead>
                 <tr>
-                  <th>S.NO</th>
+                  <th>S.no</th>
                   <th>Course Applied</th>
                   <th>First Name</th>
                   <th>Last Name</th>
-                   <th>Mobile Number</th>
-                   <th>Email</th>
-                   <th>Action</th>
+                  <th>Contact Number</th>
+                  <th>Email</th>
+                  <th>Action</th>
                 </tr>
               </thead>
   <?php

@@ -89,7 +89,7 @@ else{
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="dashboard.php">Dashboard</a></li>
                   <li class="breadcrumb-item active">
-                    Pending Applications
+                    Waiting List
                   </li>
                 </ol>
               </div>
@@ -115,7 +115,7 @@ else{
               </tr>
             </thead>
             <?php
-              $ret=mysqli_query($con,"select tbladmapplications.CourseApplied, tbladmapplications.ID as applicationID, tbluser.FirstName, tbluser.MiddleName, tbluser.PhoneNumber, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.AdminStatus is null");
+              $ret=mysqli_query($con,"select tbladmapplications.CourseApplied, tbladmapplications.ID as applicationID, tbluser.FirstName, tbluser.MiddleName, tbluser.PhoneNumber, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.AdminStatus is '3'");
               $cnt=1;
               
               while ($row=mysqli_fetch_array($ret)) {

@@ -116,20 +116,18 @@ CREATE TABLE `tbladmapplications` (
 
 CREATE TABLE `tbladmin` (
   `ID` int(11) NOT NULL,
-  `AdminName` varchar(120) DEFAULT NULL,
-  `AdminuserName` varchar(20) NOT NULL,
-  `MobileNumber` int(10) NOT NULL,
+  `AdminuserName` varchar(120) NOT NULL,
   `Email` varchar(120) NOT NULL,
   `Password` varchar(120) DEFAULT NULL,
   `AdminRegdate` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbladmin`
+-- Default data for table `tbladmin`
 --
 
-INSERT INTO `tbladmin` (`ID`, `AdminName`, `AdminuserName`, `MobileNumber`, `Email`, `Password`, `AdminRegdate`) VALUES
-(2, 'Abiel Abrham', 'tomy0abr@gmail.com', 1234567897, 'tomy0abr@gmail.com', 'Abi 07237626', '');
+INSERT INTO `tbladmin` (`ID`, `AdminuserName`, `Email`, `Password`, `AdminRegdate`) VALUES
+(2, 'Rift Valley University', 'riftvalleyuniversity0@gmail.com', '370cf47a6f610f08a2a34fa1fba67c34', current_timestamp());
 
 -- --------------------------------------------------------
 

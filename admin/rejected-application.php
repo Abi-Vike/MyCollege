@@ -10,12 +10,9 @@ else{
   <!DOCTYPE html>
   <html class="loading" lang="en" data-textdirection="ltr">
     <head>
-
-      <title>RVU-GADA Admission Management System||Rejected Application</title>
-      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
-      rel="stylesheet">
-      <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
-      rel="stylesheet">
+      <title>RVU-GADA Admission Management System - Rejected Application</title>
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
+      <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
       <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
       <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
@@ -83,7 +80,7 @@ else{
           <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
               <h3 class="content-header-title mb-0 d-inline-block">
-              View Application
+                Application
               </h3>
 
               <div class="row breadcrumbs-top d-inline-block">
@@ -93,7 +90,7 @@ else{
                     </li>
                 
                     <li class="breadcrumb-item active">
-                      Rejected Application
+                      Rejected Applications
                     </li>
                   </ol>
                 </div>
@@ -108,18 +105,17 @@ else{
             <table>
               <thead>
                 <tr>
-                  <th>S.NO</th>
-                  <th>Course Applied</th>
+                  <th>S.no</th>
+                  <th>Course</th>
                   <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Mobile Number</th>
+                  <th>Middle Name</th>
+                  <th>Contact Number</th>
                   <th>Email</th>
                   <th>Status</th>
-                  <th>Action</th>
                 </tr>
               </thead>
               <?php
-                $ret=mysqli_query($con,"select tbladmapplications.CourseApplied,tbladmapplications.ID as apid,tbladmapplications.AdminStatus, tbluser.FirstName,tbluser.LastName,tbluser.MobileNumber,tbluser.Email from  tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.AdminStatus='2'");
+                $ret=mysqli_query($con,"select tbladmapplications.CourseApplied, tbladmapplications.UserId as apid, tbladmapplications.AdminStatus, tbluser.FirstName, tbluser.MiddleName, tbladmapplications.PhoneNumber, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.AdminStatus='2'");
                 $cnt=1;
                 while ($row=mysqli_fetch_array($ret)) {
               ?>
@@ -128,25 +124,16 @@ else{
                 <td><?php echo $cnt;?></td>
                 <td><?php echo $row['CourseApplied'];?></td>
                 <td><?php echo $row['FirstName'];?></td>
-                <td><?php echo $row['LastName'];?></td>
-                <td><?php echo $row['MobileNumber'];?></td>
+                <td><?php echo $row['MiddleName'];?></td>
+                <td><?php echo $row['PhoneNumber'];?></td>
                 <td><?php echo $row['Email'];?></td>
-                <?php 
-                if($row['AdminStatus']==""){ ?>
-                  <td><?php echo "Not Updated Yet"; ?></td>
-                <?php 
-                }if($row['AdminStatus']=="1"){ ?>   
-                  <td><?php  echo "Selected";?></td>
-                <?php 
-                }if($row['AdminStatus']=="2"){ ?>
-                  <td><?php  echo "Rejected";?></td>
-                <?php 
-                }?>
-                
-                <td><a href="view-appform.php?aticid=<?php echo $row['apid'];?>" target="_blank">View Details</a></td>
+                <td><?php  echo "Rejected";?></td>
+                <td>
+                  <a href="view-appform.php?aticid=<?php echo $row['apid'];?>" target="_blank">View Application</a>
+                </td>
               </tr>
               <?php 
-                $cnt=$cnt+1;
+              $cnt=$cnt+1;
               }?>
             </table>
           </div>

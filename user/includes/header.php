@@ -6,7 +6,7 @@
           <li class="nav-item mr-auto">
             <a class="navbar-brand" href="dashboard.php">
         
-              <h3 class="brand-text"><img src="https://1.bp.blogspot.com/-zeWCdTyFgZ4/YMhnzVchAlI/AAAAAAAAFaA/aWBlSPn-kSEsRVVi-LmAqoDHIzsG7JoaQCLcBGAsYHQ/s0/logo.png" alt="Girl in a jacket" width="50"> JLN College</h3>
+              <h3 class="brand-text"><img src="logo.png" alt="Girl in a jacket" width="50"> Rift Valley University</h3>
             </a>
           </li>
           <li class="nav-item d-none d-md-block float-right"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i></a></li>
@@ -24,13 +24,14 @@
           <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-user nav-item">
               <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                <span class="mr-1">Hello,
+                <span class="mr-1"> Hello,
                   <?php
                     $uid=$_SESSION['uid'];
                     $ret=mysqli_query($con,"select FirstName from tbluser where ID='$uid'");
                     $row=mysqli_fetch_array($ret);
                     $name=$row['FirstName'];
-                  ?><span class="text-bold-700" ><?php echo $name; ?></span>
+                  ?>
+                  <span class="text-bold-700" ><?php echo $name; ?></span>
                 </span>
                 <span class="avatar avatar-online">
                   <img src="app-assets/images/user.png" alt="avatar"><i></i></span>

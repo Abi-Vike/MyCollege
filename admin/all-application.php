@@ -11,7 +11,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
 
-  <title>RVU-GADA Admission Management System|| All Applications</title>
+  <title>RVU-GADA Admission Management System - All Applications</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
   rel="stylesheet">
   <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
@@ -39,6 +39,36 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
       -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
       box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
     }
+    table{
+        width: 100%; 
+        max-width: 100%; 
+        overflow-x: auto; 
+        white-space: nowrap;
+      }
+      td, th{
+        padding: 15px;
+      }
+      @media only screen and (max-width: 600px) {
+        table, tbody, thead, th, td, tr {
+          display: block;
+          width: 100%;
+        }
+      
+        td {
+          border: none;
+          position: relative;
+          padding-left: 50%;
+        }
+
+        td::before {
+          content: attr(data-label);
+          position: absolute;
+          left: 0;
+          width: 50%;
+          padding-left: 8px;
+          font-weight: bold;
+        }
+      }
   </style>
 
 </head>
@@ -51,7 +81,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new">
           <h3 class="content-header-title mb-0 d-inline-block">
-           View Applications
+            View Applications
           </h3>
 
           <div class="row breadcrumbs-top d-inline-block">
@@ -61,7 +91,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
                   Dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">
-                  Pending Applications
+                  All Applications
                 </li>
               </ol>
             </div>
@@ -76,28 +106,27 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
         <table class="table mb-0">
           <thead>
             <tr>
-              <th>S.NO</th>
-              <th>Course Applied</th>
+              <th>S.no</th>
+              <th>Course</th>
               <th>First Name</th>
-              <th>Last Name</th>
-              <th>Mobile Number</th>
+              <th>Middle Name</th>
+              <th>Contact Number</th>
               <th>Email</th>
               <th>Status</th>
-              <th>Action</th>
             </tr>
           </thead>
           <?php
-              
-          $ret=mysqli_query($con,"select tbladmapplications.CourseApplied,tbladmapplications.AdminStatus,tbladmapplications.ID as apid, tbluser.FirstName,tbluser.LastName,tbluser.MobileNumber,tbluser.Email from  tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId");
+          $ret=mysqli_query($con,"select tbladmapplications.CourseApplied, tbladmapplications.AdminStatus, tbladmapplications.PhoneNumber, tbladmapplications.UserId as applicationID, tbluser.FirstName, tbluser.MiddleName, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId");
           $cnt=1;
+          
           while ($row=mysqli_fetch_array($ret)) {?>
             <tr>
               <td><?php echo $cnt;?></td>
-              <td><?php  echo $row['CourseApplied'];?></td>
-              <td><?php  echo $row['FirstName'];?></td>
-              <td><?php  echo $row['LastName'];?></td>
-              <td><?php  echo $row['MobileNumber'];?></td>
-              <td><?php  echo $row['Email'];?></td>
+              <td><?php echo $row['CourseApplied'];?></td>
+              <td><?php echo $row['FirstName'];?></td>
+              <td><?php echo $row['MiddleName'];?></td>
+              <td><?php echo $row['PhoneNumber'];?></td>
+              <td><?php echo $row['Email'];?></td>
               <?php 
               if($row['AdminStatus']==""){ ?>
                 <td>
@@ -115,7 +144,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
                 </td><?php 
               } ?>
               <td>
-                <a href="view-appform.php?aticid=<?php echo $row['apid'];?>" target="_blank">View Details</a>
+                <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">View Application</a>
               </td>
             </tr>
             <?php 

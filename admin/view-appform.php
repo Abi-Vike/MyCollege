@@ -21,10 +21,9 @@ include('includes/dbconnection.php');
       $admsta=$_POST['status'];
       $toemail=$_POST['useremail'];
 
-      $query=mysqli_query($con, "update  tbladmapplications set AdminRemark='$admrmk',AdminStatus='$admsta' where ID='$cid'");
+      $query=mysqli_query($con, "update tbladmapplications set AdminRemark='$admrmk', AdminStatus='$admsta' where UserId='$cid'");
       if ($query) 
       {
-        
         $mail = new PHPMailer(true);
         $mail -> isSMTP();
         $mail -> Host = 'smtp.gmail.com';
@@ -58,7 +57,7 @@ include('includes/dbconnection.php');
         );
 
         if($mail -> send()){
-            header("Location: ./pending-application.php");
+            header("Location: ./dashboard.php");
         }else{
           echo "<script>alert(Something's wrong my man!);</script>";
         }
@@ -154,7 +153,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
         <!-- Formatter start -->
         <?php
           $cid=$_GET['aticid'];
-          $query_person = mysqli_query($con,"select tbladmapplications.*,tbluser.FirstName,tbluser.LastName,tbluser.MobileNumber,tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.ID='$cid'");
+          $query_person = mysqli_query($con,"select tbladmapplications.*, tbluser.FirstName, tbluser.MiddleName, tbluser.LastName, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.UserId='$cid'");
           //$query_docs = mysqli_query($con,"select * from tbldocument where UserID=$cid");
           $cnt=1;
           while ($row=mysqli_fetch_array($query_person)) {
@@ -221,7 +220,16 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
               </tr>
               <tr>
                 <th>Alternative Phone Number</th>
-                <td><?php echo $row['PhoneNumber2'];?></td>
+                <td>
+                  <?php 
+                    if($row['PhoneNumber2']==""){ ?>
+                      N/A
+                      <?php 
+                    }    
+                    else{ ?>
+                      <?php echo $row['PhoneNumber2'];
+                    }?>
+                  </td>
               </tr>
               <tr>
                 <th>Email Address</th>
@@ -386,7 +394,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
             
             <table class="table mb-0">
               <tr>
-                <th colspan="2"><font color="red">Declaration : </font>I hereby state that the facts mentioned above are true to the best of my knowledge and belief.<br />
+                <th colspan="2"><font color="red">Declaration : </font>I hereby state that the information and documents I have submitted are true to the best of my knowledge and belief.<br />
                   {<?php  echo $row['Signature'];?>}
                 </th>
               </tr>
@@ -403,8 +411,9 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                   <th>Application Status :</th>
                   <td>
                     <select name="status" class="form-control wd-450" required="true" >
-                      <option value="1" selected="true">Accepted</option>
-                      <option value="2">Rejected</option>
+                      <option value="1" <?php if ($row['AdminStatus']=="1") { echo "selected"; } ?>> Accepted</option>
+                      <option value="2" <?php if ($row['AdminStatus']=="2") { echo "selected"; } ?>> Rejected</option>
+                      <option value="3" <?php if ($row['AdminStatus']=="3") { echo "selected"; } ?>> Waiting List</option>
                     </select>
                   </td>
                 </tr>
@@ -433,6 +442,10 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                         if($row['AdminStatus']=="2")
                         {
                           echo "Rejected";
+                        }
+                        if($row['AdminStatus']=="3")
+                        {
+                          echo "Waiting List";
                         }
                       ;?>
                       </td>

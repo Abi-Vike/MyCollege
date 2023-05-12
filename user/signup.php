@@ -26,6 +26,7 @@ if(isset($_POST['submit']))
       $token = bin2hex(random_bytes(16));
       $query = mysqli_query($con, "insert into tbluser(FirstName, MiddleName, LastName, Email, Password, Token) value('$fname', '$mname', '$lname', '$email', '$password', '$token' )");
       if ($query) {
+        $public_ip = file_get_contents('https://api.ipify.org');
         //echo "<script>alert('You have been registered successfully');</script>";
         //header("Location: ./login.php");
         $mail = new PHPMailer(true);
@@ -41,7 +42,8 @@ if(isset($_POST['submit']))
         $mail -> setFrom($email, "RVU Registrar office");
         $mail -> addAddress($email);  // receiver's email
         $mail -> Subject = "Please confirm your email address";
-        $mail -> Body = "Hi $fname,\n\nPlease click the following link to confirm your email address:\n\nhttp://localhost/mycollege/user/email-confirmation.php?email=$email&token=$token";
+        //$mail -> Body = "Hi $fname,\n\nPlease click the following link to confirm your email address:\n\nhttp://localhost/mycollege/user/email-confirmation.php?email=$email&token=$token";
+        $mail -> Body = "Hi $fname,\n\nPlease click the following link to confirm your email address:\n\nhttp://$public_ip/mycollege/user/email-confirmation.php?email=$email&token=$token";
 
         $mail -> SMTPOptions = array(   // to bypass the unable to connect to SMTP server thing
             'ssl' => array(
@@ -172,7 +174,6 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
         </div>
       </nav>
   <!-- ////////////////////////////////////////////////////////////////////////////-->
-
 
   <div class="app-content content">
     <div class="content-wrapper">

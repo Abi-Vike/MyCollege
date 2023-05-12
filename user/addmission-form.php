@@ -49,7 +49,6 @@ else
 
     $phone1=$_POST['phone1'];
     $phone2=$_POST['phone2'];
-    //$email=$_POST['email'];
     $marital=$_POST['marital'];
     
     $emename=$_POST['emename']; 
@@ -308,8 +307,12 @@ else
         <div class="content-body">
           <?php 
           $stuid = $_SESSION['uid'];
-          $query = mysqli_query($con,"select * from tbladmapplications where  UserId=$stuid");
+          $query = mysqli_query($con,"select * from tbladmapplications where UserId=$stuid");
           $rw = mysqli_num_rows($query);
+
+          $query_email = mysqli_query($con, "select Email from tbluser where Id=$stuid");
+          $res_email = mysqli_fetch_assoc($query_email);
+
           
           if($rw > 0){
             $query_docs = mysqli_query($con,"select * from tbldocument where  UserID=$stuid");
@@ -372,12 +375,20 @@ else
                 </tr>
                 <tr>
                   <th>Alternative Phone Number</th>
-                  <td><?php echo $row['PhoneNumber2'];?></td>
-                </tr>
+                  <td>
+                  <?php 
+                    if($row['PhoneNumber2']==""){ ?>
+                      N/A
+                      <?php 
+                    }    
+                    else{ ?>
+                      <?php echo $row['PhoneNumber2'];
+                    }?>
+                  </td>
+                </tr>   
                 <tr>
                   <th>Email Address</th>
-                  <!--<td> echo $row['Email'];?></td>  add <php and ur good to go-->
-                  <td><?php echo "Temporary one";?></td>  
+                  <td><?php echo $res_email["Email"]?></td>
                 </tr>
                 <tr>
                   <th>Marital Status</th>
@@ -468,7 +479,7 @@ else
                   </table>
                 <?php 
                 }
-            } 
+            }
             while($row = mysqli_fetch_array($query_docs)){ ?>
               <table class="table mb-0">
                 <tr>
@@ -492,7 +503,7 @@ else
                   <td>
                     <?php 
                     if($row['PostSecondaryTranscript']==""){ ?>
-                      NA
+                      N/A
                       <?php 
                     } 
                     else{ ?>
@@ -506,7 +517,7 @@ else
                   <td>
                     <?php 
                     if($row['PostSecondaryCertificate']==""){ ?>
-                      NA
+                      N/A
                       <?php 
                     } 
                     else{ ?>
@@ -520,7 +531,7 @@ else
                   <td>
                     <?php 
                     if($row['AdditionalDocuments']==""){ ?>
-                      NA
+                      N/A
                       <?php 
                     } 
                     else{ ?>
@@ -570,13 +581,10 @@ else
                     <div class="card">
                       <div class="card-header">
                         <h4 class="card-title">Undergraduate Admission Form</h4>
-
                         <div class="heading-elements">
                           <ul class="list-inline mb-0">
-                        
                             <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                             <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                            
                           </ul>
                         </div>
                       </div>

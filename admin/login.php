@@ -7,7 +7,7 @@ if(isset($_POST['login']))
   {
     $adminuser=$_POST['usernameAdmin'];
     $password=md5($_POST['password']);
-    $query=mysqli_query($con,"select ID from tbladmin where (AdminuserName='$adminuser' && Password='$password') ");
+    $query=mysqli_query($con,"select ID from tbladmin where (Email='$adminuser' && Password='$password') ");
     $ret=mysqli_fetch_array($query);
 
     if($ret>0){
@@ -17,7 +17,7 @@ if(isset($_POST['login']))
     else{
       //$error = mysqli_error($con);
       //echo "Error: $error";
-      echo "<script>alert('Invalid Details');</script>";
+      echo "<script>alert('Invalid Credentials!');</script>";
       //echo "<script type='text/javascript'> document.location ='login.php'; </script>";
     }
   }
@@ -126,7 +126,7 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
               <div class="card border-grey border-lighten-3 m-0">
                 <div class="card-header border-0 pb-0">
                    <div class="card-title text-center">
-                    <h4 style="font-weight: bold">Admin's Login</h4>
+                    <h4 style="font-weight: bold">Admin's Login Page</h4>
                   </div>
                 </div>
                 <div class="card-content">
@@ -134,27 +134,30 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
 
                     <form class="form-horizontal" action="" name="login"  method="post">
                       <fieldset class="form-group position-relative has-icon-left">
-                        <input type="text" name="usernameAdmin" id="username" class="form-control input-lg" placeholder="Admin's Username" required="true" >
+                        <input type="text" name="usernameAdmin" id="username" class="form-control input-lg" placeholder="Admin's Username or Email" tabindex="1" required="true" >
                         <div class="form-control-position">
                           <i class="ft-user"></i>
                         </div>
                         <div class="help-block font-small-3"></div>
                       </fieldset>
+                      
                       <fieldset class="form-group position-relative has-icon-left">
-                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="5" required>
+                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="2" required>
                         <div class="form-control-position">
                           <i class="la la-key"></i>
                         </div>
                         <div class="help-block font-small-3"></div>
                       </fieldset>
+                      
                       <div class="row">
                         <div class="col-12 col-sm-12 col-md-12">
-                          <button type="submit" name="login" class="btn btn-info btn-lg btn-block"><i class="ft-user"></i> Login</button>
+                          <button type="submit" name="login" class="btn btn-info btn-lg btn-block" tabindex="3"><i class="ft-user"></i> Login</button>
                         </div>
                       </div>
-                       <div class="col-6 col-sm-6 col-md-6">
+                      
+                      <div class="col-6 col-sm-6 col-md-6" tabindex="4">
                           <p><a href="forget-password.php">Forgot password?</a></p>
-                        </div>
+                      </div>
                       </div>
                     </form>
                   </div>

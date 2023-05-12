@@ -17,7 +17,7 @@ if(isset($_POST['login']))
     else{
       //$error = mysqli_error($con);
       //echo "Error: $error";
-      echo "<script>alert('Invalid Details');</script>";
+      echo "<script>alert('Invalid Credentials!');</script>";
     }
   }
   ?>
@@ -26,7 +26,7 @@ if(isset($_POST['login']))
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
-  <title>User Login
+  <title>Login Portal
   </title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles-merged.css">

@@ -6,7 +6,7 @@
           <li class="nav-item mr-auto">
             <a class="navbar-brand" href="dashboard.php">
         
-              <h3 class="brand-text"><img src="https://1.bp.blogspot.com/-zeWCdTyFgZ4/YMhnzVchAlI/AAAAAAAAFaA/aWBlSPn-kSEsRVVi-LmAqoDHIzsG7JoaQCLcBGAsYHQ/s0/logo.png" alt="Girl in a jacket" width="50"> JLN College</h3>
+              <h3 class="brand-text"><img src="https://1.bp.blogspot.com/-zeWCdTyFgZ4/YMhnzVchAlI/AAAAAAAAFaA/aWBlSPn-kSEsRVVi-LmAqoDHIzsG7JoaQCLcBGAsYHQ/s0/logo.png" alt="Girl in a jacket" width="50"> RVU - Gada</h3>
             </a>
           </li>
           <li class="nav-item d-none d-md-block float-right"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i></a></li>
@@ -25,11 +25,11 @@
             <li class="dropdown dropdown-user nav-item">
               <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                 <?php $admid=$_SESSION['aid'];?>
-                <span class="mr-1">(Admin-<?php echo json_encode($admid)?>), 
-                  <?php
-                    $ret=mysqli_query($con,"select AdminName from tbladmin where ID='$admid'");
-                    $row=mysqli_fetch_array($ret);
-                    $name=$row['AdminName'];
+                <span class="mr-1">(Admin-<?php echo json_encode($admid)?>), Registrar 
+                  <?php //might want to unblock these lines when you have multiple Admins
+                    //$ret=mysqli_query($con,"select AdminuserName from tbladmin where ID='$admid'");
+                    //$row=mysqli_fetch_array($ret);
+                    //$name=$row['AdminuserName'];
                   ?>
                   <span class="text-bold-700" ><?php echo $name; ?></span>
                 </span>
@@ -46,8 +46,8 @@
             </li>
 
             <?php 
-              $qury=mysqli_query($con,"SELECT  tbladmapplications.ID as appid,tbluser.FirstName,tbladmapplications.CourseApplieddate from tbladmapplications join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.AdminStatus is null");
-              $num=mysqli_num_rows($qury);
+              $notification_count=mysqli_query($con,"SELECT tbladmapplications.ID as appid, tbluser.FirstName, tbladmapplications.CourseApplieddate from tbladmapplications join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.AdminStatus is null");
+              $num=mysqli_num_rows($notification_count);
             ?>
 
             <li class="dropdown dropdown-notification nav-item">
@@ -65,7 +65,7 @@
                 <li class="scrollable-container media-list w-100">
 
               <?php
-              while ($row=mysqli_fetch_array($qury)) {
+              while ($row=mysqli_fetch_array($notification_count)) {
               ?>
             <a href="view-appform.php?aticid=<?php echo $row['appid'];?>">
                     <div class="media">
@@ -73,7 +73,7 @@
                       <div class="media-body">
                         <h6 class="media-heading"><b><?php echo $row['FirstName'];?></b> applied for admission</h6>
                         <small>
-<time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">at <?php echo $row['CourseApplieddate'];?></time>
+<time class="media-meta text-muted" datetime="2023-05-11T18:29:20+08:00">at <?php echo $row['CourseApplieddate'];?></time>
                         </small>
                       </div>
                     </div>
