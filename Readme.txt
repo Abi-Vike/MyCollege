@@ -1,6 +1,6 @@
 Issues
 
-*. Email Confirmation shaky - having trouble sending clients a working ip
+*. Email Confirmation working - ngrok version 3.3.0 installed on machine
 
 *. need to use either hosting / pages.github.com or port forwarding / NAT via a router
 
