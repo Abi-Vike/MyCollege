@@ -1,25 +1,9 @@
-How to run the College  Admission management System  Project
-1. Download the  zip file
-2. Extract the file and copy myCollege folder
-3.Paste inside root directory(for xampp xampp/htdocs, for wamp wamp/www, for lamp var/www/html)
-4. Open PHPMyAdmin (http://localhost/phpmyadmin)
-5. Create a database with name student_data
-6. Import student_data.sql file(given inside the zip package in database file folder)
-7.Run the script http://localhost/mycollege (frontend)
-8. For admin panel http://localhost/mycollege/admin  (admin panel)
+Issues
 
-Credential for admin panel :
-username: 
-password: 
+*. Email Confirmation shaky - having trouble sending clients a working ip
 
-Credential for user panel.
-email: 
-password: 
+*. need to use either hosting / pages.github.com or port forwarding / NAT via a router
 
+*. Most admin pages broken
 
-If you've any face in bugs related to this project then you can contact us via
-
-website:       www.rvudevgroup.com
-WhatsApp no.:  +251-996113866
-email:         tomy0abr@gmail.com
-
+****. Don't forget to export the sql when all pages start working .****
