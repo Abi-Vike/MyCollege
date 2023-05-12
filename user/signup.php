@@ -10,6 +10,41 @@ require 'includes/PHPMailer/src/PHPMailer.php';
 require 'includes/PHPMailer/src/SMTP.php';
 include('includes/dbconnection.php');
 
+// assuming "ngrok http 80" has been executed in server machine's terminal
+// Making sure that ngrok is running and also that a valid url has been generated
+
+
+// code that checks if there is an active ngrok session running
+// Define the command to check for ngrok processes
+$command = 'tasklist /FI "IMAGENAME eq ngrok.exe"';
+// Execute the command and capture its output
+$output = exec($command);
+
+// Check if ngrok is running
+if (strpos($output, 'ngrok.exe') !== false) {
+    echo '* temporarily Info * An ngrok session is running ';
+    // code to extract the ngrok generated url if exists
+    // Define the ngrok API endpoint
+    $apiEndpoint = 'http://localhost:4040/api/tunnels';
+    
+    // Get the JSON response from the API endpoint
+    $json = file_get_contents($apiEndpoint);
+    
+    // Decode the JSON response into a PHP associative array
+    $data = json_decode($json, true);
+    
+    // Get the first tunnel from the list of active tunnels
+    $tunnel = $data['tunnels'][0];
+    
+    // Get the public URL of the tunnel
+    $url = $tunnel['public_url'];
+    echo 'URL: ', $url;
+} else {
+    echo 'No ngrok session is running';
+    
+}
+
+
 if(isset($_POST['submit']))
   {
     $fname=$_POST['firstname'];
@@ -43,7 +78,7 @@ if(isset($_POST['submit']))
         $mail -> addAddress($email);  // receiver's email
         $mail -> Subject = "Please confirm your email address";
         //$mail -> Body = "Hi $fname,\n\nPlease click the following link to confirm your email address:\n\nhttp://localhost/mycollege/user/email-confirmation.php?email=$email&token=$token";
-        $mail -> Body = "Hi $fname,\n\nPlease click the following link to confirm your email address:\n\nhttp://$public_ip/mycollege/user/email-confirmation.php?email=$email&token=$token";
+        $mail -> Body = "Hi $fname,\n\nPlease click the following link to confirm your email address:\n\n$url/mycollege/user/email-confirmation.php?email=$email&token=$token";
 
         $mail -> SMTPOptions = array(   // to bypass the unable to connect to SMTP server thing
             'ssl' => array(
