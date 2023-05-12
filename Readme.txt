@@ -6,4 +6,6 @@ Issues
 
 *. Most admin pages broken
 
+*. New Page added here (admin/waitinglist.php)
+
 ****. Don't forget to export the sql when all pages start working .****
