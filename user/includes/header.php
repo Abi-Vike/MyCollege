@@ -2,14 +2,22 @@
     <div class="navbar-wrapper">
       <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
-          <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
+          <li class="nav-item mobile-menu d-md-none mr-auto">
+            <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#">
+              <i class="ft-menu font-large-1"></i>
+            </a>
+          </li>
           <li class="nav-item mr-auto">
             <a class="navbar-brand" href="dashboard.php">
         
-              <h3 class="brand-text"><img src="logo.png" alt="Girl in a jacket" width="50"> Rift Valley University</h3>
+              <h3 class="brand-text"><img src="app-assets/images/RVU-logo.png" alt="logo" width="50"> RVU - Gada</h3>
             </a>
           </li>
-          <li class="nav-item d-none d-md-block float-right"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i></a></li>
+          <li class="nav-item d-none d-md-block float-right">
+            <a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">
+              <i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i>
+            </a>
+          </li>
           <li class="nav-item d-md-none">
             <a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a>
           </li>
@@ -21,6 +29,7 @@
           <ul class="nav navbar-nav mr-auto float-left">
             <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>           
           </ul>
+
           <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-user nav-item">
               <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">

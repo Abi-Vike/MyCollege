@@ -174,7 +174,7 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="index.html" title="uiCookies:Enlight">Enlight</a>
+            </a><img src="app-assets/images/RVU-logo.png" alt="rvulogo" class="img-sm-responsive img-rounded img-fluid" style="width: auto; height: 75px; margin-top:7px" href="index.php">
           </div>
 
           <div id="navbar-collapse" class="navbar-collapse collapse">
@@ -203,14 +203,13 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
                 </ul>
               </li>
               <li><a href="contact.html">Contact</a></li>
-              <li><a href="login.php"><button class="btn btn-primary">Login</button></a></li>
             </ul>
           </div>
         </div>
       </nav>
   <!-- ////////////////////////////////////////////////////////////////////////////-->
 
-  <div class="app-content content">
+  <div class="app-content content" style="margin-top : 25px">
     <div class="content-wrapper">
       <div class="content-header row"></div>
       <div class="content-body">
@@ -221,7 +220,7 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
             <div class="card border-grey border-lighten-3 m-0">
               <div class="card-header border-0 pb-0">
                 <div class="card-title text-center">
-                  <h4 style="font-weight: bold"> Student's Signup</h4>
+                  <h4 style="font-weight: bold"> SignUp</h4>
                 </div>
               </div>
               <div class="card-content">
@@ -281,12 +280,13 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
                 
                     <div class="row">
                       <div class="col-12 col-sm-12 col-md-12">
-                        <button type="submit" name="submit" class="btn btn-info btn-lg btn-block"><i class="ft-user"></i> Register</button>
+                        <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block"><i class="ft-user"></i> Register</button>
 
                       </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-6">
-                      <p><a href="forget-password.php">Forgot password?</a></p>
+                    <br>
+                    <div class="col-12 col-sm-12 col-md-12" tabindex="4">
+                      <p style="font-weight : bold;">Already have an account ? <a href="login.php" class="text-primary">Click here to Login</a></p>
                     </div>
                   </form>
                 </div>
@@ -302,8 +302,8 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
   <!-- ////////////////////////////////////////////////////////////////////////////-->
   
   <footer class="footer fixed-bottom footer-dark navbar-border navbar-shadow text-center">
-    <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2">
-      <p style="color:grey;">Copyright (C) - 2023 | Developed By <a href="">RVU Dev-Team </a> </p>
+    <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2" style="margin-bottom : 20vh">
+      <p style="color:grey;">Copyright (C) - 2023 | Developed By <a href="index.php" class="text-primary">RVU Dev-Team </a> </p>
     </p>
   </footer>
   

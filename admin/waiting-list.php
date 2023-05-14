@@ -115,7 +115,7 @@ else{
               </tr>
             </thead>
             <?php
-              $ret=mysqli_query($con,"select tbladmapplications.CourseApplied, tbladmapplications.ID as applicationID, tbluser.FirstName, tbluser.MiddleName, tbluser.PhoneNumber, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.AdminStatus is '3'");
+              $ret=mysqli_query($con,"select tbladmapplications.CourseApplied, tbldocument.ID as docid,  tbladmapplications.UserId as applicationID, tbladmapplications.PhoneNumber, tbladmapplications.AdminStatus, tbluser.FirstName, tbluser.MiddleName, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId left join tbldocument on tbldocument.UserID=tbladmapplications.UserId where tbladmapplications.AdminStatus='3'");
               $cnt=1;
               
               while ($row=mysqli_fetch_array($ret)) {

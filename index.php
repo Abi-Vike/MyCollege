@@ -26,13 +26,6 @@ include_once('user/includes/dbconnection.php');
 
 <body>
     
-<div class="probootstrap-search" id="probootstrap-search">
-      <a href="#" class="probootstrap-close js-probootstrap-close"><i class="icon-cross"></i></a>
-      <form action="#">
-        <input type="search" name="s" id="search" placeholder="Search a keyword and hit enter...">
-      </form>
-    </div>
-    
     <div class="probootstrap-page-wrapper">
       <!-- Fixed navbar -->
       
@@ -50,7 +43,6 @@ include_once('user/includes/dbconnection.php');
                 <li><a href="#"><i class="icon-facebook2"></i></a></li>
                 <li><a href="#"><i class="icon-instagram2"></i></a></li>
                 <li><a href="#"><i class="icon-youtube"></i></a></li>
-                <li><a href="#" class="probootstrap-search-icon js-probootstrap-search"><i class="icon-search"></i></a></li>
               </ul>
             </div>
           </div>
@@ -68,44 +60,43 @@ include_once('user/includes/dbconnection.php');
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <img src="rvulogo.jpeg" alt="rvulogo" class="img-sm-responsive img-rounded img-fluid" style="width: auto; height: 100px;">
-            <!--This link was here..<a class="navbar-brand" href="index.html" title="uiCookies:Enlight">Enlight</a>-->
-            
-
           </div>
 
-          <div id="navbar-collapse" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="index.html">Home</a></li>
-
-              <li class="dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admissions</a>
-                <ul class="dropdown-menu">
-                  <li><a href="about.html">Graduate</a></li>
-                  <li><a href="courses.html">Undergraduate</a></li>
-                  <li><a href="course-single.html">Course Single</a></li>
-                  <li><a href="gallery.html">Gallery</a></li>
-                  <li class="dropdown-submenu dropdown">
-                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span>Departments</span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Computer Science</a></li>
-                      <li><a href="#">Business Adminstration</a></li>
-                      <li><a href="#">Software Engineering</a></li>
-                      <li><a href="#">Leadership and management</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="news.html">News</a></li>
-                </ul>
-              </li>
-
-
-              <li><a href="courses.html">Programs</a></li>
-              <li><a href="teachers.html">Faculty</a></li>
-              <li><a href="events.html">About us</a></li>
-              
-              <li><a href="contact.html">Contact us</a></li>
-              <li><a href="user/login.php"><button type="button" class="btn btn-primary">sign in</button></a></li>
-            </ul>
+          <div id="navbar-collapse" class="navbar-collapse collapse container">
+            <div class="container"> <!--either here or within the image. Something's not right with the logo position -->
+              <ul class="nav navbar-nav navbar-right">              
+                <img src="images/RVU-logo.png" alt="rvulogo" class="" style="width: auto; height: 90px;"> <!--either here or within the image. Something's not right with the logo position -->
+                <li class="active">
+                  <a href="index.html">Home</a>
+                </li>
+                <li class="dropdown">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admissions</a>
+                  <ul class="dropdown-menu">
+                    <li><a href="about.html">Graduate</a></li>
+                    <li><a href="courses.html">Undergraduate</a></li>
+                    <li><a href="course-single.html">Short Term Courses</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li class="dropdown-submenu dropdown">
+                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">
+                        <span>Departments</span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="#">Computer Science</a></li>
+                        <li><a href="#">Business Adminstration</a></li>
+                        <li><a href="#">Software Engineering</a></li>
+                        <li><a href="#">Leadership and management</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="news.html">News</a></li>
+                  </ul>
+                </li>
+                <li><a href="courses.html">Programs</a></li>
+                <li><a href="teachers.html">Faculty</a></li>
+                <li><a href="events.html">About us</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+                <li><a href="user/login.php"><button type="button" class="btn btn-primary">sign in</button></a></li>
+              </ul>
+            </div>            
           </div>
         </div>
       </nav>
@@ -412,7 +403,7 @@ include_once('user/includes/dbconnection.php');
                   <span class="probootstrap-meta"><i class="icon-calendar2"></i> July 10, 2017</span>
                   <h3>Computer Science</h3>
                   <p>Laboriosam pariatur modi praesentium deleniti molestiae officiis atque numquam quos quis nisi voluptatum architecto rerum error.</p>
-                  <p><a href="#" class="btn btn-primary">Enroll now</a> <span class="enrolled-count">2,928 students enrolled</span></p>
+                  <p><a href="user/dashboard.php" class="btn btn-primary">Enroll now</a> <span class="enrolled-count">2,928 students enrolled</span></p>
                 </div>
               </div>
 
@@ -601,7 +592,7 @@ include_once('user/includes/dbconnection.php');
         <div class="container">
           <div class="row">
             <div class="col-md-6 col-md-offset-3 text-center section-heading probootstrap-animate">
-              <h2>Why Choose Enlight School</h2>
+              <h2>Why Choose Rift Valley University</h2>
               <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto provident qui tempore natus quos quibusdam soluta at.</p>
             </div>
           </div>
@@ -704,7 +695,7 @@ include_once('user/includes/dbconnection.php');
               <div class="probootstrap-footer-widget">
                 <h3>Contact Info</h3>
                 <ul class="probootstrap-contact-info">
-                  <li><i class="icon-location2"></i> <span>198 West 21th Street, Suite 721 New York NY 10016</span></li>
+                  <li><i class="icon-location2"></i> <span>198 Gotera 21th Street, Addis Ababa 10016</span></li>
                   <li><i class="icon-mail"></i><span>info@domain.com</span></li>
                   <li><i class="icon-phone2"></i><span>+123 456 7890</span></li>
                 </ul>
@@ -719,9 +710,6 @@ include_once('user/includes/dbconnection.php');
         <div class="probootstrap-copyright">
           <div class="container">
             <div class="row">
-              <div class="col-md-8 text-left">
-                <p>&copy; 2017 <a href="https://uicookies.com/">uiCookies:Enlight</a>. All Rights Reserved. Designed &amp; Developed with <i class="icon icon-heart"></i> by <a href="https://uicookies.com/">uicookies.com</a></p>
-              </div>
               <div class="col-md-4 probootstrap-back-to-top">
                 <p><a href="#" class="js-backtotop">Back to top <i class="icon-arrow-long-up"></i></a></p>
               </div>

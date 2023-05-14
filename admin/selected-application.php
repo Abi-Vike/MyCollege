@@ -114,7 +114,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
                 </tr>
               </thead>
               <?php
-              $ret=mysqli_query($con,"select tbldocument.ID as docid, tbladmapplications.CourseApplied, tbladmapplications.UserId as applicationID, tbladmapplications.PhoneNumber, tbladmapplications.AdminStatus, tbluser.FirstName, tbluser.MiddleName, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId left join tbldocument on tbldocument.UserID=tbladmapplications.UserId where tbladmapplications.AdminStatus='1'");
+              $ret=mysqli_query($con,"select tbladmapplications.CourseApplied, tbldocument.ID as docid, tbladmapplications.UserId as appID, tbladmapplications.PhoneNumber, tbladmapplications.AdminStatus, tbluser.FirstName, tbluser.MiddleName, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId left join tbldocument on tbldocument.UserID=tbladmapplications.UserId where tbladmapplications.AdminStatus='1'");
               $cnt=1;
               
               while ($row=mysqli_fetch_array($ret)) {
@@ -128,7 +128,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
                   <td><?php echo $row['Email'];?></td>
                   <td><?php echo "Accepted";?></td>
                   <td>
-                    <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">View Application</a>
+                    <a href="view-appform.php?aticid=<?php echo $row['appID'];?>" target="_blank">View Application</a>
                   </td>
                 </tr>
                 <?php 

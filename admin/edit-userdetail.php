@@ -9,8 +9,11 @@ if(isset($_POST['submit']))
   {
     $sid=$_GET['udid'];
     $fname=$_POST['firstname'];
-    $lname=$_POST['lastname'];
-    $query=mysqli_query($con, "update tbluser set FirstName='$fname', LastName='$lname' where ID='$sid'");
+    $mname=$_POST['middlename'];
+    $contactNumber=$_POST['contactno'];
+
+    $query=mysqli_query($con, "update tbluser set FirstName='$fname', MiddleName='$mname' where ID='$sid'");
+    $query2 = mysqli_query($con, "update tbladmapplications set PhoneNumber='$contactNumber' where UserId='$sid'");
     if ($query) {
 
     echo '<script>alert("User profile has been updated")</script>';
@@ -26,7 +29,7 @@ if(isset($_POST['submit']))
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
 
-  <title>RVU-GADA Admission Management System-Update User Profile</title>
+  <title>RVU-GADA Registrar User-Profile</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
   rel="stylesheet">
   <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
@@ -92,7 +95,8 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 <form name="submit" method="post" enctype="multipart/form-data"> 
 <?php
 $sid=$_GET['udid'];
-$ret=mysqli_query($con,"select * from tbluser where ID='$sid'");
+//$ret=mysqli_query($con,"select * from tbluser, tbladmapplications.PhoneNumber where ID='$sid' ");
+$ret=mysqli_query($con,"select tbluser.FirstName, tbluser.MiddleName, tbluser.Email, tbladmapplications.PhoneNumber from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbluser.ID='$sid' ");
 $cnt=1;
 while ($row=mysqli_fetch_array($ret)) {
 
@@ -132,10 +136,10 @@ while ($row=mysqli_fetch_array($ret)) {
 
 <div class="col-xl-6 col-lg-12">
  <fieldset>
-  <h5>Last Name                 </h5>
+  <h5>Middle Name                 </h5>
    <div class="form-group">
 
-   <input class="form-control white_bg" id="lastname" name="lastname" value="<?php  echo $row['LastName'];?>"  type="text" required>
+   <input class="form-control white_bg" id="middlename" name="middlename" value="<?php  echo $row['MiddleName'];?>"  type="text" required>
                           </div>
                         </fieldset>
                       </div>
@@ -147,7 +151,7 @@ while ($row=mysqli_fetch_array($ret)) {
  <fieldset>
   <h5>Contact Number                   </h5>
    <div class="form-group">
-   <input class="form-control white_bg" id="contactno" name="contactno" value="<?php  echo $row['MobileNumber'];?>" type="text" maxlength='10' required readonly='true'>
+   <input class="form-control white_bg" id="contactno" name="contactno" value="<?php  echo $row['PhoneNumber'];?>" type="text" maxlength='10' required>
     </div>
 </fieldset>
                    
@@ -156,7 +160,7 @@ while ($row=mysqli_fetch_array($ret)) {
 
 <div class="col-xl-6 col-lg-12">
  <fieldset>
-  <h5>Email                </h5>
+  <h5>Email Address          </h5>
    <div class="form-group">
 
    <input class="form-control white_bg" id="email" name="email"  type="email" value="<?php  echo $row['Email'];?>" required readonly='true'>

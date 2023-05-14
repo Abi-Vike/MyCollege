@@ -39,7 +39,7 @@ if(strlen($_SESSION['uid'])==0){
           $row=mysqli_fetch_array($ret);
           $name=$row['FirstName'];
           ?>
-          <h3><font color="red">Welcome Back :</font> 
+          <h3><font color="red">Welcome</font> 
             <?php echo $name;?> 
           </h3>
           <hr />
@@ -59,17 +59,17 @@ if(strlen($_SESSION['uid'])==0){
                         <div class="media d-flex">
                           <div class="media-body text-left"> <?php 
                             if($adsts==1) {?>
-                              <h4 align="center">Your Application for admission has been accepted. Click here for details</h4>
+                              <h4 align="center">Your application status has been updated. Click here for details(1111)</h4>
                               <?php 
                             } ?> <?php 
                             
                             if($adsts==2) {?>
-                              <h4 align="center">Unfortunately, Your Application has been rejected</h4>
+                              <h4 align="center">Your application status has been updated. Click here for details(2222)</h4>
                               <?php 
                             } ?> <?php 
                             
-                            if($adsts=="") {?>
-                              <h4 align="center">Your Application is under review by the committee</h4>
+                            if($adsts=="3") {?>
+                              <h4 align="center">Your application status has been updated. Click here for details(3333)</h4>
                               <?php 
                             } ?>
                           </div>
@@ -112,7 +112,7 @@ if(strlen($_SESSION['uid'])==0){
                       <div class="card-body">
                         <div class="media d-flex">
                           <div class="media-body text-left">
-                            <h4 align="center">You have not applied for admission. Please fill the admission form.</h4>
+                            <h4 align="center">You have not yet applied for admission. Please fill the admission form.</h4>
                           </div>
                           <div>
                             <i class="icon-file success font-large-2 float-right"></i>

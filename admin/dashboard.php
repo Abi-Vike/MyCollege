@@ -51,7 +51,7 @@ if (strlen($_SESSION['aid']==0)) {
                           <h6>Available Courses</h6>
                         </div>
                         <div>
-                          <i class="icon-file success font-large-2 float-right"></i>
+                          <i class="icon-book-open success font-large-2 float-right"></i>
                         </div>
                       </div>
                       
@@ -80,7 +80,7 @@ if (strlen($_SESSION['aid']==0)) {
                           <h6>Registered Users</h6>
                         </div>
                         <div>
-                          <i class="icon-user-follow success font-large-2 float-right"></i>
+                          <i class="icon-users success font-large-2 float-right"></i>
                         </div>
                       </div>
                       
@@ -109,7 +109,7 @@ if (strlen($_SESSION['aid']==0)) {
                           <h6>All Applications</h6>
                         </div>
                         <div>
-                          <i class="icon-user-follow success font-large-2 float-right"></i>
+                          <i class="icon-docs success font-large-2 float-right"></i>
                         </div>
                       </div>
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -136,10 +136,10 @@ if (strlen($_SESSION['aid']==0)) {
                             $penapp=mysqli_num_rows($rtp);
                           ?>
                           <h3 class="info"><?php echo $penapp;?></h3>
-                          <h6>Pending Applications</h6>
+                          <h6>Pending For Review</h6>
                         </div>
                         <div>
-                          <i class="icon-file success font-large-2 float-right"></i>
+                          <i class="icon-hourglass success font-large-2 float-right"></i>
                         </div>
                       </div>
                       
@@ -168,7 +168,7 @@ if (strlen($_SESSION['aid']==0)) {
                           <h6>Accepted Applications</h6>
                         </div>
                         <div>
-                          <i class="icon-user-follow success font-large-2 float-right"></i>
+                          <i class="icon-check success font-large-2 float-right"></i>
                         </div>
                       </div>
                     
@@ -197,7 +197,7 @@ if (strlen($_SESSION['aid']==0)) {
                           <h6>Rejected Applications</h6>
                         </div>
                         <div>
-                          <i class="icon-user-follow success font-large-2 float-right"></i>
+                          <i class="icon-trash success font-large-2 float-right"></i>
                         </div>
                       </div>
                   
@@ -228,7 +228,7 @@ if (strlen($_SESSION['aid']==0)) {
                           <h6>Waiting List</h6>
                         </div>
                         <div>
-                          <i class="icon-user-follow success font-large-2 float-right"></i>
+                          <i class="icon-clock success font-large-2 float-right"></i>
                         </div>
                       </div>
                   

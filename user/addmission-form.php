@@ -480,34 +480,34 @@ else
                 <?php 
                 }
             }
-            while($row = mysqli_fetch_array($query_docs)){ ?>
+            while($row_d = mysqli_fetch_array($query_docs)){ ?>
               <table class="table mb-0">
                 <tr>
                   <th>National ID / Passport</th>
-                  <td><a href="userdocs/<?php echo $row['Passport'];?>" target="_blank">View File </a></td>
+                  <td><a href="userdocs/<?php echo $row_d['Passport'];?>" target="_blank">View File </a></td>
                 </tr>
                 <tr>
                   <th>High School Transcript</th>
-                  <td><a href="userdocs/<?php echo $row['HighSchoolTranscript'];?>" target="_blank">View File </a></td>
+                  <td><a href="userdocs/<?php echo $row_d['HighSchoolTranscript'];?>" target="_blank">View File </a></td>
                 </tr>
                 <tr>
                   <th>10th Grade National Examination Report</th>
-                  <td><a href="userdocs/<?php echo $row['TenthCertificate'];?>" target="_blank">View File </a></td>
+                  <td><a href="userdocs/<?php echo $row_d['TenthCertificate'];?>" target="_blank">View File </a></td>
                 </tr>
                 <tr>
                   <th>12th Grade National Examination Report</th>
-                  <td><a href="userdocs/<?php echo $row['TwelfthCertificate'];?>" target="_blank">View File </a></td>
+                  <td><a href="userdocs/<?php echo $row_d['TwelfthCertificate'];?>" target="_blank">View File </a></td>
                 </tr>
                 <tr>
                   <th>Post Secondary Education Transcript</th>
                   <td>
                     <?php 
-                    if($row['PostSecondaryTranscript']==""){ ?>
+                    if($row_d['PostSecondaryTranscript']==""){ ?>
                       N/A
                       <?php 
                     } 
                     else{ ?>
-                      <a href="userdocs/<?php echo $row['PostSecondaryTranscript'];?>" target="_blank">View File </a>
+                      <a href="userdocs/<?php echo $row_d['PostSecondaryTranscript'];?>" target="_blank">View File </a>
                       <?php 
                     } ?>
                   </td>
@@ -516,12 +516,12 @@ else
                   <th>Post Secondary Education Certificate</th>
                   <td>
                     <?php 
-                    if($row['PostSecondaryCertificate']==""){ ?>
+                    if($row_d['PostSecondaryCertificate']==""){ ?>
                       N/A
                       <?php 
                     } 
                     else{ ?>
-                      <a href="userdocs/<?php echo $row['PostSecondaryCertificate'];?>" target="_blank">View File </a>
+                      <a href="userdocs/<?php echo $row_d['PostSecondaryCertificate'];?>" target="_blank">View File </a>
                       <?php 
                     } ?>
                   </td>
@@ -530,31 +530,36 @@ else
                   <th>Additional Documents</th>
                   <td>
                     <?php 
-                    if($row['AdditionalDocuments']==""){ ?>
+                    if($row_d['AdditionalDocuments']==""){ ?>
                       N/A
                       <?php 
                     } 
                     else{ ?>
-                      <a href="userdocs/<?php echo $row['PostSecondaryCertificate'];?>" target="_blank">View File </a>
+                      <a href="userdocs/<?php echo $row_d['PostSecondaryCertificate'];?>" target="_blank">View File </a>
                       <?php 
                     } ?>
                   </td>
                 </tr>
               </table>
               <br>
+              <?php
+              $query = mysqli_query($con,"select * from tbladmapplications where UserId=$stuid");
+              echo $stuid; 
+              $row_s = mysqli_num_rows($query);
+              ?>
               <table class="table mb-0">
                 <tr>
                   <th>Application Status</th>
                   <td><?php 
-                    if($row['AdminStatus']==""){
+                    if($row_s['AdminStatus']==''){
                       echo "Your application is under review";
                     } 
                     
-                    if($row['AdminStatus']=="1"){
+                    if($row_s['AdminStatus']=='1'){
                       echo "Your application has been accepted";
                     }
                     
-                    if($row['AdminStatus']=="2"){
+                    if($row['AdminStatus']=='2'){
                       echo "Your application has been Rejected";
                     }
                   ?></td>
@@ -565,7 +570,7 @@ else
                 </tr>
                 <tr>
                   <th>Admission Committee's Decision Date</th>
-                  <td><?php echo $row['AdminRemarkDate'];?></td>
+                  <td><?php echo $row_s['AdminRemarkDate'];?></td>
                 </tr>
               </table>
               <?php
