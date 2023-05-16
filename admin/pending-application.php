@@ -115,7 +115,7 @@ else{
               </tr>
             </thead>
             <?php
-              $ret=mysqli_query($con,"select tbladmapplications.CourseApplied, tbladmapplications.ID as applicationID, tbluser.FirstName, tbluser.MiddleName, tbluser.PhoneNumber, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.AdminStatus is null");
+              $ret=mysqli_query($con, "select tbladmapplications.CourseApplied, tbladmapplications.UserId as appID, tbldocument.ID as docid,  tbladmapplications.PhoneNumber, tbladmapplications.AdminStatus, tbluser.FirstName, tbluser.MiddleName, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId left join tbldocument on tbldocument.UserID=tbladmapplications.UserId where tbladmapplications.AdminStatus is null");
               $cnt=1;
               
               while ($row=mysqli_fetch_array($ret)) {
@@ -128,7 +128,7 @@ else{
                   <td><?php echo $row['PhoneNumber'];?></td>
                   <td><?php echo $row['Email'];?></td>
                   <td>
-                    <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">View Application</a>
+                    <a href="view-appform.php?aticid=<?php echo $row['appID'];?>" target="_blank">View Application</a>
                   </td>
                 </tr>
                 <?php 

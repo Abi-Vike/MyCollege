@@ -8,9 +8,9 @@ include_once('user/includes/dbconnection.php');
 
 <!--Copied links -->
 <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Open+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles-merged.css">
-    <link rel="stylesheet" href="css/style.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+<link rel="stylesheet" href="css/styles-merged.css">
+<link rel="stylesheet" href="css/style.min.css">
+<link rel="stylesheet" href="css/custom.css">
  <!--COPY ENDS-->
 
 
@@ -49,10 +49,11 @@ include_once('user/includes/dbconnection.php');
         </div>
       </div>
       <nav class="navbar navbar-default probootstrap-navbar">
+
         <div class="container">
           <div class="navbar-header">
             <div class="btn-more js-btn-more visible-xs">
-              <a href="#"><i class="icon-dots-three-vertical "></i></a>
+                <a href="#"><i class="icon-dots-three-vertical "></i></a>
             </div>
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
               <span class="sr-only">Toggle navigation</span>
@@ -60,44 +61,37 @@ include_once('user/includes/dbconnection.php');
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
+            <a class="navbar-brand" href="index.php" title="uiCookies:RVU">RVU - GADA</a>
           </div>
 
-          <div id="navbar-collapse" class="navbar-collapse collapse container">
-            <div class="container"> <!--either here or within the image. Something's not right with the logo position -->
-              <ul class="nav navbar-nav navbar-right">              
-                <img src="images/RVU-logo.png" alt="rvulogo" class="" style="width: auto; height: 90px;"> <!--either here or within the image. Something's not right with the logo position -->
-                <li class="active">
-                  <a href="index.html">Home</a>
-                </li>
-                <li class="dropdown">
-                  <a href="#" data-toggle="dropdown" class="dropdown-toggle">Admissions</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="about.html">Graduate</a></li>
-                    <li><a href="courses.html">Undergraduate</a></li>
-                    <li><a href="course-single.html">Short Term Courses</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li class="dropdown-submenu dropdown">
-                      <a href="#" data-toggle="dropdown" class="dropdown-toggle">
-                        <span>Departments</span>
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a href="#">Computer Science</a></li>
-                        <li><a href="#">Business Adminstration</a></li>
-                        <li><a href="#">Software Engineering</a></li>
-                        <li><a href="#">Leadership and management</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="news.html">News</a></li>
-                  </ul>
-                </li>
-                <li><a href="courses.html">Programs</a></li>
-                <li><a href="teachers.html">Faculty</a></li>
-                <li><a href="events.html">About us</a></li>
-                <li><a href="contact.html">Contact us</a></li>
-                <li><a href="user/login.php"><button type="button" class="btn btn-primary">sign in</button></a></li>
-              </ul>
-            </div>            
+          <div id="navbar-collapse" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="index.php">Home</a></li>
+              <li><a href="courses.html">Courses</a></li>
+              <li><a href="teachers.html">Teachers</a></li>
+              <li><a href="news.html">News</a></li>
+              <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">Departments</a>
+                <ul class="dropdown-menu">
+                  <li><a href="about.html">Computer Science</a></li>
+                  <li><a href="courses.html">Business Administration</a></li>
+                  <li><a href="course-single.html">Software Engineering</a></li>
+                  <li><a href="gallery.html">Global Relations</a></li>
+                  <li class="dropdown-submenu dropdown">
+                    <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span>Short Term Courses</span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Leadership</a></li>
+                      <li><a href="#">CCNA</a></li>
+                      <li><a href="#">Python FullStack Development</a></li>
+                      <li><a href="#">Data Science with R</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><a href="contact.html">Contact Us</a></li>
+            </ul>
           </div>
+        </div>
         </div>
       </nav>
 
@@ -160,8 +154,8 @@ include_once('user/includes/dbconnection.php');
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis explicabo veniam labore ratione illo vero voluptate a deserunt incidunt odio aliquam commodi blanditiis voluptas error non rerum temporibus optio accusantium!</p>
                   <p><a href="#" class="btn btn-primary">Learn More</a></p>
                 </div>
-                <div class="probootstrap-image probootstrap-animate" style="background-image: url(img/slider_3.jpg)">
-                  <a href="https://vimeo.com/45830194" class="btn-video popup-vimeo"><i class="icon-play3"></i></a>
+                <div class="probootstrap-image probootstrap-animate" style="background-image: url(img/RVU-Vid-slider-image.jpg)">
+                  <a href="img/RVU_2022.mp4" class="btn-video popup-vimeo"><i class="icon-play3"></i></a>
                 </div>
               </div>
             </div>
@@ -729,7 +723,7 @@ include_once('user/includes/dbconnection.php');
    
     <!--footer------------->
     <footer>
-        <p>Copyright (C) - 2021 | Developed By <a href="https://codingcush.blogspot.com/">Coding Cush </a> </p>
+        <p>Copyright (C) - 2023 | Developed By <a href="#">RVU Dev-Team </a> </p>
     </footer>
 </body>
 

@@ -27,7 +27,7 @@
       <div class="navbar-container content">
         <div class="collapse navbar-collapse" id="navbar-mobile">
           <ul class="nav navbar-nav mr-auto float-left">
-            <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>           
+            <!-- gives it space and pushes the user logo to right -->
           </ul>
 
           <ul class="nav navbar-nav float-right">

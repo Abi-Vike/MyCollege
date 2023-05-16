@@ -155,7 +155,7 @@ a:hover {
 
 @media screen and (max-width:1500px) {
     .probootstrap-page-wrapper {
-        max-width: 1200px
+        max-width: 90vw
     }
     .probootstrap-page-wrapper .container {
         max-width: 1000px
@@ -164,10 +164,10 @@ a:hover {
 
 @media screen and (max-width:1200px) {
     .probootstrap-page-wrapper {
-        max-width: 960px
+        max-width: 100vw;
     }
     .probootstrap-page-wrapper .container {
-        max-width: 900px
+        max-width: 100vw
     }
 }
 
@@ -482,11 +482,12 @@ a:hover {
     padding-bottom: 0!important;
     font-size: 30px;
     text-transform: uppercase;
-    background: url(../img/logo.png) left 100% no-repeat;
-    top: 24px;
+    background: url(../img/RVU-logo.png) left 100% no-repeat;
+    background-size: contain;
+    top: 0px;
     position: relative;
-    width: 160px;
-    height: 43px;
+    width: 120px;
+    height: 80px;
     text-indent: -999999px;
     -webkit-transition: .2s all;
     transition: .2s all
@@ -494,14 +495,16 @@ a:hover {
 
 @media screen and (max-width:768px) {
     .probootstrap-navbar .navbar-brand {
-        top: 5px!important;
-        background-position: left 100%
+        margin: 5px!important;
+        margin-left: 20px!important;
+        background-position: left 100%;
+        height: 50px;
     }
 }
 
 @media screen and (max-width:480px) {
     .probootstrap-navbar .navbar-brand {
-        top: 6px!important
+        top: 0px!important;
     }
 }
 
@@ -514,8 +517,8 @@ only screen and (min-resolution:2dppx) {
         position: relative;
         width: 160px;
         height: 43px;
-        background: url(../img/logo@2x.png) left 100% no-repeat;
-        background-size: cover
+        background: url(../img/RVU-logo.png) left 100% no-repeat;
+        background-size: contain
     }
 }
 

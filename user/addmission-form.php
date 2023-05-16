@@ -544,7 +544,6 @@ else
               <br>
               <?php
               $query = mysqli_query($con,"select * from tbladmapplications where UserId=$stuid");
-              echo $stuid; 
               $row_s = mysqli_num_rows($query);
               ?>
               <table class="table mb-0">
@@ -584,11 +583,10 @@ else
                 <div class="row">
                   <div class="col-12">
                     <div class="card">
-                      <div class="card-header">
+                      <div class="card-header pb-0">
                         <h4 class="card-title">Undergraduate Admission Form</h4>
                         <div class="heading-elements">
                           <ul class="list-inline mb-0">
-                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                             <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                           </ul>
                         </div>
@@ -627,24 +625,21 @@ else
                                 <div class="form-group">
                                   <select name='admissionType' id="admissionType" class="form-control white_bg" required="true">
                                     <option value=""></option>
-                                    <option value="regular">  Regular </option>
-                                    <option value="evening">  Evening </option>
-                                    <option value="weekend">  Weekend </option>
-                                    <option value="distance"> Distance</option>
+                                    <option value="regular">  Regular  </option>
+                                    <option value="evening">  Evening  </option>
+                                    <option value="weekend">  Weekend  </option>
+                                    <option value="distance"> Distance </option>
                                   </select>
                                 </div>
                               </fieldset>
                             </div>
-                            
                           </div>
-
 
                           <div class="row" style="margin-top: 2% ">
                             <div class="col-xl-12 col-lg-12"><h4 class="card-title"><b>Personal Information</b></h4>
                               <hr style="border-top: 1px solid" />
                             </div>
                           </div>
-
 
                           <!--second row-->
                           <div class="row">

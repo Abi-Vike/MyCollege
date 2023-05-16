@@ -5,7 +5,6 @@
           <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
           <li class="nav-item mr-auto">
             <a class="navbar-brand" href="dashboard.php">
-        
               <h3 class="brand-text"><img src="app-assets/images/RVU-logo.png" alt="logo" width="50"> RVU - Gada</h3>
             </a>
           </li>
@@ -19,7 +18,7 @@
       <div class="navbar-container content">
         <div class="collapse navbar-collapse" id="navbar-mobile">
           <ul class="nav navbar-nav mr-auto float-left">
-            <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
+            <!-- creates space at the left and pushes the next content rightwards -->
           </ul>
           <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-user nav-item">
