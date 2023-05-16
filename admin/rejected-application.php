@@ -128,9 +128,6 @@ else{
                 <td><?php echo $row['PhoneNumber'];?></td>
                 <td><?php echo $row['Email'];?></td>
                 <td><?php  echo "Rejected";?></td>
-                <td>
-                  <a href="view-appform.php?aticid=<?php echo $row['apid'];?>" target="_blank">View Application</a>
-                </td>
               </tr>
               <?php 
               $cnt=$cnt+1;

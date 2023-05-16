@@ -130,22 +130,24 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
               <?php 
               if($row['AdminStatus']==""){ ?>
                 <td>
-                  <?php echo "Decision Not Made"; ?>
+                <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">Desicion Not Made</a>
                 </td><?php 
               } 
               if($row['AdminStatus']=="1"){ ?>                  
                 <td>
-                  <?php  echo "Accepted";?>
+                  <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">Accepted</a>
                 </td><?php 
               } 
               if($row['AdminStatus']=="2"){ ?>
                 <td>
-                  <?php  echo "Rejected";?>
+                  <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">Rejected</a>
+                </td><?php 
+              }
+              if($row['AdminStatus']=="3"){ ?>
+                <td>
+                  <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">Waiting List</a>
                 </td><?php 
               } ?>
-              <td>
-                <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">View Application</a>
-              </td>
             </tr>
             <?php 
             $cnt=$cnt+1;

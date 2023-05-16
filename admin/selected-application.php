@@ -127,9 +127,6 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
                   <td><?php echo $row['PhoneNumber'];?></td>
                   <td><?php echo $row['Email'];?></td>
                   <td><?php echo "Accepted";?></td>
-                  <td>
-                    <a href="view-appform.php?aticid=<?php echo $row['appID'];?>" target="_blank">View Application</a>
-                  </td>
                 </tr>
                 <?php 
                 $cnt=$cnt+1;

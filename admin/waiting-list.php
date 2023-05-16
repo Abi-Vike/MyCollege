@@ -127,9 +127,7 @@ else{
                   <td><?php echo $row['MiddleName'];?></td>
                   <td><?php echo $row['PhoneNumber'];?></td>
                   <td><?php echo $row['Email'];?></td>
-                  <td>
-                    <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">View Application</a>
-                  </td>
+                  <td><?php echo "Waiting List";?></td>
                 </tr>
                 <?php 
                 $cnt=$cnt+1;
