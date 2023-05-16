@@ -101,7 +101,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
 
       <div class="content-body">
         <!-- Input Mask start -->
-   
+        
         <!-- Formatter start -->
         <table class="table mb-0">
           <thead>
@@ -127,7 +127,8 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
               <td><?php echo $row['MiddleName'];?></td>
               <td><?php echo $row['PhoneNumber'];?></td>
               <td><?php echo $row['Email'];?></td>
-              <?php 
+              <?php
+
               if($row['AdminStatus']==""){ ?>
                 <td>
                 <a href="view-appform.php?aticid=<?php echo $row['applicationID'];?>" target="_blank">Desicion Not Made</a>
@@ -162,19 +163,12 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
   <?php include('includes/footer.php');?>
   <!-- BEGIN VENDOR JS-->
   <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-
-  <script src="app-assets/vendors/js/forms/extended/typeahead/typeahead.bundle.min.js"
-  type="text/javascript"></script>
-  <script src="app-assets/vendors/js/forms/extended/typeahead/bloodhound.min.js"
-  type="text/javascript"></script>
-  <script src="app-assets/vendors/js/forms/extended/typeahead/handlebars.js"
-  type="text/javascript"></script>
-  <script src="app-assets/vendors/js/forms/extended/inputmask/jquery.inputmask.bundle.min.js"
-  type="text/javascript"></script>
-  <script src="app-assets/vendors/js/forms/extended/formatter/formatter.min.js"
-  type="text/javascript"></script>
-  <script src="../../../app-assets/vendors/js/forms/extended/maxlength/bootstrap-maxlength.js"
-  type="text/javascript"></script>
+  <script src="app-assets/vendors/js/forms/extended/typeahead/typeahead.bundle.min.js" type="text/javascript"></script>
+  <script src="app-assets/vendors/js/forms/extended/typeahead/bloodhound.min.js" type="text/javascript"></script>
+  <script src="app-assets/vendors/js/forms/extended/typeahead/handlebars.js" type="text/javascript"></script>
+  <script src="app-assets/vendors/js/forms/extended/inputmask/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
+  <script src="app-assets/vendors/js/forms/extended/formatter/formatter.min.js" type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/forms/extended/maxlength/bootstrap-maxlength.js" type="text/javascript"></script>
   <script src="app-assets/vendors/js/forms/extended/card/jquery.card.js" type="text/javascript"></script>
   <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
   <script src="app-assets/js/core/app.js" type="text/javascript"></script>

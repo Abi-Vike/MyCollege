@@ -930,7 +930,9 @@ only screen and (min-resolution:2dppx) {
 .btn.btn-primary {
     border: 1px solid #49D292;
     background: #49D292;
-    color: #fff
+    color: #fff;
+    margin: -20px;
+    margin-left: 5px;
 }
 
 .btn.btn-primary:active,

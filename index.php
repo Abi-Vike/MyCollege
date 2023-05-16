@@ -89,6 +89,7 @@ include_once('user/includes/dbconnection.php');
                 </ul>
               </li>
               <li><a href="contact.html">Contact Us</a></li>
+              <li><a href="user/login.php"><button type="button" class="btn btn-primary">sign in</button></a></li>
             </ul>
           </div>
         </div>
