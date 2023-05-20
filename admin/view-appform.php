@@ -48,7 +48,7 @@ include('includes/dbconnection.php');
                             </body>
                               <div>
                                 <div><img src='' id='email_rvu_logo'></img></div>
-                                <div>Applicant ID $ID_i <br><br>
+                                <div>Application ID: $ID_i <br><br>
 
                                   Dear $FirstName_i, <br><br>
                                   
@@ -79,7 +79,7 @@ include('includes/dbconnection.php');
 
           if($mail -> send()){
             //header("Location: ./dashboard.php");
-            echo "<script>alert('Application status updated! ?><br><?php Email sent to applicant!');</script>";
+            echo "<script>alert('Application status updated & Email notification sent to applicant!');</script>";
             echo "<script>window.close();</script>";
           }else{
             echo "<script>alert(Something's wrong my man!)</scrip>";
