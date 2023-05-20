@@ -22,67 +22,76 @@ include('includes/dbconnection.php');
       $toemail=$_POST['useremail'];
 
       $query=mysqli_query($con, "update tbladmapplications set AdminRemark='$admrmk', AdminStatus='$admsta' where UserId='$cid'");
-      if ($query) 
-      {
-        $mail = new PHPMailer(true);
-        $mail -> isSMTP();
-        $mail -> Host = 'smtp.gmail.com';
-        $mail -> SMTPAuth = true;
-        $mail -> Username = 'riftvalleyuniversity0@gmail.com';  // sender email
-        $mail -> Password = 'jneqfubiqenuzhsm';  // sender's gmail app password
-        $mail -> Port = 465;
-        $mail -> SMTPSecure = 'ssl';
-        $mail -> isHTML(true);
-        //$mail -> setFrom($email, $name);
-        $mail -> setFrom($toemail, "RVU Registrar office");
-        $mail -> addAddress($toemail);  // receiver's emails 
-        $mail -> Subject = "Response To Admission Application";
-        $mail -> Body = "<html>
-                          </body>
-                            <div>
-                              <div>Hello,</div><br><br>
-                              <div style='padding-top:8px;'>
-                                Your Admission application has been $admsta<br>
-                                <strong>Admin Remark: </strong> $admrmk 
-                              </div>
-                            </div>
-                          </body>
-                        </html>";
-        $mail -> SMTPOptions = array(   // to bypass the unable to connect to SMTP server thing
-            'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-          )
-        );
+      if ($query){
+        $query_email_info = mysqli_query($con,"select * from tbladmapplications where tbladmapplications.UserId='$cid'");
+        
+        if ($info=mysqli_fetch_array($query_email_info)){
+          $ID_i = $info['ID'];
+          $CourseApplied_i = $info['CourseApplied'];
+          $AdmissionType_i = $info['AdmissionType'];
+          $FirstName_i = $info['FirstName'];
 
-        if($mail -> send()){
-            header("Location: ./dashboard.php");
-        }else{
-          echo "<script>alert(Something's wrong my man!);</script>";
+          $mail = new PHPMailer(true);
+          $mail -> isSMTP();
+          $mail -> Host = 'smtp.gmail.com';
+          $mail -> SMTPAuth = true;
+          $mail -> Username = 'riftvalleyuniversity0@gmail.com';  // sender email
+          $mail -> Password = 'jneqfubiqenuzhsm';  // sender's gmail app password
+          $mail -> Port = 465;
+          $mail -> SMTPSecure = 'ssl';
+          $mail -> isHTML(true);
+          //$mail -> setFrom($email, $name);
+          $mail -> setFrom($toemail, "RVU Registrar office");
+          $mail -> addAddress($toemail);  // receiver's emails 
+          $mail -> Subject = "Response To Admission Application";
+          $mail -> Body = "<html>
+                            </body>
+                              <div>
+                                <div><img src='' id='email_rvu_logo'></img></div>
+                                <div>Applicant ID $ID_i <br><br>
+
+                                  Dear $FirstName_i, <br><br>
+                                  
+                                  Re: Application to $CourseApplied_i, $AdmissionType_i program<br><br>
+                                  
+                                  We’re writing to let you know that we’ve updated your $CourseApplied_i application. <br><br>
+                                  
+                                  You can review this update by logging on to your <a href='#'>applicant portal</a>. <br><br>
+                                  
+                                  If you have any questions about your application or the admissions process, please don’t 
+                                  
+                                  hesitate to contact us through your applicant portal. <br><br>
+                                  
+                                  Kind regards, <br><br>
+                                  
+                                  Rift Valley University Admissions Team
+                                </div>
+                              </div>
+                            </body>
+                          </html>";
+          $mail -> SMTPOptions = array(   // to bypass the unable to connect to SMTP server thing
+              'ssl' => array(
+              'verify_peer' => false,
+              'verify_peer_name' => false,
+              'allow_self_signed' => true
+            )
+          );
+
+          if($mail -> send()){
+            //header("Location: ./dashboard.php");
+            echo "<script>alert('Application status updated! ?><br><?php Email sent to applicant!');</script>";
+            echo "<script>window.close();</script>";
+          }else{
+            echo "<script>alert(Something's wrong my man!)</scrip>";
+          }
         }
-        /*
-        $subject="Response to Admission Application";       
-        $heade.= "MIME-Version: 1.0"."\r\n";
-        $heade.= 'Content-type: text/html; charset=iso-8859-1'."\r\n";
-        $heade.= 'From:CAMS<riftvalleyuniversity0@gmail.com>'."\r\n";    // Put your sender email here
-        $msgec.= "<html></body><div><div>Hello,</div></div></br></br>"; // the 2nd div might be useless and wasn't there actually
-        $msgec.= "<div style='padding-top:8px;'>Your Admission application has been $admsta ) </br>
-          <strong>Admin Remark: </strong> $admrmk </div><div></div></body></html>";
+        else{
+          echo "<script>alert('info fetch failed!')</script>";
+        }
           
-        if (mail($toemail,$subject,$msgec,$heade)){
-          echo "<script>alert('Admin Remark and  Status has been updated.');</script>";
-          //echo "<script>window.location.href ='pending-application.php'</script>";
-        }
-        else
-        {
-          echo "<script>alert('Something Went Wrong. Please try again.');</script>";          
-        }
-        echo "<script>window.location.href ='pending-application.php'</script>";
-        */
       }
       else{
-        echo "Sorry, query was unable to return value";
+        echo "<script>alert('Sorry, query was unable to return value!')</script>";
       }
     }
 ?>
@@ -91,7 +100,7 @@ include('includes/dbconnection.php');
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
 
-  <title>College Addmission Management System|| View Form</title>
+  <title>College Addmission Management System || View Form</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
   rel="stylesheet">
   <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
@@ -389,6 +398,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
               </table>
               <br>
               <?php
+              echo $cid;
             }
             ?>
             
@@ -454,7 +464,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                 <?php } ?>
             </table>
           <?php 
-        } 
+          } 
         ?>
 
         <div class="row" style="margin-top: 2%">

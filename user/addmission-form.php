@@ -558,11 +558,11 @@ else
                       echo "Your application has been accepted";
                     }
                     
-                    if($row['AdminStatus']=='2'){
+                    if($row_s['AdminStatus']=='2'){
                       echo "Your application has been Rejected";
                     }
                     
-                    if($row['AdminStatus']=='3'){
+                    if($row_s['AdminStatus']=='3'){
                       echo "Your application has been put to waiting list";
                     }
                   ?></td>
