@@ -23,7 +23,7 @@ if(strlen($_SESSION['uid'])==0){
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
   
-  <body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+  <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
     <!-- fixed-top-->
     <?php include_once('includes/header.php');?>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
@@ -39,7 +39,7 @@ if(strlen($_SESSION['uid'])==0){
           $row=mysqli_fetch_array($ret);
           $name=$row['FirstName'];
           ?>
-          <h3><font color="red">Welcome</font> 
+          <h3><font color="red">Welcome,</font> 
             <?php echo $name;?> 
           </h3>
           <hr />
@@ -58,19 +58,13 @@ if(strlen($_SESSION['uid'])==0){
                       <div class="card-body">
                         <div class="media d-flex">
                           <div class="media-body text-left"> <?php 
-                            if($adsts==1) {?>
-                              <h4 align="center">Your application status has been updated. Click here for details(1111)</h4>
+                            if($adsts == "") {?>
+                              <h4 align="center">Your application has been submitted successfully. Click here for details</h4>
                               <?php 
-                            } ?> <?php 
-                            
-                            if($adsts==2) {?>
-                              <h4 align="center">Your application status has been updated. Click here for details(2222)</h4>
-                              <?php 
-                            } ?> <?php 
-                            
-                            if($adsts=="3") {?>
-                              <h4 align="center">Your application status has been updated. Click here for details(3333)</h4>
-                              <?php 
+                            }
+                            else {?>
+                              <h4 align="center">Your application status has been updated. Click here for details</h4>
+                              <?php
                             } ?>
                           </div>
                           
@@ -81,20 +75,15 @@ if(strlen($_SESSION['uid'])==0){
                         
                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
                           <?php 
-                          if($adsts=="") {?>
-                            <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div> 
-                            <?php 
-                          } ?> <?php 
-                          
-                          if($adsts=="2") {?>
-                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div> 
-                            <?php 
-                          } ?> <?php 
-                          
-                          if($adsts=="1") {?>
+                          if($adsts == "") {?>
                             <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div> 
                             <?php 
-                          } ?>
+                          } ?> <?php 
+                          
+                          if($adsts != "") {?>
+                            <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div> 
+                            <?php 
+                          } ?> 
                         </div>
                       </div>
                     </a>
@@ -103,19 +92,17 @@ if(strlen($_SESSION['uid'])==0){
               </div>
             </div>
             <?php 
-          } else{?>
+          } 
+          else{?>
             <div class="row" >
-              <div class="col-xl-10 col-lg-12 col-12">
+              <div class="col-12">
                 <div class="card pull-up">
                   <div class="card-content">
                     <a href="addmission-form.php">
                       <div class="card-body">
                         <div class="media d-flex">
                           <div class="media-body text-left">
-                            <h4 align="center">You have not yet applied for admission. Please fill the admission form.</h4>
-                          </div>
-                          <div>
-                            <i class="icon-file success font-large-2 float-right"></i>
+                            <h4 align="center">Click here to fill an admission application form.</h4>
                           </div>
                         </div>
                   
@@ -129,33 +116,32 @@ if(strlen($_SESSION['uid'])==0){
               </div>
             </div>
             <?php 
-          } ?> <?php
-
+          } ?> 
+          
+          
+          <?php
+          /*
           $rtp =mysqli_query($con ,"SELECT ID from tbladmapplications where UserID='$uid'");
           $row=mysqli_fetch_array($rtp);
           if($row>0){
-            $ret=mysqli_query($con,"select AdminStatus from tbladmapplications join tbldocument on tbldocument.UserID=tbladmapplications.UserID where tbldocument.UserID='$stuid' and  tbladmapplications.AdminStatus='1'");
+            $ret=mysqli_query($con,"select AdminStatus from tbladmapplications join tbldocument on tbldocument.UserID=tbladmapplications.UserID where tbldocument.UserID='$uid' and tbladmapplications.AdminStatus='1'");
             $num=mysqli_fetch_array($ret);
             
             if($num>0){ ?>
-              <div class="row" >
-                <div class="col-xl-10 col-lg-12 col-12">
+              <<div class="row" >
+                <div class="col-12">
                   <div class="card pull-up">
                     <div class="card-content">
-                      <a href="addmission-form.php">
+                      <a href="upload-doc.php">
                         <div class="card-body">
                           <div class="media d-flex">
                             <div class="media-body text-left">
                               <h4 align="center">Your Application has been accepted and documents also uploaded successfully</h4>
                             </div>
-    
-                            <div>
-                              <i class="icon-file success font-large-2 float-right"></i>
-                            </div>
                           </div>
       
                           <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </a>
@@ -192,11 +178,13 @@ if(strlen($_SESSION['uid'])==0){
               </div>
               <?php 
             }  
-          }?>
+          } */
+          ?>
+
+
         </div>
       </div>
     </div>
-  <!--</div> I think this was just a mistake--> 
   
   <?php include('includes/footer.php');?>
   <!-- BEGIN VENDOR JS-->

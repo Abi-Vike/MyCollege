@@ -14,8 +14,8 @@ if ($result->num_rows == 1) {
     $con->query("UPDATE tbluser SET status='confirmed' WHERE Email='$email'");
     ?>
     <script>
-        alert('Your account has been confirmed successfully.\n You will now be directed to your account dashboard.')
-        window.location.href = "dashboard.php";
+        alert('Your account has been confirmed successfully.\n You can now login to your account!')
+        window.location.href = "login.php";
     </script>;
     <?php
     // Redirect the user to the login page

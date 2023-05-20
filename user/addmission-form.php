@@ -259,15 +259,15 @@ else
         box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
       }
       #print-button {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 5px;
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 5px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
       }
       @media print {
         body{
@@ -560,6 +560,10 @@ else
                     
                     if($row['AdminStatus']=='2'){
                       echo "Your application has been Rejected";
+                    }
+                    
+                    if($row['AdminStatus']=='3'){
+                      echo "Your application has been put to waiting list";
                     }
                   ?></td>
                 </tr>
