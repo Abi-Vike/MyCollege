@@ -4,18 +4,15 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['aid']==0)) {
   header('location:logout.php');
-
 }else
 {
   ?>
   <!DOCTYPE html>
   <html class="loading" lang="en" data-textdirection="ltr">
   <head>
-    <title>RVU-GADA : Admin Portal | Dashboard</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
-    rel="stylesheet">
-    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
-    rel="stylesheet">
+    <title>RVU-GADA : Admin Portal || Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
+    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
@@ -169,7 +166,7 @@ if (strlen($_SESSION['aid']==0)) {
                           <i class="icon-check success font-large-2 float-right"></i>
                         </div>
                       </div>
-                    
+                      
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
                         <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%"
                         aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>

@@ -30,7 +30,6 @@
                     //$row=mysqli_fetch_array($ret);
                     //$name=$row['AdminuserName'];
                   ?>
-                  <span class="text-bold-700" ><?php echo $name; ?></span>
                 </span>
                 <span class="avatar avatar-online">
                   <img src="app-assets/images/user.png" alt="avatar"><i></i></span>

@@ -4,7 +4,7 @@ use phpMailer\PHPMailer\PHPMailer;
 use phpMailer\PHPMailer\Exception;
 
 require './PHPMailer/src/Exception.php';
-require './PHPMailer/src/PHPMailer.php';
+//require './PHPMailer/src/PHPMailer.php';
 require './PHPMailer/src/SMTP.php';
 
 if(isset($_POST['send'])){

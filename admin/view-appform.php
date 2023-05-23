@@ -1,13 +1,9 @@
 <?php
 session_start();
-error_reporting(0);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-use phpMailer\PHPMailer\PHPMailer;
-use phpMailer\PHPMailer\Exception;
-
-require 'includes/PHPMailer/src/Exception.php';
-require 'includes/PHPMailer/src/PHPMailer.php';
-require 'includes/PHPMailer/src/SMTP.php';
+require_once 'includes/emailer.php';
 
 include('includes/dbconnection.php');
   if (strlen($_SESSION['aid']==0)) {    // was ==0
@@ -30,7 +26,10 @@ include('includes/dbconnection.php');
           $CourseApplied_i = $info['CourseApplied'];
           $AdmissionType_i = $info['AdmissionType'];
           $FirstName_i = $info['FirstName'];
+          // call a function from emailer.php
+          SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i );
 
+          /*
           $mail = new PHPMailer(true);
           $mail -> isSMTP();
           $mail -> Host = 'smtp.gmail.com';
@@ -42,29 +41,32 @@ include('includes/dbconnection.php');
           $mail -> isHTML(true);
           //$mail -> setFrom($email, $name);
           $mail -> setFrom($toemail, "RVU Registrar office");
-          $mail -> addAddress($toemail);  // receiver's emails 
+          $mail -> addAddress($toemail);  // receiver's email
           $mail -> Subject = "Response To Admission Application";
           $mail -> Body = "<html>
                             </body>
-                              <div>
-                                <div><img src='' id='email_rvu_logo'></img></div>
-                                <div>Application ID: $ID_i <br><br>
+                              <div style='text-align:center;'>
+                                <div style='display:inline-block; text-align:left'>
+                                  <img src='https://live.staticflickr.com/65535/52913847707_b31b2fba91_c.jpg' style='display: inline-block; text-align: left; width: auto; height: auto; margin-top:7px' id='email_rvu_logo'>
+                                  <div style='position:center; text-align:left; color:black'>
+                                    <strong>Application ID: $ID_i <br><br>
 
-                                  Dear $FirstName_i, <br><br>
-                                  
-                                  Re: Application to $CourseApplied_i, $AdmissionType_i program<br><br>
-                                  
-                                  We’re writing to let you know that we’ve updated your $CourseApplied_i application. <br><br>
-                                  
-                                  You can review this update by logging on to your <a href='#'>applicant portal</a>. <br><br>
-                                  
-                                  If you have any questions about your application or the admissions process, please don’t 
-                                  
-                                  hesitate to contact us through your applicant portal. <br><br>
-                                  
-                                  Kind regards, <br><br>
-                                  
-                                  Rift Valley University Admissions Team
+                                    Dear $FirstName_i, <br><br>
+                                    
+                                    Re: Application to $CourseApplied_i, $AdmissionType_i program</strong><br><br>
+                                    
+                                    We’re writing to let you know that we’ve updated your $CourseApplied_i application. <br><br>
+                                    
+                                    You can review this update by logging on to your <a href='https://localhost/mycollege/user/login.php'>applicant portal</a>. <br><br>
+                                    
+                                    If you have any questions about your application or the admissions process, please don’t 
+                                    
+                                    hesitate to contact us through your applicant portal. <br><br>
+                                    
+                                    <strong>Kind regards, <br><br>
+                                    
+                                    Rift Valley University Admissions Team</strong>
+                                  </div>
                                 </div>
                               </div>
                             </body>
@@ -84,6 +86,7 @@ include('includes/dbconnection.php');
           }else{
             echo "<script>alert(Something's wrong my man!)</scrip>";
           }
+          */
         }
         else{
           echo "<script>alert('info fetch failed!')</script>";
@@ -99,7 +102,6 @@ include('includes/dbconnection.php');
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
-
   <title>College Addmission Management System || View Form</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
   rel="stylesheet">
@@ -398,7 +400,6 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
               </table>
               <br>
               <?php
-              echo $cid;
             }
             ?>
             
