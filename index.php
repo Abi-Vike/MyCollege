@@ -415,8 +415,8 @@ include_once('user/includes/dbconnection.php');
                   <p><a href="#" class="btn btn-primary">Enroll now</a> <span class="enrolled-count">7,202 students enrolled</span></p>
                 </div>
               </div>
-
             </div>
+
             <div class="col-md-6">
               <div class="probootstrap-service-2 probootstrap-animate">
                 <div class="image">
@@ -445,7 +445,6 @@ include_once('user/includes/dbconnection.php');
                   <p><a href="#" class="btn btn-primary">Enroll now</a> <span class="enrolled-count">9,582 students enrolled</span></p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>

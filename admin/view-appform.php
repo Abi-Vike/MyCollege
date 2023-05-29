@@ -421,7 +421,8 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                 <tr>
                   <th>Application Status :</th>
                   <td>
-                    <select name="status" class="form-control wd-450" required="true" >
+                    <select id="mySelect" onchange="checkSelection()" name="status" class="form-control wd-450" required="true" >
+                      <option value=""> Decision not made </option>
                       <option value="1" <?php if ($row['AdminStatus']=="1") { echo "selected"; } ?>> Accepted</option>
                       <option value="2" <?php if ($row['AdminStatus']=="2") { echo "selected"; } ?>> Rejected</option>
                       <option value="3" <?php if ($row['AdminStatus']=="3") { echo "selected"; } ?>> Waiting List</option>
@@ -430,7 +431,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
                 </tr>
 
                 <tr align="center">
-                  <td colspan="2"><button type="submit" name="submit" class="btn btn-primary">Update</button></td>
+                  <td colspan="2"><button type="submit" id="submit_button" name="submit" class="btn btn-primary disabled">Update</button></td>
                 </tr>
 
                 </form>
@@ -481,10 +482,22 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
     </div>
   </div>
             
-     
-
 <?php include('includes/footer.php');?>
   <!-- BEGIN VENDOR JS-->
+  <!-- task specific JS definitions -->
+  <script>
+    function checkSelection() {
+    var selectElement = document.getElementById("mySelect");
+    var submitButton = document.getElementById("submit_button");
+    
+    if (selectElement.value !== "") {
+      submitButton.classList.remove("disabled");
+      submitButton.disabled = false;
+    } else {
+      submitButton.disabled = true;
+    }
+  }
+  </script>
   <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
 
   <script src="app-assets/vendors/js/forms/extended/typeahead/typeahead.bundle.min.js"

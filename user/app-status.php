@@ -10,7 +10,7 @@ if (strlen($_SESSION['uid']) == 0) {
   <html class="loading" lang="en" data-textdirection="ltr">
 
   <head>
-    <title>RVU-GADA : Student portal | Dashboard</title>
+    <title>RVU-GADA : Student portal || Application Status</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
@@ -35,97 +35,80 @@ if (strlen($_SESSION['uid']) == 0) {
         <div class="content-body">
           <?php
           $uid = $_SESSION['uid'];
-          $ret = mysqli_query($con, "select FirstName from tbluser where ID='$uid'");
+          //taking out only the date
+          $sql = mysqli_query($con, "SELECT DATE(CourseApplieddate) AS date_part FROM tbladmapplications WHERE UserID='$uid'");
+          $result = mysqli_fetch_array($sql);
+          $application_date = $row['date_part'];
+
+          $ret = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE UserID='$uid'");
           $row = mysqli_fetch_array($ret);
-          $name = $row['FirstName'];
+          $fname = $row['FirstName'];
           ?>
           <h3>
             <font color="red">Welcome,</font>
-            <?php echo $name; ?>
+            <?php echo $fname; ?>
           </h3>
-          <hr />
-          <?php
-          $uid = $_SESSION['uid'];
-          $rtp = mysqli_query($con, "SELECT AdminStatus from tbladmapplications where UserID='$uid'");
-          $row = mysqli_fetch_array($rtp);
-          $adsts = $row['AdminStatus'];
-
-          if ($row > 0) { ?>
-            <div class="row">
-              <div class="col-xl-12 col-lg-12 col-12">
-                <div class="card pull-up">
-                  <div class="card-content"> <?php
-
-                    // application still under review
-                    if ($adsts == "") { ?>
-                      <a href="addmission-form.php">
-                        <div class="card-body">
-                          <div class="media d-flex">
-                            <div class="media-body text-left">
-                                <h4 align="center">Your application has been submitted successfully and is under review !<br> Click here to see the summary of your application.</h4>
-                            </div>
-                            <div>
-                              <i class="icon-file success font-large-2 float-right"></i>
-                            </div>
-                          </div>
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </a><?php 
-                    }
-
-                    // status updated by registrar 
-                    elseif ($adsts != "") { ?>
-                      <a href="app-status.php">
-                        <div class="card-body">
-                          <div class="media d-flex">
-                            <div class="media-body text-left">
-                                <h4 align="center">Decision has been made on your application. Click here for details</h4>
-                            </div>
-                            <div>
-                              <i class="icon-file success font-large-2 float-right"></i>
-                            </div>
-                          </div>
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </a><?php 
-                    } ?>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          <?php
-          } else { ?>
-            <div class="row">
-              <div class="col-12">
-                <div class="card pull-up">
-                  <div class="card-content">
-                    <a href="addmission-form.php">
-                      <div class="card-body">
-                        <div class="media d-flex">
-                          <div class="media-body text-left">
-                            <h4 align="center">Click here to fill an admission application form.</h4>
-                          </div>
-                        </div>
-
-                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                          <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          <?php
-          } ?>
-
+          <hr>
 
           <?php
+          $admission_status = $row['AdminStatus'];
+          $application_ID = $row['ID'];
+          $full_name = $row['FirstName'] . " " . $row['MiddleName'];
+          $course_name = $row['CourseApplied'];
+          $application_date = $row['CourseApplieddate'];
+          $decision_date = $row['AdminRemarkDate'];
+
+          if ($admission_status == "1") { ?>
+            <h4><strong>Application reference number:</strong> <?php echo $application_ID ?> <br><br>
+              <strong>Date:</strong> <?php echo $decision_date ?> <br><br>
+              Dear <?php echo $full_name ?>, <br><br>
+              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on [<?php echo $application_date ?>] <br><br>
+              We are pleased to inform you that your application for admission to the bachelor's degree program in <?php echo $course_name ?>
+              at our university has been thoroughly reviewed by our admissions committee. It is with great pleasure that we extend to
+              you an offer of admission to join our esteemed institution for the upcoming academic year. <br><br>
+              To secure your place in the program, please submit your acceptance and pay the required non-refundable registration fee
+              of 150 ETB by within 10 days of you getting this email. This payment is essential for the processing of your documents
+              including the making of a student ID for the academic year.<br><br>
+              Should you have any questions or require any further assistance, please do not hesitate to reach out to our
+              admissions office at [contact information].<br><br>
+              We eagerly anticipate your response and look forward to welcoming you to our campus for the start of the academic
+              year. On behalf of the entire university community, the office of admissions extends warmest congratulations once again.<br><br>
+              <strong>Kind regards,<br><br>
+                Rift Valley University Admissions Office</strong>
+            </h4>
+          <?php
+          } elseif ($admission_status == "2") { ?>
+            <h4><strong>Application reference number:</strong> 230857849 <br><br>
+              <strong>Date:</strong> 25 May 2023 <br><br>
+              Dear Abiel Yacob <br><br>
+              Re: Application for PFQM-G4U1-09, [Program Name], September 2023 <br><br>
+              We regret to inform you that after careful consideration of your application, we are unable to offer you a place on the above course. <br><br>
+              This decision has been taken for the following reason: <br><br>
+              From information supplied, unfortunately you do not meet our entry requirements. <br><br>
+              Thank you for your interest in Rift Valley University. We hope you will be successful in obtaining a place to study at another institution of your choice.<br><br>
+              <strong>Kind regards,<br><br>
+                Rift Valley University Admissions Office</strong>
+            </h4>
+          <?php
+          } elseif ($admission_status == "3") { ?>
+            <h4><strong>Application reference number:</strong> 230857849 <br><br>
+              <strong>Date:</strong> 25 May 2023 <br><br>
+              Dear Abiel Yacob <br><br>
+              Re: Application for PFQM-G4U1-09, [Program Name], September 2023 <br><br>
+              We hope this letter finds you well. On behalf of the admissions committee at [University Name], we would like to
+              express our appreciation for your application to the [Program Name].<br><br>
+              Every academic term, we receive more applications from candidates than we have capacity to accommodate. And unfortunately,
+              your application was not selected for the program. We will keep your application in a waiting list and if an alternative
+              opportunity becomes available, that you are qualified for, you will be contacted.<br><br>
+              We wish you the very best in all your academic endeavors..<br><br>
+              <strong>Kind regards,<br><br>
+                Rift Valley University Admissions Office</strong>
+            </h4>
+          <?php
+          } else {
+            echo "What the heck has happened here?";
+          }
+
           /*
           $rtp =mysqli_query($con ,"SELECT ID from tbladmapplications where UserID='$uid'");
           $row=mysqli_fetch_array($rtp);

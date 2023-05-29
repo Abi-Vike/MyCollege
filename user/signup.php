@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 error_reporting(0);
 
@@ -25,25 +25,25 @@ if (strpos($output, 'ngrok.exe') !== false) {
   // code to extract the ngrok generated url if exists
   // Define the ngrok API endpoint
   $apiEndpoint = 'http://localhost:4040/api/tunnels';
-  
+
   // Get the JSON response from the API endpoint
   $json = file_get_contents($apiEndpoint);
-  
+
   // Decode the JSON response into a PHP associative array
   $data = json_decode($json, true);
-  
+
   // Get the first tunnel from the list of active tunnels
   $tunnel = $data['tunnels'][0];
-  
+
   // Get the public URL of the tunnel
   $url = $tunnel['public_url'];
   echo 'URL: ', $url;
-}else {
+} else {
   echo '*temp-info* No ngrok session is running!';
 }
 
 // when user clicks register / signup
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
   $fname = $_POST['firstname'];
   $mname = $_POST['middlename'];
   $lname = $_POST['lastname'];
@@ -51,81 +51,83 @@ if(isset($_POST['submit'])){
   $password = md5($_POST['password']);
   $ret = mysqli_query($con, "select Email from tbluser where Email='$email'");
   $result = mysqli_fetch_array($ret);
-  
-  if($result>0){
+
+  if ($result > 0) {
     echo "<script>alert('This email-address is associated with another user!');</script>";
-  }
-  else{
+  } else {
     $token = bin2hex(random_bytes(16));
     $query = mysqli_query($con, "insert into tbluser(FirstName, MiddleName, LastName, Email, Password, Token) value('$fname', '$mname', '$lname', '$email', '$password', '$token' )");
-    
+
     if ($query) {
       $public_ip = file_get_contents('https://api.ipify.org');
       //echo "<script>alert('You have been registered successfully');</script>";
       //header("Location: ./login.php");
       $mail = new PHPMailer(true);
-      $mail -> isSMTP();
-      $mail -> Host = 'smtp.gmail.com';
-      $mail -> SMTPAuth = true;
-      $mail -> Username = 'riftvalleyuniversity0@gmail.com';  // sender email
-      $mail -> Password = 'jneqfubiqenuzhsm';  // sender's gmail app password
-      $mail -> Port = 465;
-      $mail -> SMTPSecure = 'ssl';
-      $mail -> isHTML(true);
+      $mail->isSMTP();
+      $mail->Host = 'smtp.gmail.com';
+      $mail->SMTPAuth = true;
+      $mail->Username = 'riftvalleyuniversity0@gmail.com';  // sender email
+      $mail->Password = 'jneqfubiqenuzhsm';  // sender's gmail app password
+      $mail->Port = 465;
+      $mail->SMTPSecure = 'ssl';
+      $mail->isHTML(true);
       //$mail -> setFrom($email, $name);
-      $mail -> setFrom($email, "RVU Registrar office");
-      $mail -> addAddress($email);  // receiver's email
-      $mail -> Subject = "Please confirm your email address";
+      $mail->setFrom($email, "RVU Registrar office");
+      $mail->addAddress($email);  // receiver's email
+      $mail->Subject = "Please confirm your email address";
     }
 
-    if ($url){
+    if ($url) {
       // there is an active Ngrok session
-      $mail -> Body = "Hi $fname,\n\nPlease click the following link to verify your account:\n\n$url/mycollege/user/email-confirmation.php?email=$email&token=$token";
-      $mail -> SMTPOptions = array(   // to bypass the unable to connect to SMTP server thing
-          'ssl' => array(
+      $mail->Body = "Hi $fname,\n\nPlease click the following link to verify your account:\n\n$url/mycollege/user/email-confirmation.php?email=$email&token=$token";
+      $mail->SMTPOptions = array(   // to bypass the unable to connect to SMTP server thing
+        'ssl' => array(
           'verify_peer' => false,
           'verify_peer_name' => false,
           'allow_self_signed' => true
         )
       );
 
-      if($mail -> send()){
-        ?>
+      if ($mail->send()) {
+?>
         <script>
           alert("Verification link has been sent to your email. Please check in the Spam-box if you couldn't find it in the inbox.")
           window.location.href = "login.php";
         </script>;
-        <?php
+      <?php
 
-      }else{
-        ?>
-          <script>alert('Error.<?php $mail->ErrorInfo ?>')</script>';
-        <?php
+      } else {
+      ?>
+        <script>
+          alert('Error.<?php $mail->ErrorInfo ?>')
+        </script>';
+      <?php
       }
-
-    }elseif (!$url){
+    } elseif (!$url) {
       // there is no active Ngrok session
-      $mail -> Body = "Hi $fname,\n\nPlease click the following link to verify your account:\n\nhttp://localhost/mycollege/user/email-confirmation.php?email=$email&token=$token";
-      $mail -> SMTPOptions = array(   // to bypass the unable to connect to SMTP server thing
-          'ssl' => array(
+      $mail->Body = "Hi $fname,\n\nPlease click the following link to verify your account:\n\nhttp://localhost/mycollege/user/email-confirmation.php?email=$email&token=$token";
+      $mail->SMTPOptions = array(   // to bypass the unable to connect to SMTP server thing
+        'ssl' => array(
           'verify_peer' => false,
           'verify_peer_name' => false,
           'allow_self_signed' => true
         )
       );
 
-      if($mail -> send()){
-        ?>
+      if ($mail->send()) {
+      ?>
         <script>
           alert("Verification link has been sent to your account. Please check in the Spam-box if you couldn't find it in the inbox.")
           window.location.href = "login.php";
         </script>';
-        <?php
+      <?php
 
-      }else{
-        ?>
-          <script>alert('Error.<?php $mail->ErrorInfo ?>')</script>';
-        <?php
+      } else {
+      ?>
+        <script>
+          alert('Error.<?php $mail->ErrorInfo ?>')
+        </script>';
+<?php
       }
     }
   }
@@ -134,6 +136,7 @@ if(isset($_POST['submit'])){
 
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
+
 <head>
 
   <title>College Admission Management System || User Signup
@@ -143,20 +146,19 @@ if(isset($_POST['submit'])){
   <link rel="stylesheet" href="../css/style.min.css">
   <link rel="stylesheet" href="../css/custom.css">
 
-<script type="text/javascript">
-function checkpass(){
-  if(document.signup.password.value!=document.signup.repeatpassword.value)
-  {
-    alert('Password and Repeat Password field do not match');
-    document.signup.repeatpassword.focus();
-    return false;
-  }
-  return true;
-} 
-
-</script>
+  <script type="text/javascript">
+    function checkpass() {
+      if (document.signup.password.value != document.signup.repeatpassword.value) {
+        alert('Password and Repeat Password field do not match');
+        document.signup.repeatpassword.focus();
+        return false;
+      }
+      return true;
+    }
+  </script>
 
 </head>
+
 <body class="vertical-layout vertical-menu 1-column  bg-cyan bg-lighten-2 menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="1-column">
   <nav class="navbar navbar-default probootstrap-navbar">
     <div class="container">
@@ -221,7 +223,7 @@ function checkpass(){
               </div>
               <div class="card-content">
                 <div class="card-body">
-                  <form  method="post" name="signup" onSubmit="return checkpass();">
+                  <form method="post" name="signup" onSubmit="return checkpass();">
                     <fieldset class="form-group position-relative has-icon-left">
                       <input type="text" name="firstname" id="firstname" required="true" class="form-control input-lg" placeholder="First Name" tabindex="1">
                       <div class="form-control-position">
@@ -235,14 +237,14 @@ function checkpass(){
                         <i class="ft-user"></i>
                       </div>
                     </fieldset>
-                    
+
                     <fieldset class="form-group position-relative has-icon-left">
                       <input type="text" name="lastname" id="lastname" required="true" class="form-control input-lg" placeholder="Last Name" tabindex="3">
                       <div class="form-control-position">
                         <i class="ft-user"></i>
                       </div>
                     </fieldset>
-                      
+
                     <fieldset class="form-group position-relative has-icon-left">
                       <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address" tabindex="4" required="true" required data-validation-required-message="Please enter email address.">
                       <div class="form-control-position">
@@ -263,9 +265,7 @@ function checkpass(){
                       </div>
                       <div class="col-12 col-sm-6 col-md-6">
                         <fieldset class="form-group position-relative has-icon-left">
-                          <input type="password" name="repeatpassword" id="repeatpassword" class="form-control input-lg"
-                            placeholder="Repeat Password" tabindex="6" data-validation-matches-match="password" required="true" 
-                            data-validation-matches-message="Password & Confirm Password must be the same.">
+                          <input type="password" name="repeatpassword" id="repeatpassword" class="form-control input-lg" placeholder="Repeat Password" tabindex="6" data-validation-matches-match="password" required="true" data-validation-matches-message="Password & Confirm Password must be the same.">
                           <div class="form-control-position">
                             <i class="la la-key"></i>
                           </div>
@@ -273,7 +273,7 @@ function checkpass(){
                         </fieldset>
                       </div>
                     </div>
-                
+
                     <div class="row">
                       <div class="col-12 col-sm-12 col-md-12" tabindex="6">
                         <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block"><i class="ft-user"></i> Register</button>
@@ -296,15 +296,16 @@ function checkpass(){
     </div>
   </div>
   <!-- ////////////////////////////////////////////////////////////////////////////-->
-  
+
   <footer class="footer fixed-bottom footer-dark navbar-border navbar-shadow text-center">
     <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2" style="margin-bottom : 20vh">
-      <p style="color:grey;">Copyright (C) - 2023 | Developed By <a href="index.php" class="text-primary">RVU Dev-Team </a> </p>
+    <p style="color:grey;">Copyright (C) - 2023 | Developed By <a href="index.php" class="text-primary">RVU Dev-Team </a> </p>
     </p>
   </footer>
-  
+
   <script src="../js/scripts.min.js"></script>
   <script src="../js/main.min.js"></script>
   <script src="../js/custom.js"></script>
 </body>
+
 </html>
