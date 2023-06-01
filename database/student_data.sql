@@ -172,8 +172,8 @@ CREATE TABLE `tblnotice` (
 --
 
 INSERT INTO `tblnotice` (`ID`, `Title`, `Decription`, `CreationDate`) VALUES
-(3, 'Admission Notice for BCA / MCA', 'Section 1.10.33 of \"de Finibus Bonorum et Malorum\", written by Cicero in 45 BC\r\n\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\"\r\n\r\n1914 translation by H. Rackham\r\n\"On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we like best, every pleasure is to be welcomed and every pain avoided. But in certain circumstances and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted. The wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.\"', '2021-10-26 03:36:07'),
-(4, 'Test Notification for Demo', 'This is demo notification for demo project. Student Admission Management System....', '2021-10-26 04:52:14');
+(3, 'Upcoming Class Starting date', 'Hey There, Next Season Class Starts on the 20th of September, 2023', '2023-05-26 03:36:07'),
+(4, 'Test Notification for Demo', 'This is demo notification for demo project. Student Admission Management System....', '2023--26 04:52:14');
 
 -- --------------------------------------------------------
 
@@ -193,6 +193,24 @@ CREATE TABLE `tbluser` (
   `status` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL DEFAULT 'unconfirmed'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+
+CREATE TABLE `tbladmissions` (
+  `Adm_ID` int NOT NULL, --should take UserId from tbladmmapplications
+  `Adm_Course` varchar(120) DEFAULT NULL,
+  `Adm_Status` varchar(120) DEFAULT 'offered',
+  `Adm_Payment_Status` varchar(60) NOT NULL DEFAULT 'unpaid',
+  `Adm_Offer_Date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `Adm_Accept_Date` timestamp NULL DEFAULT NULL,
+  `Adm_Pay_Date` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `tblregistered` (
+  `Reg_ID` int NOT NULL, --same as the application ID
+  `Reg_User_ID` int NOT NULL, --same as the user ID
+  `Reg_Course` varchar(120) DEFAULT NULL,
+  `Reg_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 --
 -- Indexes for table `tbladmapplications`
 --
@@ -230,6 +248,20 @@ ALTER TABLE `tbluser`
   ADD PRIMARY KEY (`ID`);
 
 --
+-- Indexes for table `tbladmissions`
+--
+ALTER TABLE `tbladmissions`
+  ADD PRIMARY KEY (`Adm_ID`);
+
+--
+-- Indexes for table `tblregistered`
+--
+ALTER TABLE `tblregistered`
+  ADD PRIMARY KEY (`Reg_ID`);
+
+
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -237,25 +269,25 @@ ALTER TABLE `tbluser`
 -- AUTO_INCREMENT for table `tbladmapplications`
 --
 ALTER TABLE `tbladmapplications`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbladmin`
 --
 ALTER TABLE `tbladmin`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT for table `tblcourse`
 --
 ALTER TABLE `tblcourse`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT for table `tbldocument`
 --
 ALTER TABLE `tbldocument`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `tblnotice`
@@ -267,7 +299,7 @@ ALTER TABLE `tblnotice`
 -- AUTO_INCREMENT for table `tbluser`
 --
 ALTER TABLE `tbluser`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1000;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

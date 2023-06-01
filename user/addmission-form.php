@@ -544,7 +544,7 @@ else
               <br>
               <?php
               $query = mysqli_query($con,"select * from tbladmapplications where UserId=$stuid");
-              $row_s = mysqli_num_rows($query);
+              $row_s = mysqli_fetch_array($query);
               ?>
               <table class="table mb-0">
                 <tr>
@@ -555,7 +555,7 @@ else
                     } 
                     
                     if($row_s['AdminStatus']=='1'){
-                      echo "Your application has been accepted";
+                      echo "You have been admitted to the progam";
                     }
                     
                     if($row_s['AdminStatus']=='2'){
@@ -573,7 +573,7 @@ else
                 </tr>
                 <tr>
                   <th>Admission Committee's Decision Date</th>
-                  <td><?php echo $row_s['AdminRemarkDate'];?></td>
+                  <td><?php echo date('D, d-M-Y', strtotime($row_s['AdminRemarkDate']));?></td>
                 </tr>
               </table>
               <?php

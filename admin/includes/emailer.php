@@ -37,7 +37,7 @@ function SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, 
                                         We’re writing to let you know that we’ve updated your $CourseApplied_i application. <br><br>
                                         You can review this update by logging on to your <a href='https://localhost/mycollege/user/login.php'>applicant portal</a>. <br><br>
                                         If you have any questions about your application or the admissions process, please don’t 
-                                        hesitate to contact us through your applicant portal. <br><br>
+                                        hesitate to contact us at rvu.admissions.sup@gmail.com <br><br>
                                         <strong>Kind regards, <br><br>
                                         Rift Valley University Admissions Team</strong>
                                     </div>

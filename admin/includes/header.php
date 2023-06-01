@@ -25,7 +25,7 @@
             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
               <?php $admid = $_SESSION['aid']; ?>
               <span class="mr-1">(Admin-<?php echo json_encode($admid) ?>), Registrar
-                <?php //might want to unblock these lines when you have multiple Admins
+                <?php //might want to un-block these lines when you have multiple Admins
                 //$ret=mysqli_query($con,"select AdminuserName from tbladmin where ID='$admid'");
                 //$row=mysqli_fetch_array($ret);
                 //$name=$row['AdminuserName'];
