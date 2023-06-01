@@ -195,7 +195,7 @@ CREATE TABLE `tbluser` (
 
 
 CREATE TABLE `tbladmissions` (
-  `Adm_ID` int NOT NULL, --should take UserId from tbladmmapplications
+  `Adm_App_ID` int NOT NULL, --should take UserId from tbladmmapplications
   `Adm_Course` varchar(120) DEFAULT NULL,
   `Adm_Status` varchar(120) DEFAULT 'offered',
   `Adm_Payment_Status` varchar(60) NOT NULL DEFAULT 'unpaid',

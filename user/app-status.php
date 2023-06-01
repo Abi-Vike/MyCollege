@@ -4,6 +4,7 @@ error_reporting(0);
 include('includes/dbconnection.php');
 if (strlen($_SESSION['uid']) == 0) {
   header('location:logout.php');
+  exit(); // prevents further code execution
 } else {
 ?>
   <!DOCTYPE html>
@@ -35,20 +36,16 @@ if (strlen($_SESSION['uid']) == 0) {
         <div class="content-body">
           <?php
           $uid = $_SESSION['uid'];
+          echo "$uid"; //temp
           //taking out only the date
-          $sql = mysqli_query($con, "SELECT DATE(CourseApplieddate) AS date_part FROM tbladmapplications WHERE UserID='$uid'");
+          $sql = mysqli_query($con, "SELECT DATE(CourseApplieddate) AS date_part FROM tbladmapplications WHERE UserId='$uid'");
           $result = mysqli_fetch_array($sql);
           $application_date = $row['date_part'];
 
-          $ret = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE UserID='$uid'");
+          $ret = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE UserId='$uid'");
           $row = mysqli_fetch_array($ret);
           $fname = $row['FirstName'];
           ?>
-          <h3>
-            <font color="red">Welcome,</font>
-            <?php echo $fname; ?>
-          </h3>
-          <hr>
 
           <?php
           $admission_status = $row['AdminStatus'];
@@ -60,9 +57,9 @@ if (strlen($_SESSION['uid']) == 0) {
 
           if ($admission_status == "1") { ?>
             <h4><strong>Application reference number:</strong> <?php echo $application_ID ?> <br><br>
-              <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date))?> <br><br>
+              <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date)) ?> <br><br>
               Dear <?php echo $full_name ?>, <br><br>
-              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on <?php echo date('D, d-M-Y', strtotime($application_date))?> <br><br>
+              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on <?php echo date('D, d-M-Y', strtotime($application_date)) ?> <br><br>
               We are pleased to inform you that your application for admission to the bachelor's degree program in <?php echo $course_name ?>
               at our university has been thoroughly reviewed by our admissions committee. It is with great pleasure that we extend to
               you an offer of admission to join our esteemed institution for the upcoming academic year. <br><br>
@@ -77,15 +74,15 @@ if (strlen($_SESSION['uid']) == 0) {
                 Rift Valley University Admissions Office</strong>
             </h4>
             <div align="center">
-              <button type="submit" id="submit_button" name="submit" class="btn btn-success mx-2" style="width: 300px;">Accept Offer</button>
+              <button onclick="acceptOffer()" type="submit" id="submit_button" name="submit" class="btn btn-success mx-2" style="width: 300px;">Accept Offer</button>
               <button onclick="confirmDecline()" type="submit" id="submit_button" name="submit" class="btn btn-danger mx-2" style="width: 300px;">Decline Offer</button>
             </div>
           <?php
           } elseif ($admission_status == "2") { ?>
             <h4><strong>Application reference number:</strong> <?php echo $application_ID ?> <br><br>
-              <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date))?> <br><br>
+              <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date)) ?> <br><br>
               Dear <?php echo $full_name ?>, <br><br>
-              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on <?php echo date('D, d-M-Y', strtotime($application_date))?> <br><br>
+              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on <?php echo date('D, d-M-Y', strtotime($application_date)) ?> <br><br>
               We regret to inform you that after careful consideration of your application, we are unable to offer you a place on the above course. <br><br>
               This decision has been taken for the following reason: <br><br>
               From information supplied, unfortunately you do not meet our entry requirements. <br><br>
@@ -96,9 +93,9 @@ if (strlen($_SESSION['uid']) == 0) {
           <?php
           } elseif ($admission_status == "3") { ?>
             <h4><strong>Application reference number:</strong> <?php echo $application_ID ?> <br><br>
-              <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date))?> <br><br>
+              <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date)) ?> <br><br>
               Dear <?php echo $full_name ?>, <br><br>
-              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on <?php echo date('D, d-M-Y', strtotime($application_date))?> <br><br>
+              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on <?php echo date('D, d-M-Y', strtotime($application_date)) ?> <br><br>
               We hope this letter finds you well. On behalf of the admissions committee at Rift Valley University, we would like to
               express our appreciation for your application to the Program.<br><br>
               Every academic term, we receive more applications from candidates than we have capacity to accommodate. And unfortunately,
@@ -115,86 +112,36 @@ if (strlen($_SESSION['uid']) == 0) {
             echo "What the heck has happened here?";
           }
 
-          ?><!--<?php /*
-          $rtp =mysqli_query($con ,"SELECT ID from tbladmapplications where UserID='$uid'");
-          $row=mysqli_fetch_array($rtp);
-          if($row>0){
-            $ret=mysqli_query($con,"select AdminStatus from tbladmapplications join tbldocument on tbldocument.UserID=tbladmapplications.UserID where tbldocument.UserID='$uid' and tbladmapplications.AdminStatus='1'");
-            $num=mysqli_fetch_array($ret);
-            
-            if($num>0){ ?>
-              <<div class="row" >
-                <div class="col-12">
-                  <div class="card pull-up">
-                    <div class="card-content">
-                      <a href="upload-doc.php">
-                        <div class="card-body">
-                          <div class="media d-flex">
-                            <div class="media-body text-left">
-                              <h4 align="center">Your Application has been accepted and documents also uploaded successfully</h4>
-                            </div>
-                          </div>
-      
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <?php 
-            } else 
-            {?>
-              <div class="row" >
-                <div class="col-xl-10 col-lg-12 col-12">
-                  <div class="card pull-up">
-                    <div class="card-content">
-                      <a href="upload-doc.php">
-                        <div class="card-body">
-                          <div class="media d-flex">
-                            <div class="media-body text-left">
-                              <h4 align="center">Upload your documents</h4>
-                            </div>
-                            <div>
-                              <i class="icon-file success font-large-2 float-right"></i>
-                            </div>
-                          </div>
-                          
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <?php 
-            }  
-          } */?>--><?php
           ?>
-
-
         </div>
       </div>
     </div>
 
     <?php include('includes/footer.php'); ?>
+
     <!-- BEGIN VENDOR JS-->
     <!-- General Javascript functions definitions -->
     <script>
+      // accepting an offer
+      function acceptOffer() {
+        window.location.href = "register.php";
+      }
+
+      // declining an offer
       function confirmDecline() {
         var confirmMessage = "Are you sure you want to decline the admission offer? \nThis action cannot be undone.";
-
         if (confirm(confirmMessage)) {
-          // Perform the action to decline the offer
-          // You can add your own code here
-          // For example: window.location.href = "decline-offer.php";
+          // delete application from tbladmissions, tbladmapplications, and tbldocument.
+          <?php
+          mysqli_query($con, "DELETE FROM tbladmapplications WHERE UserId='$uid'");
+          mysqli_query($con, "DELETE FROM tbldocument WHERE UserID='$uid'");
+          mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID='$uid'");
+          ?>
+          window.location.href = "decline-acknowledgement.php";
         }
       }
-      </script>
+    </script>
+
     <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->

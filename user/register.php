@@ -22,6 +22,12 @@ if (strlen($_SESSION['uid']) == 0) {
     <link rel="stylesheet" type="text/css" href="app-assets/fonts/simple-line-icons/style.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <style>
+      #error-message {
+        color: red;
+        margin-top: -20px;
+      }
+    </style>
   </head>
 
   <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
@@ -44,157 +50,111 @@ if (strlen($_SESSION['uid']) == 0) {
           $row = mysqli_fetch_array($ret);
           $fname = $row['FirstName'];
           ?>
-          <h3>
-            <font color="red">Welcome,</font>
-            <?php echo $fname; ?>
-          </h3>
-          <hr>
+          <h4>
+            Dear <?php echo $row['FirstName'] ?>, <br><br>
+            Please follow the mentioned steps to fully register for the program and obtain a student ID.<br><br>
+            Make a deposit of 150 ETB to one of the accounts mentioned below and then fill all the fields with the accurate
+            information from your payment reciept. You also need to submit a screenshot or photo of the payment receipt. <br><br>
+            It might take us sometime to confirm your payment so we would really appreciate your patience. But if you don't hear
+            from us in <b>two working days</b>, please don't hesitate to reach us through <a style="color:coral">rvu.admissions.sup@gmail.com</a>.<br><br>
+            <em>Please mention your application reference number and also attach your payment receipt when contacting us!</em>
+          </h4>
+          <br><br>
 
-          <?php
-          $admission_status = $row['AdminStatus'];
-          $application_ID = $row['ID'];
-          $full_name = $row['FirstName'] . " " . $row['MiddleName'];
-          $course_name = $row['CourseApplied'];
-          $application_date = $row['CourseApplieddate'];
-          $decision_date = $row['AdminRemarkDate'];
-
-          if ($admission_status == "1") { ?>
-            <h4><strong>Application reference number:</strong> <?php echo $application_ID ?> <br><br>
-              <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date))?> <br><br>
-              Dear <?php echo $full_name ?>, <br><br>
-              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on <?php echo date('D, d-M-Y', strtotime($application_date))?> <br><br>
-              We are pleased to inform you that your application for admission to the bachelor's degree program in <?php echo $course_name ?>
-              at our university has been thoroughly reviewed by our admissions committee. It is with great pleasure that we extend to
-              you an offer of admission to join our esteemed institution for the upcoming academic year. <br><br>
-              To secure your place in the program, please submit your acceptance and pay the required non-refundable registration fee
-              of 150 ETB within 20 days of you getting this email. This payment is essential for the processing of your documents
-              including the making of a student ID for the academic year.<br><br>
-              Should you have any questions or require any further assistance, please do not hesitate to reach out to our
-              admissions office at <a style="color:coral">rvu.admissions.sup@gmail.com</a><br><br>
-              We eagerly anticipate your response and look forward to welcoming you to our campus for the start of the academic
-              year. On behalf of the entire university community, the office of admissions extends warmest congratulations once again.<br><br>
-              <strong>Kind regards,<br><br>
-                Rift Valley University Admissions Office</strong>
-            </h4>
-            <div align="center">
-              <button type="submit" id="submit_button" name="submit" class="btn btn-success mx-2" style="width: 300px;">Accept Offer</button>
-              <button onclick="confirmDecline()" type="submit" id="submit_button" name="submit" class="btn btn-danger mx-2" style="width: 300px;">Decline Offer</button>
-            </div>
-          <?php
-          } elseif ($admission_status == "2") { ?>
-            <h4><strong>Application reference number:</strong> <?php echo $application_ID ?> <br><br>
-              <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date))?> <br><br>
-              Dear <?php echo $full_name ?>, <br><br>
-              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on <?php echo date('D, d-M-Y', strtotime($application_date))?> <br><br>
-              We regret to inform you that after careful consideration of your application, we are unable to offer you a place on the above course. <br><br>
-              This decision has been taken for the following reason: <br><br>
-              From information supplied, unfortunately you do not meet our entry requirements. <br><br>
-              Thank you for your interest in Rift Valley University. We hope you will be successful in obtaining a place to study at another institution of your choice.<br><br>
-              <strong>Kind regards,<br><br>
-                Rift Valley University Admissions Office</strong>
-            </h4>
-          <?php
-          } elseif ($admission_status == "3") { ?>
-            <h4><strong>Application reference number:</strong> <?php echo $application_ID ?> <br><br>
-              <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date))?> <br><br>
-              Dear <?php echo $full_name ?>, <br><br>
-              Re: Application for Bachelor of <b><?php echo $course_name ?></b>, September 2023, made on <?php echo date('D, d-M-Y', strtotime($application_date))?> <br><br>
-              We hope this letter finds you well. On behalf of the admissions committee at Rift Valley University, we would like to
-              express our appreciation for your application to the Program.<br><br>
-              Every academic term, we receive more applications from candidates than we have capacity to accommodate. And unfortunately,
-              your application was not selected for the program. We will keep your application in a waiting list and if an alternative
-              opportunity becomes available, that you are qualified for, you will be contacted.<br><br>
-              Should you have any questions or require any further assistance, please do not hesitate to reach out to our
-              admissions office at <a style="color:coral">rvu.admissions.sup@gmail.com</a><br><br>
-              We wish you the very best in all your academic endeavors..<br><br>
-              <strong>Kind regards,<br><br>
-                Rift Valley University Admissions Office</strong>
-            </h4>
-          <?php
-          } else {
-            echo "What the heck has happened here?";
-          }
-
-          ?><!--<?php /*
-          $rtp =mysqli_query($con ,"SELECT ID from tbladmapplications where UserID='$uid'");
-          $row=mysqli_fetch_array($rtp);
-          if($row>0){
-            $ret=mysqli_query($con,"select AdminStatus from tbladmapplications join tbldocument on tbldocument.UserID=tbladmapplications.UserID where tbldocument.UserID='$uid' and tbladmapplications.AdminStatus='1'");
-            $num=mysqli_fetch_array($ret);
-            
-            if($num>0){ ?>
-              <<div class="row" >
+          <form name="submit" method="post" enctype="multipart/form-data">
+            <!--start of section-->
+            <section class="formatter" id="formatter">
+              <div class="row">
                 <div class="col-12">
-                  <div class="card pull-up">
+                  <div class="card">
+                    <div class="card-header pb-0">
+                      <h4 class="card-title">Payment Confirmation Form</h4>
+                    </div>
+                    <hr>
                     <div class="card-content">
-                      <a href="upload-doc.php">
-                        <div class="card-body">
-                          <div class="media d-flex">
-                            <div class="media-body text-left">
-                              <h4 align="center">Your Application has been accepted and documents also uploaded successfully</h4>
-                            </div>
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-xl-4 col-lg-6">
+                            <fieldset>
+                              <h5>Full Name <span class="text-muted">(as written in the receipt)</span> </h5>
+                              <div class="form-group">
+                                <input class="form-control white_bg" id="name" name="name" type="text" required>
+                              </div>
+                            </fieldset>
                           </div>
-      
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+
+                          <div class="col-xl-4 col-lg-6">
+                            <fieldset>
+                              <h5>Payment Reference </h5>
+                              <div class="form-group">
+                                <input class="form-control white_bg" id="pay_ref" name="pay_ref" type="text" required>
+                              </div>
+                            </fieldset>
+                          </div>
+
+                          <div class="col-xl-4 col-lg-6">
+                            <fieldset>
+                              <h5>Payment Date</h5>
+                              <div class="form-group">
+                                <input class="form-control white_bg" id="pay_date" name="pay_date" type="date" required>
+                              </div>
+                            </fieldset>
+                          </div>
+
+                          <div class="col-xl-4 col-lg-6">
+                            <fieldset>
+                              <h5>Receipt Photo </h5>
+                              <div class="form-group">
+                                <input class="form-control white_bg" id="pay_pic" name="pay_pic" type="file" accept="image/*" required>
+                              </div>
+                              <div id="error-message"></div>
+                            </fieldset>
                           </div>
                         </div>
-                      </a>
+                      </div>
+                    </div>
+                    <div align="center" class="mt-2 mb-2">
+                      <button type="submit" id="submit_button" name="submit" class="btn btn-success mx-2" style="width: 300px;">Confirm payment</button>
                     </div>
                   </div>
                 </div>
               </div>
-              <?php 
-            } else 
-            {?>
-              <div class="row" >
-                <div class="col-xl-10 col-lg-12 col-12">
-                  <div class="card pull-up">
-                    <div class="card-content">
-                      <a href="upload-doc.php">
-                        <div class="card-body">
-                          <div class="media d-flex">
-                            <div class="media-body text-left">
-                              <h4 align="center">Upload your documents</h4>
-                            </div>
-                            <div>
-                              <i class="icon-file success font-large-2 float-right"></i>
-                            </div>
-                          </div>
-                          
-                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <?php 
-            }  
-          } */?>--><?php
-          ?>
-
-
+            </section>
+          </form>
         </div>
+
+
       </div>
     </div>
 
     <?php include('includes/footer.php'); ?>
     <!-- BEGIN VENDOR JS-->
     <!-- General Javascript functions definitions -->
+    <!-- Image input validator-->
     <script>
-      function confirmDecline() {
-        var confirmMessage = "Are you sure you want to decline the admission offer? \nThis action cannot be undone.";
+      const fileInput = document.querySelector('#userpic');
+      const errorMessage = document.querySelector('#error-message');
 
-        if (confirm(confirmMessage)) {
-          // Perform the action to decline the offer
-          // You can add your own code here
-          // For example: window.location.href = "decline-offer.php";
+      fileInput.addEventListener('change', function(event) {
+        const selectedFile = event.target.files[0];
+        const fileTypePic = selectedFile.type;
+
+        if (!fileTypePic.startsWith('image/')) {
+          // Display error message and highlight the file input field
+          errorMessage.textContent = 'Please select an image file';
+          fileInput.classList.add('error');
+          fileInput.style.border = '1px solid red';
+
+          // Prevent form submission
+          event.preventDefault();
+        } else {
+          // Clear error message and remove highlight from file input field
+          errorMessage.textContent = '';
+          fileInput.classList.remove('error');
+          fileInput.style.border = '';
         }
-      }
-      </script>
+      });
+    </script>
     <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
     <!-- BEGIN VENDOR JS-->
     <!-- BEGIN PAGE VENDOR JS-->

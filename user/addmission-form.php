@@ -2,140 +2,129 @@
 session_start();
 error_reporting(1);
 include('includes/dbconnection.php');
-if (strlen($_SESSION['uid']==0)) 
-{
+if (strlen($_SESSION['uid'] == 0)) {
   header('location:logout.php');
-} 
-else
-{
+} else {
   // Coding for form Submission 	
-  if(isset($_POST['submit']))
-  {
-    $uid=$_SESSION['uid'];
-    $coursename=$_POST['coursename'];
-    $admissionType=$_POST['admissionType'];
+  if (isset($_POST['submit'])) {
+    $uid = $_SESSION['uid'];
+    $coursename = $_POST['coursename'];
+    $admissionType = $_POST['admissionType'];
 
     // personal information
-    $firstname=$_POST['firstname'];
-    $middlename=$_POST['middlename'];
-    $lastname=$_POST['lastname'];
-    $nationality=$_POST['nationality'];
-  
-    $dobGregorian=$_POST['dobGregorian'];
-    $dobEthiopian=$_POST['dobEthiopian'];
-    $gender=$_POST['gender'];
-    $upic=$_FILES["userpic"]["name"];
-    
-    $cobirth=$_POST['cobirth'];
-    $pobtown=$_POST['pobtown'];
-    $pobworeda=$_POST['pobworeda'];
-    $pobkebele=$_POST['pobkebele'];
-    
-    // father's information
-    $ffirstname=$_POST['ffirstname'];
-    $fmiddlename=$_POST['fmiddlename'];
-    $flastname=$_POST['flastname'];
-    
-    // mother's information
-    $mfirstname=$_POST['mfirstname'];
-    $mmiddlename=$_POST['mmiddlename'];
-    $mlastname=$_POST['mlastname'];
-    
-    // residence and contact
-    $restown=$_POST['restown'];
-    $resworeda=$_POST['resworeda'];
-    $reskebele=$_POST['reskebele'];
-    $reshouse=$_POST['reshouse'];
+    $firstname = $_POST['firstname'];
+    $middlename = $_POST['middlename'];
+    $lastname = $_POST['lastname'];
+    $nationality = $_POST['nationality'];
 
-    $phone1=$_POST['phone1'];
-    $phone2=$_POST['phone2'];
-    $marital=$_POST['marital'];
-    
-    $emename=$_POST['emename']; 
-    $emephone=$_POST['emephone']; 
-    $emetown=$_POST['emetown']; 
-    $emerelation=$_POST['emerelation']; 
+    $dobGregorian = $_POST['dobGregorian'];
+    $dobEthiopian = $_POST['dobEthiopian'];
+    $gender = $_POST['gender'];
+    $upic = $_FILES["userpic"]["name"];
+
+    $cobirth = $_POST['cobirth'];
+    $pobtown = $_POST['pobtown'];
+    $pobworeda = $_POST['pobworeda'];
+    $pobkebele = $_POST['pobkebele'];
+
+    // father's information
+    $ffirstname = $_POST['ffirstname'];
+    $fmiddlename = $_POST['fmiddlename'];
+    $flastname = $_POST['flastname'];
+
+    // mother's information
+    $mfirstname = $_POST['mfirstname'];
+    $mmiddlename = $_POST['mmiddlename'];
+    $mlastname = $_POST['mlastname'];
+
+    // residence and contact
+    $restown = $_POST['restown'];
+    $resworeda = $_POST['resworeda'];
+    $reskebele = $_POST['reskebele'];
+    $reshouse = $_POST['reshouse'];
+
+    $phone1 = $_POST['phone1'];
+    $phone2 = $_POST['phone2'];
+    $marital = $_POST['marital'];
+
+    $emename = $_POST['emename'];
+    $emephone = $_POST['emephone'];
+    $emetown = $_POST['emetown'];
+    $emerelation = $_POST['emerelation'];
 
     // educational background
-    $sch_name_1=$_POST['sch_name_1'];
-    $sch_town_1=$_POST['sch_town_1'];
-    $sch_year_1=$_POST['sch_year_1'];
-    $sch_stream_1=$_POST['sch_stream_1'];
+    $sch_name_1 = $_POST['sch_name_1'];
+    $sch_town_1 = $_POST['sch_town_1'];
+    $sch_year_1 = $_POST['sch_year_1'];
+    $sch_stream_1 = $_POST['sch_stream_1'];
 
-    $sch_name_2=$_POST['sch_name_2'];
-    $sch_town_2=$_POST['sch_town_2'];
-    $sch_year_2=$_POST['sch_year_2'];
-    $sch_stream_2=$_POST['sch_stream_2'];
+    $sch_name_2 = $_POST['sch_name_2'];
+    $sch_town_2 = $_POST['sch_town_2'];
+    $sch_year_2 = $_POST['sch_year_2'];
+    $sch_stream_2 = $_POST['sch_stream_2'];
 
-    $sch_name_3=$_POST['sch_name_3'];
-    $sch_town_3=$_POST['sch_town_3'];
-    $sch_year_3=$_POST['sch_year_3'];
-    $sch_stream_3=$_POST['sch_stream_3'];
+    $sch_name_3 = $_POST['sch_name_3'];
+    $sch_town_3 = $_POST['sch_town_3'];
+    $sch_year_3 = $_POST['sch_year_3'];
+    $sch_stream_3 = $_POST['sch_stream_3'];
 
-    $ins_name_1=$_POST['ins_name_1'];
-    $ins_country_1=$_POST['ins_country_1'];
-    $ins_year_1=$_POST['ins_year_1'];
-    $ins_major_1=$_POST['ins_major_1'];
+    $ins_name_1 = $_POST['ins_name_1'];
+    $ins_country_1 = $_POST['ins_country_1'];
+    $ins_year_1 = $_POST['ins_year_1'];
+    $ins_major_1 = $_POST['ins_major_1'];
 
-    $ins_name_2=$_POST['ins_name_1'];
-    $ins_country_2=$_POST['ins_country_2'];
-    $ins_year_2=$_POST['ins_year_2'];
-    $ins_major_2=$_POST['ins_major_2'];
+    $ins_name_2 = $_POST['ins_name_1'];
+    $ins_country_2 = $_POST['ins_country_2'];
+    $ins_year_2 = $_POST['ins_year_2'];
+    $ins_major_2 = $_POST['ins_major_2'];
 
-    $ins_name_3=$_POST['ins_name_3'];
-    $ins_country_3=$_POST['ins_country_3'];
-    $ins_year_3=$_POST['ins_year_3'];
-    $ins_major_3=$_POST['ins_major_3'];
+    $ins_name_3 = $_POST['ins_name_3'];
+    $ins_country_3 = $_POST['ins_country_3'];
+    $ins_year_3 = $_POST['ins_year_3'];
+    $ins_major_3 = $_POST['ins_major_3'];
 
-    $passport=$_FILES["passport"]["name"];
-    $highSchool_transcript=$_FILES["highSchool_trans"]["name"];
-    $tenth_certificate=$_FILES["tenth_cert"]["name"];
-    $twelfth_certificate=$_FILES["twelfth_cert"]["name"];
-    $post_sec_transcript=$_FILES["post_sec_trans"]["name"];
-    $post_sec_certificate=$_FILES["post_sec_cert"]["name"];
-    $additional_documents=$_FILES["additional_docs"]["name"];
-  
-    $extension_pic = substr($upic,strlen($upic)-4,strlen($upic));
-    $extension_passport = substr($passport,strlen($passport)-4,strlen($passport));
-    $extension_highSchool_transcript = substr($highSchool_transcript,strlen($highSchool_transcript)-4,strlen($highSchool_transcript));
-    $extension_tenth_certificate = substr($tenth_certificate,strlen($tenth_certificate)-4,strlen($tenth_certificate));
-    $extension_twelfth_certificate = substr($twelfth_certificate,strlen($twelfth_certificate)-4,strlen($twelfth_certificate));
-    $extension_post_sec_transcript = substr($post_sec_transcript,strlen($post_sec_transcript)-4,strlen($post_sec_transcript));
-    $extension_post_sec_certificate = substr($post_sec_certificate,strlen($post_sec_certificate)-4,strlen($post_sec_certificate));
-    $extension_additional_documents = substr($additional_documents,strlen($additional_documents)-4,strlen($additional_documents));
+    $passport = $_FILES["passport"]["name"];
+    $highSchool_transcript = $_FILES["highSchool_trans"]["name"];
+    $tenth_certificate = $_FILES["tenth_cert"]["name"];
+    $twelfth_certificate = $_FILES["twelfth_cert"]["name"];
+    $post_sec_transcript = $_FILES["post_sec_trans"]["name"];
+    $post_sec_certificate = $_FILES["post_sec_cert"]["name"];
+    $additional_documents = $_FILES["additional_docs"]["name"];
 
-    $dec=$_POST['declaration'];
-    $sign=$_POST['signature'];
+    $extension_pic = substr($upic, strlen($upic) - 4, strlen($upic));
+    $extension_passport = substr($passport, strlen($passport) - 4, strlen($passport));
+    $extension_highSchool_transcript = substr($highSchool_transcript, strlen($highSchool_transcript) - 4, strlen($highSchool_transcript));
+    $extension_tenth_certificate = substr($tenth_certificate, strlen($tenth_certificate) - 4, strlen($tenth_certificate));
+    $extension_twelfth_certificate = substr($twelfth_certificate, strlen($twelfth_certificate) - 4, strlen($twelfth_certificate));
+    $extension_post_sec_transcript = substr($post_sec_transcript, strlen($post_sec_transcript) - 4, strlen($post_sec_transcript));
+    $extension_post_sec_certificate = substr($post_sec_certificate, strlen($post_sec_certificate) - 4, strlen($post_sec_certificate));
+    $extension_additional_documents = substr($additional_documents, strlen($additional_documents) - 4, strlen($additional_documents));
+
+    $dec = $_POST['declaration'];
+    $sign = $_POST['signature'];
 
     // allowed extensions for docs and applicant pic
     $allowed_extensions_pic = array(".jpg", ".png", ".jpeg", ".gif");
     $allowed_extensions_doc = array(".pdf", ".PDF");  // or maybe change it to application/pdf
     // Validation for allowed extensions .in_array() function searches an array for a specific value.
-    
-    if(!in_array($extension_pic, $allowed_extensions_pic))
-    {
+
+    if (!in_array($extension_pic, $allowed_extensions_pic)) {
       echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
-    }
-    elseif(!in_array($extension_passport, $allowed_extensions_doc)){
+    } elseif (!in_array($extension_passport, $allowed_extensions_doc)) {
       echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
-    }
-    elseif(!in_array($extension_highSchool_transcript, $allowed_extensions_doc)){
+    } elseif (!in_array($extension_highSchool_transcript, $allowed_extensions_doc)) {
       echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
-    }
-    elseif(!in_array($extension_tenth_certificate, $allowed_extensions_doc)){
+    } elseif (!in_array($extension_tenth_certificate, $allowed_extensions_doc)) {
       echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
-    }
-    elseif(!in_array($extension_twelfth_certificate, $allowed_extensions_doc)){
+    } elseif (!in_array($extension_twelfth_certificate, $allowed_extensions_doc)) {
       echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
-    }
-    else
-    {
+    } else {
       // Applicant's photo query writing starts here
       // rename user pic
-      $userpic = $firstname."_".md5($upic).$extension_pic;
-      move_uploaded_file($_FILES["userpic"]["tmp_name"],"userimages/".$userpic);
+      $userpic = $firstname . "_" . md5($upic) . $extension_pic;
+      move_uploaded_file($_FILES["userpic"]["tmp_name"], "userimages/" . $userpic);
       // Only now it should upload to the database
-      $query1 = mysqli_query($con,"insert into tbladmapplications( 
+      $query1 = mysqli_query($con, "insert into tbladmapplications( 
             UserId, CourseApplied, AdmissionType, FirstName, MiddleName, LastName, Nationality, DobGregorian, 
             DobEthiopian, Gender, UserPic, CountryOfBirth, TownOfBirth, WoredaOfBirth,
             KebeleOfBirth, FatherFirstName, FatherMiddleName, FatherLastName, MotherFirstName, 
@@ -155,86 +144,78 @@ else
             '$sch_name_3', '$sch_town_3', '$sch_year_3', '$sch_stream_3', '$ins_name_1', '$ins_country_1', 
             '$ins_year_1', '$ins_major_1', '$ins_name_2', '$ins_country_2', '$ins_year_2', '$ins_major_2', 
             '$ins_name_3', '$ins_country_3', '$ins_year_3', '$ins_major_3', '$sign')");
-      
+
       // Applicant's photo query writing ends here
 
 
       // docs query writing starts here
       //rename upload file
-      $pass = $firstname."_".md5($passport).$extension_passport;
-      $highSchool_T = $firstname."_".md5($highSchool_transcript).$extension_highSchool_transcript;
-      $tenth_C = $firstname."_".md5($tenth_certificate).$extension_tenth_certificate;
-      $twelfth_C = $firstname."_".md5($twelfth_certificate).$extension_twelfth_certificate;
-      
-      if($post_sec_transcript != ""){
-        if(!in_array($extension_post_sec_transcript, $allowed_extensions_doc)){
+      $pass = $firstname . "_" . md5($passport) . $extension_passport;
+      $highSchool_T = $firstname . "_" . md5($highSchool_transcript) . $extension_highSchool_transcript;
+      $tenth_C = $firstname . "_" . md5($tenth_certificate) . $extension_tenth_certificate;
+      $twelfth_C = $firstname . "_" . md5($twelfth_certificate) . $extension_twelfth_certificate;
+
+      if ($post_sec_transcript != "") {
+        if (!in_array($extension_post_sec_transcript, $allowed_extensions_doc)) {
           echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
-        }else{
-          $post_sec_T = $firstname."_".md5($post_sec_transcript).$extension_post_sec_transcript;
+        } else {
+          $post_sec_T = $firstname . "_" . md5($post_sec_transcript) . $extension_post_sec_transcript;
         }
-      } 
-      else{ 
-        $post_sec_T="";
+      } else {
+        $post_sec_T = "";
       }
 
-      if($post_sec_certificate != ""){
-        if(!in_array($extension_post_sec_certificate, $allowed_extensions_doc)){
+      if ($post_sec_certificate != "") {
+        if (!in_array($extension_post_sec_certificate, $allowed_extensions_doc)) {
           echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
-        }else{
-          $post_sec_C = $firstname."_".md5($post_sec_certificate).$extension_post_sec_certificate;
+        } else {
+          $post_sec_C = $firstname . "_" . md5($post_sec_certificate) . $extension_post_sec_certificate;
         }
-      } 
-      else{ 
-        $post_sec_C="";
+      } else {
+        $post_sec_C = "";
       }
 
-      if($additional_documents != ""){
-        if(!in_array($extension_additional_documents, $allowed_extensions_doc)){
+      if ($additional_documents != "") {
+        if (!in_array($extension_additional_documents, $allowed_extensions_doc)) {
           echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
-        }else{
-          $additionals = $firstname."_".md5($post_sec_certificate).$extension_additional_documents;
+        } else {
+          $additionals = $firstname . "_" . md5($post_sec_certificate) . $extension_additional_documents;
         }
-      } 
-      else{ 
-        $additionals="";
+      } else {
+        $additionals = "";
       }
-      move_uploaded_file($_FILES["passport"]["tmp_name"],"userdocs/".$pass);
-      move_uploaded_file($_FILES["highSchool_trans"]["tmp_name"],"userdocs/".$highSchool_T);
-      move_uploaded_file($_FILES["tenth_cert"]["tmp_name"],"userdocs/".$tenth_C);
-      move_uploaded_file($_FILES["twelfth_cert"]["tmp_name"],"userdocs/".$twelfth_C);
-      move_uploaded_file($_FILES["post_sec_trans"]["tmp_name"],"userdocs/".$post_sec_T);
-      move_uploaded_file($_FILES["post_sec_cert"]["tmp_name"],"userdocs/".$post_sec_C);
-      move_uploaded_file($_FILES["additional_docs"]["tmp_name"],"userdocs/".$additionals);
-      
-      $query2 = mysqli_query($con,"insert into tbldocument(UserID, Passport, HighSchoolTranscript, TenthCertificate, TwelfthCertificate, 
+      move_uploaded_file($_FILES["passport"]["tmp_name"], "userdocs/" . $pass);
+      move_uploaded_file($_FILES["highSchool_trans"]["tmp_name"], "userdocs/" . $highSchool_T);
+      move_uploaded_file($_FILES["tenth_cert"]["tmp_name"], "userdocs/" . $tenth_C);
+      move_uploaded_file($_FILES["twelfth_cert"]["tmp_name"], "userdocs/" . $twelfth_C);
+      move_uploaded_file($_FILES["post_sec_trans"]["tmp_name"], "userdocs/" . $post_sec_T);
+      move_uploaded_file($_FILES["post_sec_cert"]["tmp_name"], "userdocs/" . $post_sec_C);
+      move_uploaded_file($_FILES["additional_docs"]["tmp_name"], "userdocs/" . $additionals);
+
+      $query2 = mysqli_query($con, "insert into tbldocument(UserID, Passport, HighSchoolTranscript, TenthCertificate, TwelfthCertificate, 
                           PostSecondaryTranscript, PostSecondaryCertificate, AdditionalDocuments) 
                           value('$uid','$pass','$highSchool_T','$tenth_C','$twelfth_C','$post_sec_T', '$post_sec_C', '$additionals')");
-      
+
       // docs query writing ends here
 
 
-      if ($query1 && $query2) 
-        {
-          echo '<script>alert("Your application has been submitted successfully.")</script>';
-          echo "<script>window.location.href ='addmission-form.php'</script>";
-        }
-      else
-        {
-          echo '<script>alert("Something Went Wrong. Please try again.")</script>';
-          echo "<script>window.location.href ='addmission-form.php'</script>";
-        }
+      if ($query1 && $query2) {
+        echo '<script>alert("Your application has been submitted successfully.")</script>';
+        echo "<script>window.location.href ='addmission-form.php'</script>";
+      } else {
+        echo '<script>alert("Something Went Wrong. Please try again.")</script>';
+        echo "<script>window.location.href ='addmission-form.php'</script>";
+      }
     }
   }
-  ?>
+?>
   <!DOCTYPE html>
   <html class="loading" lang="en" data-textdirection="ltr">
 
   <head>
     <title>Admission Form || RVU-GADA Admission Management System</title>
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
-    rel="stylesheet">
-    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
+    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
@@ -247,17 +228,19 @@ else
         margin: 20px 0 0px 0;
         background: #fff;
         border-left: 4px solid #dd3d36;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-        box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
       }
-      .succWrap{
+
+      .succWrap {
         padding: 10px;
         margin: 0 0 20px 0;
         background: #fff;
         border-left: 4px solid #5cb85c;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-        box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
+        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
+        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
       }
+
       #print-button {
         position: absolute;
         top: 10px;
@@ -269,23 +252,75 @@ else
         border-radius: 5px;
         cursor: pointer;
       }
+
+      #error-message {
+        color: red;
+        margin-top: -20px;
+      }
+
+      #error_message_doc1 {
+        color: red;
+        margin-top: -20px;
+        margin-bottom: 10px;
+      }
+
+      #error_message_doc2 {
+        color: red;
+        margin-top: -20px;
+        margin-bottom: 10px;
+      }
+
+      #error_message_doc3 {
+        color: red;
+        margin-top: -10px;
+        margin-bottom: 10px;
+      }
+
+      #error_message_doc4 {
+        color: red;
+        margin-top: -10px;
+        margin-bottom: 10px;
+      }
+
+      #error_message_doc5 {
+        color: red;
+        margin-top: -10px;
+        margin-bottom: 10px;
+      }
+
+      #error_message_doc6 {
+        color: red;
+        margin-top: -10px;
+        margin-bottom: 10px;
+      }
+
+      #error_message_doc7 {
+        color: red;
+        margin-top: -10px;
+        margin-bottom: 10px;
+      }
+
       @media print {
-        body{
+        body {
           padding: 0;
           margin-top: -90px;
         }
-        #header_part, #sidebar_part, #footer_part, #print-button, .content-header{
+
+        #header_part,
+        #sidebar_part,
+        #footer_part,
+        #print-button,
+        .content-header {
           display: none;
         }
-      }                      
+      }
     </style>
   </head>
 
-  <body onbeforeunload="return myFunction()" class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar"
-    data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+  <body onbeforeunload="return myFunction()" class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
-    <?php include('includes/header.php');?>
-    <?php include('includes/leftbar.php');?>
+    <?php include('includes/header.php'); ?>
+    <?php include('includes/leftbar.php'); ?>
     <div class="app-content content">
       <div class="content-wrapper">
         <div class="content-header row">
@@ -305,98 +340,97 @@ else
         </div>
 
         <div class="content-body">
-          <?php 
+          <?php
           $stuid = $_SESSION['uid'];
-          $query = mysqli_query($con,"select * from tbladmapplications where UserId=$stuid");
+          $query = mysqli_query($con, "select * from tbladmapplications where UserId=$stuid");
           $rw = mysqli_num_rows($query);
 
           $query_email = mysqli_query($con, "select Email from tbluser where Id=$stuid");
           $res_email = mysqli_fetch_assoc($query_email);
 
-          
-          if($rw > 0){
-            $query_docs = mysqli_query($con,"select * from tbldocument where  UserID=$stuid");
-            
-            while($row = mysqli_fetch_array($query)){ ?>
+
+          if ($rw > 0) {
+            $query_docs = mysqli_query($con, "select * from tbldocument where  UserID=$stuid");
+
+            while ($row = mysqli_fetch_array($query)) { ?>
               <button id="print-button" class="btn btn-primary" onclick="window.print()">Print</button>
               <p style="font-size:16px; color:red" align="center">Your Application Summary</p>
               <table border="1" class="table mb-0">
                 <tr>
                   <th>Course</th>
-                  <td><?php echo $row['CourseApplied'];?></td>
+                  <td><?php echo $row['CourseApplied']; ?></td>
                 </tr>
                 <tr>
                   <th>Admission Type</th>
-                  <td><?php echo $row['AdmissionType'];?></td>
+                  <td><?php echo $row['AdmissionType']; ?></td>
                 </tr>
                 <tr>
                   <th>Applicant's Photo</th>
-                  <td><img src="userimages/<?php echo $row['UserPic'];?>" width="200" height="200"></td>
+                  <td><img src="userimages/<?php echo $row['UserPic']; ?>" width="200" height="200"></td>
                 </tr>
                 <tr>
                   <th>Applicant's Full Name</th>
-                  <td><?php echo $row['FirstName']," ",$row['MiddleName']," ", $row['LastName'];?></td>
+                  <td><?php echo $row['FirstName'], " ", $row['MiddleName'], " ", $row['LastName']; ?></td>
                 </tr>
                 <tr>
                   <th>Date of Birth</th>
-                  <td><?php echo $row['DobGregorian'];?></td>
+                  <td><?php echo $row['DobGregorian']; ?></td>
                 </tr>
                 <tr>
                   <th>Date of Birth - Ethiopian</th>
-                  <td><?php echo $row['DobEthiopian'];?></td>
+                  <td><?php echo $row['DobEthiopian']; ?></td>
                 </tr>
                 <tr>
                   <th>Gender</th>
-                  <td><?php echo $row['Gender'];?></td>
+                  <td><?php echo $row['Gender']; ?></td>
                 </tr>
                 <tr>
                   <th>Nationality</th>
-                  <td><?php echo $row['Nationality'];?></td>
+                  <td><?php echo $row['Nationality']; ?></td>
                 </tr>
                 <tr>
                   <th>Place of Birth</th>
-                  <td><?php echo $row['CountryOfBirth']. ", ". $row['TownOfBirth']. ", ". $row['WoredaOfBirth']. ", ". $row['KebeleOfBirth'];?></td>
+                  <td><?php echo $row['CountryOfBirth'] . ", " . $row['TownOfBirth'] . ", " . $row['WoredaOfBirth'] . ", " . $row['KebeleOfBirth']; ?></td>
                 </tr>
                 <tr>
                   <th>Father's Full Name</th>
-                  <td><?php echo $row['FatherFirstName']." ".$row['FatherMiddleName']." ".$row['FatherLastName'];?></td>
+                  <td><?php echo $row['FatherFirstName'] . " " . $row['FatherMiddleName'] . " " . $row['FatherLastName']; ?></td>
                 </tr>
                 <tr>
                   <th>Mother's Full Name</th>
-                  <td><?php echo $row['MotherFirstName']." ".$row['MotherMiddleName']." ".$row['MotherLastName'];?></td>
+                  <td><?php echo $row['MotherFirstName'] . " " . $row['MotherMiddleName'] . " " . $row['MotherLastName']; ?></td>
                 </tr>
                 <tr>
                   <th>Residence</th>
-                  <td><?php echo $row['ResidenceTown'].", ". $row['ResidenceWoreda'].", ". $row['ResidenceKebele'].", ". $row['ResidenceHouse'];?></td>
+                  <td><?php echo $row['ResidenceTown'] . ", " . $row['ResidenceWoreda'] . ", " . $row['ResidenceKebele'] . ", " . $row['ResidenceHouse']; ?></td>
                 </tr>
                 <tr>
                   <th>Primary Phone Number</th>
-                  <td><?php echo $row['PhoneNumber'];?></td>
+                  <td><?php echo $row['PhoneNumber']; ?></td>
                 </tr>
                 <tr>
                   <th>Alternative Phone Number</th>
                   <td>
-                  <?php 
-                    if($row['PhoneNumber2']==""){ ?>
+                    <?php
+                    if ($row['PhoneNumber2'] == "") { ?>
                       N/A
-                      <?php 
-                    }    
-                    else{ ?>
-                      <?php echo $row['PhoneNumber2'];
-                    }?>
+                    <?php
+                    } else { ?>
+                    <?php echo $row['PhoneNumber2'];
+                    } ?>
                   </td>
-                </tr>   
+                </tr>
                 <tr>
                   <th>Email Address</th>
-                  <td><?php echo $res_email["Email"]?></td>
+                  <td><?php echo $res_email["Email"] ?></td>
                 </tr>
                 <tr>
                   <th>Marital Status</th>
-                  <td><?php echo $row['MaritalStatus'];?></td>
+                  <td><?php echo $row['MaritalStatus']; ?></td>
                 </tr>
                 <tr>
                   <th>Emergency Contact</th>
-                  <td><?php echo $row['EmergencyName'].", ". $row['EmergencyPhone'].", ". $row['EmergencyTown'];?></td>
+                  <td><?php echo $row['EmergencyName'] . ", " . $row['EmergencyPhone'] . ", " . $row['EmergencyTown']; ?></td>
                 </tr>
               </table>
 
@@ -409,179 +443,177 @@ else
                   <th>Stream</th>
                 </tr>
                 <tr>
-                <th>1</th>
-                  <td><?php echo $row['SchoolName1'];?></td>
-                  <td><?php echo $row['SchoolTown1'];?></td>
-                  <td><?php echo $row['SchoolLastYear1'];?></td>
-                  <td><?php echo $row['SchoolStream1'];?></td>
+                  <th>1</th>
+                  <td><?php echo $row['SchoolName1']; ?></td>
+                  <td><?php echo $row['SchoolTown1']; ?></td>
+                  <td><?php echo $row['SchoolLastYear1']; ?></td>
+                  <td><?php echo $row['SchoolStream1']; ?></td>
                 </tr>
-                <?php 
-                if (!empty($row['SchoolName2'])){?>
+                <?php
+                if (!empty($row['SchoolName2'])) { ?>
                   <tr>
                     <th>2</th>
-                    <td><?php echo $row['SchoolName2'];?></td>
-                    <td><?php echo $row['SchoolTown2'];?></td>
-                    <td><?php echo $row['SchoolLastYear2'];?></td>
-                    <td><?php echo $row['SchoolStream2'];?></td>
+                    <td><?php echo $row['SchoolName2']; ?></td>
+                    <td><?php echo $row['SchoolTown2']; ?></td>
+                    <td><?php echo $row['SchoolLastYear2']; ?></td>
+                    <td><?php echo $row['SchoolStream2']; ?></td>
                   </tr>
                   <?php
-                  if (!empty($row['SchoolName3'])){?> 
+                  if (!empty($row['SchoolName3'])) { ?>
                     <tr>
                       <th>3</th>
-                      <td><?php echo $row['SchoolName3'];?></td>
-                      <td><?php echo $row['SchoolTown3'];?></td>
-                      <td><?php echo $row['SchoolLastYear3'];?></td>
-                      <td><?php echo $row['SchoolStream3'];?></td>
+                      <td><?php echo $row['SchoolName3']; ?></td>
+                      <td><?php echo $row['SchoolTown3']; ?></td>
+                      <td><?php echo $row['SchoolLastYear3']; ?></td>
+                      <td><?php echo $row['SchoolStream3']; ?></td>
                     </tr>
-                    <?php  
+                <?php
                   }
                 } ?>
               </table>
 
-              <?php 
-                if (!empty($row['InsName1'])){ ?>
-                  <table class="table mb-0">
+              <?php
+              if (!empty($row['InsName1'])) { ?>
+                <table class="table mb-0">
+                  <tr>
+                    <th>#</th>
+                    <th>Post Secondary School</th>
+                    <th>Country</th>
+                    <th>Last Year Attended</th>
+                    <th>Study Major</th>
+                  </tr>
+                  <tr>
+                    <th>1</th>
+                    <td><?php echo $row['InsName1']; ?></td>
+                    <td><?php echo $row['InsCounty1']; ?></td>
+                    <td><?php echo $row['InsLastYear1']; ?></td>
+                    <td><?php echo $row['InsMajor1']; ?></td>
+                  </tr>
+                  <?php
+                  if (!empty($row['InsName2'])) { ?>
                     <tr>
-                      <th>#</th>
-                      <th>Post Secondary School</th>
-                      <th>Country</th>
-                      <th>Last Year Attended</th>
-                      <th>Study Major</th>
+                      <th>2</th>
+                      <td><?php echo $row['InsName2']; ?></td>
+                      <td><?php echo $row['InsCountry2']; ?></td>
+                      <td><?php echo $row['InsLastYear2']; ?></td>
+                      <td><?php echo $row['InsMajor2']; ?></td>
                     </tr>
-                    <tr>
-                      <th>1</th>
-                      <td><?php echo $row['InsName1'];?></td>
-                      <td><?php echo $row['InsCounty1'];?></td>
-                      <td><?php echo $row['InsLastYear1'];?></td>
-                      <td><?php echo $row['InsMajor1'];?></td>
-                    </tr>
-                    <?php 
-                    if (!empty($row['InsName2'])){ ?>
+                    <?php
+                    if (!empty($row['InsName3'])) { ?>
                       <tr>
-                        <th>2</th>
-                        <td><?php echo $row['InsName2'];?></td>
-                        <td><?php echo $row['InsCountry2'];?></td>
-                        <td><?php echo $row['InsLastYear2'];?></td>
-                        <td><?php echo $row['InsMajor2'];?></td>
+                        <th>3</th>
+                        <td><?php echo $row['InsName3']; ?></td>
+                        <td><?php echo $row['InsCountry3']; ?></td>
+                        <td><?php echo $row['InsLastYear3']; ?></td>
+                        <td><?php echo $row['InsMajor3']; ?></td>
                       </tr>
-                      <?php
-                      if (!empty($row['InsName3'])){ ?>
-                        <tr>
-                          <th>3</th>
-                          <td><?php echo $row['InsName3'];?></td>
-                          <td><?php echo $row['InsCountry3'];?></td>
-                          <td><?php echo $row['InsLastYear3'];?></td>
-                          <td><?php echo $row['InsMajor3'];?></td>
-                        </tr>
-                        <?php
-                      }
-                    }?>
-                  </table>
-                <?php 
-                }
+                  <?php
+                    }
+                  } ?>
+                </table>
+              <?php
+              }
             }
-            while($row_d = mysqli_fetch_array($query_docs)){ ?>
+            while ($row_d = mysqli_fetch_array($query_docs)) { ?>
               <table class="table mb-0">
                 <tr>
                   <th>National ID / Passport</th>
-                  <td><a href="userdocs/<?php echo $row_d['Passport'];?>" target="_blank">View File </a></td>
+                  <td><a href="userdocs/<?php echo $row_d['Passport']; ?>" target="_blank">View File </a></td>
                 </tr>
                 <tr>
                   <th>High School Transcript</th>
-                  <td><a href="userdocs/<?php echo $row_d['HighSchoolTranscript'];?>" target="_blank">View File </a></td>
+                  <td><a href="userdocs/<?php echo $row_d['HighSchoolTranscript']; ?>" target="_blank">View File </a></td>
                 </tr>
                 <tr>
                   <th>10th Grade National Examination Report</th>
-                  <td><a href="userdocs/<?php echo $row_d['TenthCertificate'];?>" target="_blank">View File </a></td>
+                  <td><a href="userdocs/<?php echo $row_d['TenthCertificate']; ?>" target="_blank">View File </a></td>
                 </tr>
                 <tr>
                   <th>12th Grade National Examination Report</th>
-                  <td><a href="userdocs/<?php echo $row_d['TwelfthCertificate'];?>" target="_blank">View File </a></td>
+                  <td><a href="userdocs/<?php echo $row_d['TwelfthCertificate']; ?>" target="_blank">View File </a></td>
                 </tr>
                 <tr>
                   <th>Post Secondary Education Transcript</th>
                   <td>
-                    <?php 
-                    if($row_d['PostSecondaryTranscript']==""){ ?>
+                    <?php
+                    if ($row_d['PostSecondaryTranscript'] == "") { ?>
                       N/A
-                      <?php 
-                    } 
-                    else{ ?>
-                      <a href="userdocs/<?php echo $row_d['PostSecondaryTranscript'];?>" target="_blank">View File </a>
-                      <?php 
+                    <?php
+                    } else { ?>
+                      <a href="userdocs/<?php echo $row_d['PostSecondaryTranscript']; ?>" target="_blank">View File </a>
+                    <?php
                     } ?>
                   </td>
                 </tr>
                 <tr>
                   <th>Post Secondary Education Certificate</th>
                   <td>
-                    <?php 
-                    if($row_d['PostSecondaryCertificate']==""){ ?>
+                    <?php
+                    if ($row_d['PostSecondaryCertificate'] == "") { ?>
                       N/A
-                      <?php 
-                    } 
-                    else{ ?>
-                      <a href="userdocs/<?php echo $row_d['PostSecondaryCertificate'];?>" target="_blank">View File </a>
-                      <?php 
+                    <?php
+                    } else { ?>
+                      <a href="userdocs/<?php echo $row_d['PostSecondaryCertificate']; ?>" target="_blank">View File </a>
+                    <?php
                     } ?>
                   </td>
                 </tr>
                 <tr>
                   <th>Additional Documents</th>
                   <td>
-                    <?php 
-                    if($row_d['AdditionalDocuments']==""){ ?>
+                    <?php
+                    if ($row_d['AdditionalDocuments'] == "") { ?>
                       N/A
-                      <?php 
-                    } 
-                    else{ ?>
-                      <a href="userdocs/<?php echo $row_d['PostSecondaryCertificate'];?>" target="_blank">View File </a>
-                      <?php 
+                    <?php
+                    } else { ?>
+                      <a href="userdocs/<?php echo $row_d['PostSecondaryCertificate']; ?>" target="_blank">View File </a>
+                    <?php
                     } ?>
                   </td>
                 </tr>
               </table>
               <br>
               <?php
-              $query = mysqli_query($con,"select * from tbladmapplications where UserId=$stuid");
+              $query = mysqli_query($con, "select * from tbladmapplications where UserId=$stuid");
               $row_s = mysqli_fetch_array($query);
               ?>
               <table class="table mb-0">
                 <tr>
                   <th>Application Status</th>
-                  <td><?php 
-                    if($row_s['AdminStatus']==''){
-                      echo "Your application is under review";
-                    } 
-                    
-                    if($row_s['AdminStatus']=='1'){
-                      echo "You have been admitted to the progam";
-                    }
-                    
-                    if($row_s['AdminStatus']=='2'){
-                      echo "Your application has been Rejected";
-                    }
-                    
-                    if($row_s['AdminStatus']=='3'){
-                      echo "Your application has been put to waiting list";
-                    }
-                  ?></td>
+                  <td><?php
+                      if ($row_s['AdminStatus'] == '') {
+                        echo "Your application is under review";
+                      }
+
+                      if ($row_s['AdminStatus'] == '1') {
+                        echo "You have been admitted to the progam";
+                      }
+
+                      if ($row_s['AdminStatus'] == '2') {
+                        echo "Your application has been Rejected";
+                      }
+
+                      if ($row_s['AdminStatus'] == '3') {
+                        echo "Your application has been put to waiting list";
+                      }
+                      ?></td>
                 </tr>
                 <tr>
                   <th>Admission Committee's Remark</th>
-                  <td><?php echo $row['AdminRemark'];?></td>
+                  <td><?php echo $row['AdminRemark']; ?></td>
                 </tr>
                 <tr>
                   <th>Admission Committee's Decision Date</th>
-                  <td><?php echo date('D, d-M-Y', strtotime($row_s['AdminRemarkDate']));?></td>
+                  <td><?php echo $row_s['AdminRemarkDate']; ?></td>
+                  <!-- would be better but has some issues when the value in DB is Null
+                    <td><?php //echo date('D, d-M-Y', strtotime($row_s['AdminRemarkDate'])); ?></td>
+                  -->
                 </tr>
               </table>
-              <?php
-            } 
-          } 
-          else 
-          { ?>
-            <form name="submit" method="post" enctype="multipart/form-data">      
+            <?php
+            }
+          } else { ?>
+            <form name="submit" method="post" enctype="multipart/form-data">
               <!--start of section-->
               <section class="formatter" id="formatter">
                 <div class="row">
@@ -589,11 +621,6 @@ else
                     <div class="card">
                       <div class="card-header pb-0">
                         <h4 class="card-title">Undergraduate Admission Form</h4>
-                        <div class="heading-elements">
-                          <ul class="list-inline mb-0">
-                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                          </ul>
-                        </div>
                       </div>
                       <div class="card-content">
                         <div class="card-body">
@@ -613,11 +640,11 @@ else
                                 <div class="form-group">
                                   <select name='coursename' id="coursename" class="form-control white_bg" required="true">
                                     <option value=""></option>
-                                    <?php $query=mysqli_query($con,"select * from tblcourse");
-                                      while($row=mysqli_fetch_array($query)){ ?>    
-                                        <option value="<?php echo $row['CourseName'];?>">
-                                        <?php echo $row['CourseName'];?></option>
-                                        <?php } ?>  
+                                    <?php $query = mysqli_query($con, "select * from tblcourse");
+                                    while ($row = mysqli_fetch_array($query)) { ?>
+                                      <option value="<?php echo $row['CourseName']; ?>">
+                                        <?php echo $row['CourseName']; ?></option>
+                                    <?php } ?>
                                   </select>
                                 </div>
                               </fieldset>
@@ -629,9 +656,9 @@ else
                                 <div class="form-group">
                                   <select name='admissionType' id="admissionType" class="form-control white_bg" required="true">
                                     <option value=""></option>
-                                    <option value="regular">  Regular  </option>
-                                    <option value="evening">  Evening  </option>
-                                    <option value="weekend">  Weekend  </option>
+                                    <option value="regular"> Regular </option>
+                                    <option value="evening"> Evening </option>
+                                    <option value="weekend"> Weekend </option>
                                     <option value="distance"> Distance </option>
                                   </select>
                                 </div>
@@ -640,7 +667,8 @@ else
                           </div>
 
                           <div class="row" style="margin-top: 2% ">
-                            <div class="col-xl-12 col-lg-12"><h4 class="card-title"><b>Personal Information</b></h4>
+                            <div class="col-xl-12 col-lg-12">
+                              <h4 class="card-title"><b>Personal Information</b></h4>
                               <hr style="border-top: 1px solid" />
                             </div>
                           </div>
@@ -651,16 +679,16 @@ else
                               <fieldset>
                                 <h5>First Name </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="firstname" name="firstname"  type="text" required>
+                                  <input class="form-control white_bg" id="firstname" name="firstname" type="text" required>
                                 </div>
-                              </fieldset>               
+                              </fieldset>
                             </div>
-                                
+
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
                                 <h5>Middle Name </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="middlename" name="middlename"  type="text" required>
+                                  <input class="form-control white_bg" id="middlename" name="middlename" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
@@ -669,16 +697,16 @@ else
                               <fieldset>
                                 <h5>Last Name </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="lastname" name="lastname"  type="text" required>
+                                  <input class="form-control white_bg" id="lastname" name="lastname" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
 
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Nationality                </h5>
+                                <h5>Nationality </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="nationality" name="nationality"  type="text" required>
+                                  <input class="form-control white_bg" id="nationality" name="nationality" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
@@ -687,22 +715,22 @@ else
                           <div class="row">
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Date of Birth (Gregorian)                  </h5>
+                                <h5>Date of Birth (Gregorian) </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="dobGregorian" name="dobGregorian"  type="date" required>
+                                  <input class="form-control white_bg" id="dobGregorian" name="dobGregorian" type="date" required>
                                   <!--<small class="text-muted">Must be in format (dd/mm/yyyy)</small>-->
                                 </div>
-                              </fieldset>                  
+                              </fieldset>
                             </div>
 
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Date of Birth (Ethiopian)                   </h5>
+                                <h5>Date of Birth (Ethiopian) </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="dobEthiopian" name="dobEthiopian"  type="date" required>
+                                  <input class="form-control white_bg" id="dobEthiopian" name="dobEthiopian" type="date" required>
                                   <!--<small class="text-muted">Must be in format (dd/mm/yyyy)</small>-->
                                 </div>
-                              </fieldset>                  
+                              </fieldset>
                             </div>
                             <!-- this is some bullshit JS code right below
                             <script>
@@ -749,7 +777,7 @@ else
                               <fieldset>
                                 <h5>Gender</h5>
                                 <div class="form-group">
-                                  <select class="form-control white_bg" id="gender" name="gender"  required>
+                                  <select class="form-control white_bg" id="gender" name="gender" required>
                                     <option value=""></option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
@@ -760,82 +788,49 @@ else
 
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Applicant's Photo                   </h5>
+                                <h5>Applicant's Photo </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="userpic" name="userpic"  type="file" accept="image/*" required>
+                                  <input class="form-control white_bg" id="userpic" name="userpic" type="file" accept="image/*" required>
                                 </div>
                                 <div id="error-message"></div>
-                              </fieldset>                  
+                              </fieldset>
                             </div>
-
-                            <script>
-                              const fileInput = document.querySelector('#userpic');
-                              const errorMessage = document.querySelector('#error-message');
-
-                              fileInput.addEventListener('change', function(event) {
-                                const selectedFile = event.target.files[0];
-                                const fileTypePic = selectedFile.type;
-
-                                if (!fileTypePic.startsWith('image/')) {
-                                  // Display error message and highlight the file input field
-                                  errorMessage.textContent = 'Please select an image file';
-                                  fileInput.classList.add('error');
-                                  fileInput.style.border = '1px solid red';
-                                  
-                                  // Prevent form submission
-                                  event.preventDefault();
-                                } else {
-                                  // Clear error message and remove highlight from file input field
-                                  errorMessage.textContent = '';
-                                  fileInput.classList.remove('error');
-                                  fileInput.style.border = '';
-                                }
-                              });
-                            </script>
-
-                            <style>
-                              #error-message {
-                                color: red;
-                                margin-top: -20px;
-                              }
-                            </style>
-
                           </div>
 
                           <!--fourth row-->
                           <div class="row">
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Country of Birth                </h5>
+                                <h5>Country of Birth </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="cobirth" name="cobirth"  type="text" required>
+                                  <input class="form-control white_bg" id="cobirth" name="cobirth" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
 
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Place of Birth (Town)             </h5>
+                                <h5>Place of Birth (Town) </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="pobtown" name="pobtown"  type="text" required>
+                                  <input class="form-control white_bg" id="pobtown" name="pobtown" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
 
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Place of Birth (Woreda)             </h5>
+                                <h5>Place of Birth (Woreda) </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="pobworeda" name="pobworeda"  type="text" required>
+                                  <input class="form-control white_bg" id="pobworeda" name="pobworeda" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
-                            
+
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Place of Birth (Kebele)             </h5>
+                                <h5>Place of Birth (Kebele) </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="pobkebele" name="pobkebele"  type="text" required>
+                                  <input class="form-control white_bg" id="pobkebele" name="pobkebele" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
@@ -864,27 +859,27 @@ else
                               <fieldset>
                                 <h5>First Name </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="ffirstname" name="ffirstname"  type="text" required>
-                                </div>
-                              </fieldset>               
-                            </div>
-                                
-                            <div class="col-xl-4 col-lg-12">
-                              <fieldset>
-                                <h5><br></h5>
-                                <h5>Middle Name </h5>
-                                <div class="form-group">
-                                  <input class="form-control white_bg" id="fmiddlename" name="fmiddlename"  type="text" required>
+                                  <input class="form-control white_bg" id="ffirstname" name="ffirstname" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
 
                             <div class="col-xl-4 col-lg-12">
                               <fieldset>
-                              <h5><br></h5>
+                                <h5><br></h5>
+                                <h5>Middle Name </h5>
+                                <div class="form-group">
+                                  <input class="form-control white_bg" id="fmiddlename" name="fmiddlename" type="text" required>
+                                </div>
+                              </fieldset>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-12">
+                              <fieldset>
+                                <h5><br></h5>
                                 <h5>Last Name </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="flastname" name="flastname"  type="text" required>
+                                  <input class="form-control white_bg" id="flastname" name="flastname" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
@@ -897,27 +892,27 @@ else
                               <fieldset>
                                 <h5>First Name </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="mfirstname" name="mfirstname"  type="text" required>
-                                </div>
-                              </fieldset>               
-                            </div>
-                                
-                            <div class="col-xl-4 col-lg-12">
-                              <fieldset>
-                                <h5><br></h5>
-                                <h5>Middle Name </h5>
-                                <div class="form-group">
-                                  <input class="form-control white_bg" id="mmiddlename" name="mmiddlename"  type="text" required>
+                                  <input class="form-control white_bg" id="mfirstname" name="mfirstname" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
 
                             <div class="col-xl-4 col-lg-12">
                               <fieldset>
-                              <h5><br></h5>
+                                <h5><br></h5>
+                                <h5>Middle Name </h5>
+                                <div class="form-group">
+                                  <input class="form-control white_bg" id="mmiddlename" name="mmiddlename" type="text" required>
+                                </div>
+                              </fieldset>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-12">
+                              <fieldset>
+                                <h5><br></h5>
                                 <h5>Last Name </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="mlastname" name="mlastname"  type="text" required>
+                                  <input class="form-control white_bg" id="mlastname" name="mlastname" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
@@ -925,7 +920,7 @@ else
 
                           <div class="row">
                             <div class="col-xl-12 col-lg-12">
-                                <h4 style="margin-bottom: 1%" class="card-title">Applicant's Current Residence and Contact :</h4>
+                              <h4 style="margin-bottom: 1%" class="card-title">Applicant's Current Residence and Contact :</h4>
                             </div>
                           </div>
 
@@ -933,36 +928,36 @@ else
                           <div class="row">
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Town             </h5>
+                                <h5>Town </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="restown" name="restown"  type="text" required>
-                                </div>
-                              </fieldset>
-                            </div>
-                            
-                            <div class="col-xl-3 col-lg-12">
-                              <fieldset>
-                                <h5>Woreda             </h5>
-                                <div class="form-group">
-                                  <input class="form-control white_bg" id="resworeda" name="resworeda"  type="text" required>
+                                  <input class="form-control white_bg" id="restown" name="restown" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
 
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Kebele             </h5>
+                                <h5>Woreda </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="reskebele" name="reskebele"  type="text" required>
+                                  <input class="form-control white_bg" id="resworeda" name="resworeda" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
 
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>House Number <span class="background-color: primary">(optional)</span>   </h5>
+                                <h5>Kebele </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="reshouse" name="reshouse"  type="text">
+                                  <input class="form-control white_bg" id="reskebele" name="reskebele" type="text" required>
+                                </div>
+                              </fieldset>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-12">
+                              <fieldset>
+                                <h5>House Number <span class="background-color: primary">(optional)</span> </h5>
+                                <div class="form-group">
+                                  <input class="form-control white_bg" id="reshouse" name="reshouse" type="text">
                                 </div>
                               </fieldset>
                             </div>
@@ -972,53 +967,25 @@ else
                           <div class="row">
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Phone Number             </h5>
+                                <h5>Phone Number </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="phone1" name="phone1"  type="text" placeholder="09xxxxxxxx / +2519xxxxxxxx" required>
-                                </div>
-                              </fieldset>
-                            </div>
-                            
-                            <div class="col-xl-3 col-lg-12">
-                              <fieldset>
-                                <h5>Phone Number <span class="background-color: primary">(optional)</span>      </h5>
-                                <div class="form-group">
-                                  <input class="form-control white_bg" id="phone2" name="phone2"  type="text" placeholder="09xxxxxxxx / +2519xxxxxxxx">
+                                  <input class="form-control white_bg" id="phone1" name="phone1" type="text" placeholder="09xxxxxxxx / +2519xxxxxxxx" required>
                                 </div>
                               </fieldset>
                             </div>
 
-                            <!--<div class="col-xl-3 col-lg-12">
+                            <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Email Address             </h5>
+                                <h5>Phone Number <span class="background-color: primary">(optional)</span> </h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="email" name="email"  type="text" placeholder="Example@gmail.com" required>
-                                  <span id="email-error" style="color:red;"></span>
+                                  <input class="form-control white_bg" id="phone2" name="phone2" type="text" placeholder="09xxxxxxxx / +2519xxxxxxxx">
                                 </div>
                               </fieldset>
-
-                              <script>
-                              const emailInput = document.getElementById('email');
-                              const emailError = document.getElementById('email-error');
-
-                              emailInput.addEventListener('input', function() {
-                                const email = emailInput.value;
-                                const validEmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                                if (email.match(validEmailRegex)) {
-                                  emailError.textContent = '';
-                                  emailInput.style.border = '1px solid green';
-                                } else {
-                                  emailError.textContent = 'Please enter a valid email address';
-                                  emailInput.style.border = '1px solid red';
-                                }
-                              });
-                              </script>
-                            </div>-->
+                            </div>
 
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Marital Status               </h5>
+                                <h5>Marital Status </h5>
                                 <div class="form-group">
                                   <select class="form-control white_bg" id="marital" name="marital" required>
                                     <option value=""></option>
@@ -1034,7 +1001,7 @@ else
                           <!--fifth row-->
                           <div class="row">
                             <div class="col-xl-12 col-lg-12">
-                                <h4 style="margin-bottom: 1%" class="card-title">Emergency Contact :</h4>
+                              <h4 style="margin-bottom: 1%" class="card-title">Emergency Contact :</h4>
                             </div>
                           </div>
 
@@ -1044,11 +1011,11 @@ else
                               <fieldset>
                                 <h5>Full Name</h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="emename" name="emename"  type="text" required>
+                                  <input class="form-control white_bg" id="emename" name="emename" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
-                            
+
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
                                 <h5>Phone Number</h5>
@@ -1062,14 +1029,14 @@ else
                               <fieldset>
                                 <h5>Town</h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="emetown" name="emetown"  type="text" required>
+                                  <input class="form-control white_bg" id="emetown" name="emetown" type="text" required>
                                 </div>
                               </fieldset>
                             </div>
 
                             <div class="col-xl-3 col-lg-12">
                               <fieldset>
-                                <h5>Relationship With Applicant             </h5>
+                                <h5>Relationship With Applicant </h5>
                                 <div class="form-group">
                                   <select class="form-control white_bg" id="emerelation" name="emerelation" required>
                                     <option value=""></option>
@@ -1091,8 +1058,8 @@ else
                                 <b>Educational Background</b>
                               </h4>
                             </div>
-                            <div class="col-xl-12 col-lg-12">                        
-                                <h5>List the Three last Secondary schools you attended, if applicable, starting with the most recent.</h5>
+                            <div class="col-xl-12 col-lg-12">
+                              <h5>List the Three last Secondary schools you attended, if applicable, starting with the most recent.</h5>
                             </div>
                           </div>
 
@@ -1101,7 +1068,7 @@ else
                           <div class="row">
                             <div class="col-12">
                               <table class="table mb-0">
-                                
+
                                 <tr>
                                   <th class="col-1"></th>
                                   <th class="col-4">School Name</th>
@@ -1109,7 +1076,7 @@ else
                                   <th class="col-2">Last Year</th>
                                   <th class="col-3">Stream</th>
                                 </tr>
-                                
+
                                 <tr>
                                   <td> 1</td>
                                   <td> <input class="form-control white_bg" id="sch_name_1" name="sch_name_1" type="text" required></td>
@@ -1117,44 +1084,44 @@ else
                                   <td> <input class="form-control white_bg" id="sch_year_1" name="sch_year_1" type="int" min="1950" max="2023" required></td>
                                   <td> <input class="form-control white_bg" id="sch_stream_1" name="sch_stream_1" type="text" required></td>
                                 </tr>
-                                
+
                                 <tr>
                                   <td> 2 <span class="background-color: primary">(optional)</span></td>
-                                  <td> <input class="form-control white_bg" id="sch_name_2" name="sch_name_2" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="sch_town_2" name="sch_town_2" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="sch_year_2" name="sch_year_2" type="int" min="1950" max="2023" ></td>
-                                  <td> <input class="form-control white_bg" id="sch_stream_2" name="sch_stream_2" type="text" ></td>
+                                  <td> <input class="form-control white_bg" id="sch_name_2" name="sch_name_2" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="sch_town_2" name="sch_town_2" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="sch_year_2" name="sch_year_2" type="int" min="1950" max="2023"></td>
+                                  <td> <input class="form-control white_bg" id="sch_stream_2" name="sch_stream_2" type="text"></td>
                                 </tr>
-                                
+
                                 <tr>
                                   <td> 3 <span class="background-color: primary">(optional)</span></td>
-                                  <td> <input class="form-control white_bg" id="sch_name_3" name="sch_name_3" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="sch_town_3" name="sch_town_3" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="sch_year_3" name="sch_year_3" type="int" min="1950" max="2023" ></td>
-                                  <td> <input class="form-control white_bg" id="sch_stream_3" name="sch_stream_3" type="text" ></td>
+                                  <td> <input class="form-control white_bg" id="sch_name_3" name="sch_name_3" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="sch_town_3" name="sch_town_3" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="sch_year_3" name="sch_year_3" type="int" min="1950" max="2023"></td>
+                                  <td> <input class="form-control white_bg" id="sch_stream_3" name="sch_stream_3" type="text"></td>
                                 </tr>
-                                
+
                               </table>
                             </div>
                           </div>
                           </hr>
 
                           <div class="row" style="margin-top: 2%">
-                            <div class="col-xl-12 col-lg-12">                        
-                                <h5>Have you ever enrolled in any Post Secondary educational institution(s) - University or College, in Ethiopia or Abroad?</h5>
-                                <form>
-                                  <div class="form-group">
-                                    <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="show-table" value="yes" id="yes-radio">
-                                      <label class="form-check-label" for="yes-radio">Yes</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="show-table" value="no" id="no-radio">
-                                      <label class="form-check-label" for="no-radio">No</label>
-                                    </div>
+                            <div class="col-xl-12 col-lg-12">
+                              <h5>Have you ever enrolled in any Post Secondary educational institution(s) - University or College, in Ethiopia or Abroad?</h5>
+                              <form>
+                                <div class="form-group">
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="show-table" value="yes" id="yes-radio">
+                                    <label class="form-check-label" for="yes-radio">Yes</label>
                                   </div>
-                                </form>
-                              </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="show-table" value="no" id="no-radio">
+                                    <label class="form-check-label" for="no-radio">No</label>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
                           </div>
 
                           <div class="row">
@@ -1170,31 +1137,31 @@ else
                                   <th class="col-2">Last Year</th>
                                   <th class="col-3">Major</th>
                                 </tr>
-                                
+
                                 <tr>
                                   <td> 1</td>
-                                  <td> <input class="form-control white_bg" id="ins_name_1" name="ins_name_1" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="ins_country_1" name="ins_country_1" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="ins_year_1" name="ins_year_1" type="int" min="1950" max="2023" ></td>
-                                  <td> <input class="form-control white_bg" id="ins_major_1" name="ins_major_1" type="text" ></td>
+                                  <td> <input class="form-control white_bg" id="ins_name_1" name="ins_name_1" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="ins_country_1" name="ins_country_1" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="ins_year_1" name="ins_year_1" type="int" min="1950" max="2023"></td>
+                                  <td> <input class="form-control white_bg" id="ins_major_1" name="ins_major_1" type="text"></td>
                                 </tr>
-                                
+
                                 <tr>
                                   <td> 2 </td>
-                                  <td> <input class="form-control white_bg" id="ins_name_2" name="ins_name_2" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="ins_country_2" name="ins_country_2" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="ins_year_2" name="ins_year_2" type="int" min="1950" max="2023" ></td>
-                                  <td> <input class="form-control white_bg" id="ins_major_1" name="ins_major_2" type="text" ></td>
+                                  <td> <input class="form-control white_bg" id="ins_name_2" name="ins_name_2" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="ins_country_2" name="ins_country_2" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="ins_year_2" name="ins_year_2" type="int" min="1950" max="2023"></td>
+                                  <td> <input class="form-control white_bg" id="ins_major_1" name="ins_major_2" type="text"></td>
                                 </tr>
-                                
+
                                 <tr>
                                   <td> 3 </td>
-                                  <td> <input class="form-control white_bg" id="ins_name_3" name="ins_name_3" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="ins_country_3" name="ins_country_3" type="text" ></td>
-                                  <td> <input class="form-control white_bg" id="ins_year_3" name="ins_year_3" type="int" min="1950" max="2023" ></td>
-                                  <td> <input class="form-control white_bg" id="ins_major_3" name="ins_major_3" type="text" ></td>
+                                  <td> <input class="form-control white_bg" id="ins_name_3" name="ins_name_3" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="ins_country_3" name="ins_country_3" type="text"></td>
+                                  <td> <input class="form-control white_bg" id="ins_year_3" name="ins_year_3" type="int" min="1950" max="2023"></td>
+                                  <td> <input class="form-control white_bg" id="ins_major_3" name="ins_major_3" type="text"></td>
                                 </tr>
-                                
+
                               </table>
                             </div>
                           </div>
@@ -1214,7 +1181,7 @@ else
                               <fieldset>
                                 <h5>National ID / Passport</h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="passport" name="passport"  type="file" accept="application/pdf" required>
+                                  <input class="form-control white_bg" id="passport" name="passport" type="file" accept="application/pdf" required>
                                 </div>
                                 <div id="error_message_doc1"></div>
                               </fieldset>
@@ -1223,19 +1190,19 @@ else
                               <fieldset>
                                 <h5>High School Transcript</h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="highSchool_trans" name="highSchool_trans"  type="file" accept="application/pdf" required>
+                                  <input class="form-control white_bg" id="highSchool_trans" name="highSchool_trans" type="file" accept="application/pdf" required>
                                 </div>
                                 <div id="error_message_doc2"></div>
-                              </fieldset>                 
+                              </fieldset>
                             </div>
                           </div>
-                          
+
                           <div class="row mb-2">
                             <div class="col-xl-6 col-lg-12">
                               <fieldset>
                                 <h5>10th Grade National Examination Certificate</h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="tenth_cert" name="tenth_cert"  type="file" accept="application/pdf" required>
+                                  <input class="form-control white_bg" id="tenth_cert" name="tenth_cert" type="file" accept="application/pdf" required>
                                 </div>
                                 <div id="error_message_doc3"></div>
                               </fieldset>
@@ -1244,13 +1211,13 @@ else
                               <fieldset>
                                 <h5>12th Grade National Examination Certificate</h5>
                                 <div class="form-group">
-                                  <input class="form-control white_bg" id="twelfth_cert" name="twelfth_cert"  type="file" accept="application/pdf" required >
+                                  <input class="form-control white_bg" id="twelfth_cert" name="twelfth_cert" type="file" accept="application/pdf" required>
                                 </div>
                                 <div id="error_message_doc4"></div>
-                              </fieldset>                 
+                              </fieldset>
                             </div>
-                          </div>        
-                          
+                          </div>
+
                           <div class="row mb-2">
                             <div class="col-xl-6 col-lg-12">
                               <fieldset>
@@ -1265,7 +1232,7 @@ else
                               <fieldset>
                                 <h5>Post Secondary School Graduation Certificate <span class="background-color: primary">(if applicable)</span></h5>
                                 <div class="form-group custom_class">
-                                  <input class="form-control white_bg" id="post_sec_cert" name="post_sec_cert"  type="file" accept="application/pdf">
+                                  <input class="form-control white_bg" id="post_sec_cert" name="post_sec_cert" type="file" accept="application/pdf">
                                 </div>
                                 <div id="error_message_doc6"></div>
                               </fieldset>
@@ -1277,214 +1244,179 @@ else
                               <fieldset>
                                 <h5>Additional Documents <span class="background-color: primary">(Optional)</span></h5>
                                 <div class="form-group custom_class">
-                                  <input class="form-control white_bg" id="additional_docs" name="additional_docs"  type="file" accept="application/pdf">
+                                  <input class="form-control white_bg" id="additional_docs" name="additional_docs" type="file" accept="application/pdf">
                                 </div>
                                 <div id="error_message_doc7"></div>
                               </fieldset>
                             </div>
                           </div>
-
+                          
+                          <!--Uploaded documents validator scripts-->
                           <script>
-                              const fileInputDoc1 = document.querySelector('#passport');
-                              const fileInputDoc2 = document.querySelector('#highSchool_trans');
-                              const fileInputDoc3 = document.querySelector('#tenth_cert');
-                              const fileInputDoc4 = document.querySelector('#twelfth_cert');
-                              const fileInputDoc5 = document.querySelector('#post_sec_trans');
-                              const fileInputDoc6 = document.querySelector('#post_sec_cert');
-                              const fileInputDoc7 = document.querySelector('#additional_docs');
+                            const fileInputDoc1 = document.querySelector('#passport');
+                            const fileInputDoc2 = document.querySelector('#highSchool_trans');
+                            const fileInputDoc3 = document.querySelector('#tenth_cert');
+                            const fileInputDoc4 = document.querySelector('#twelfth_cert');
+                            const fileInputDoc5 = document.querySelector('#post_sec_trans');
+                            const fileInputDoc6 = document.querySelector('#post_sec_cert');
+                            const fileInputDoc7 = document.querySelector('#additional_docs');
 
-                              const errorMessageDoc1 = document.querySelector('#error_message_doc1');
-                              const errorMessageDoc2 = document.querySelector('#error_message_doc2');
-                              const errorMessageDoc3 = document.querySelector('#error_message_doc3');
-                              const errorMessageDoc4 = document.querySelector('#error_message_doc4');
-                              const errorMessageDoc5 = document.querySelector('#error_message_doc5');
-                              const errorMessageDoc6 = document.querySelector('#error_message_doc6');
-                              const errorMessageDoc7 = document.querySelector('#error_message_doc7');
+                            const errorMessageDoc1 = document.querySelector('#error_message_doc1');
+                            const errorMessageDoc2 = document.querySelector('#error_message_doc2');
+                            const errorMessageDoc3 = document.querySelector('#error_message_doc3');
+                            const errorMessageDoc4 = document.querySelector('#error_message_doc4');
+                            const errorMessageDoc5 = document.querySelector('#error_message_doc5');
+                            const errorMessageDoc6 = document.querySelector('#error_message_doc6');
+                            const errorMessageDoc7 = document.querySelector('#error_message_doc7');
 
-                              
-                              fileInputDoc1.addEventListener('change', function(event) {
-                                const selectedFile = event.target.files[0];
-                                const fileTypeDoc = selectedFile.type;
 
-                                if (!fileTypeDoc.startsWith('application/pdf')) {
-                                  // Display error message and highlight the file input field's border
-                                  errorMessageDoc1.textContent = 'You can upload only a PDF file';
-                                  fileInputDoc1.classList.add('error');
-                                  fileInputDoc1.style.border = '1px solid red';
-                                  
-                                  // Prevent form submission
-                                  event.preventDefault();
-                                } else {
-                                  // Clear error message and remove highlight from file input field
-                                  errorMessageDoc1.textContent = '';
-                                  fileInputDoc1.classList.remove('error');
-                                  fileInputDoc1.style.border = '';
-                                }
-                              });
-                              
-                              fileInputDoc2.addEventListener('change', function(event) {
-                                const selectedFile = event.target.files[0];
-                                const fileTypeDoc = selectedFile.type;
+                            fileInputDoc1.addEventListener('change', function(event) {
+                              const selectedFile = event.target.files[0];
+                              const fileTypeDoc = selectedFile.type;
 
-                                if (!fileTypeDoc.startsWith('application/pdf')) {
-                                  // Display error message and highlight the file input field's border
-                                  errorMessageDoc2.textContent = 'You can upload only a PDF file';
-                                  fileInputDoc2.classList.add('error');
-                                  fileInputDoc2.style.border = '1px solid red';
-                                  
-                                  // Prevent form submission
-                                  event.preventDefault();
-                                } else {
-                                  // Clear error message and remove highlight from file input field
-                                  errorMessageDoc2.textContent = '';
-                                  fileInputDoc2.classList.remove('error');
-                                  fileInputDoc2.style.border = '';
-                                }
-                              });
+                              if (!fileTypeDoc.startsWith('application/pdf')) {
+                                // Display error message and highlight the file input field's border
+                                errorMessageDoc1.textContent = 'You can upload only a PDF file';
+                                fileInputDoc1.classList.add('error');
+                                fileInputDoc1.style.border = '1px solid red';
 
-                              fileInputDoc3.addEventListener('change', function(event) {
-                                const selectedFile = event.target.files[0];
-                                const fileTypeDoc = selectedFile.type;
-
-                                if (!fileTypeDoc.startsWith('application/pdf')) {
-                                  // Display error message and highlight the file input field's border
-                                  errorMessageDoc3.textContent = 'You can upload only a PDF file';
-                                  fileInputDoc3.classList.add('error');
-                                  fileInputDoc3.style.border = '1px solid red';
-                                  
-                                  // Prevent form submission
-                                  event.preventDefault();
-                                } else {
-                                  // Clear error message and remove highlight from file input field
-                                  errorMessageDoc3.textContent = '';
-                                  fileInputDoc3.classList.remove('error');
-                                  fileInputDoc3.style.border = '';
-                                }
-                              });
-                              
-                              fileInputDoc4.addEventListener('change', function(event) {
-                                const selectedFile = event.target.files[0];
-                                const fileTypeDoc = selectedFile.type;
-
-                                if (!fileTypeDoc.startsWith('application/pdf')) {
-                                  // Display error message and highlight the file input field's border
-                                  errorMessageDoc4.textContent = 'You can upload only a PDF file';
-                                  fileInputDoc4.classList.add('error');
-                                  fileInputDoc4.style.border = '1px solid red';
-                                  
-                                  // Prevent form submission
-                                  event.preventDefault();
-                                } else {
-                                  // Clear error message and remove highlight from file input field
-                                  errorMessageDoc4.textContent = '';
-                                  fileInputDoc4.classList.remove('error');
-                                  fileInputDoc4.style.border = '';
-                                }
-                              });
-                              
-                              fileInputDoc5.addEventListener('change', function(event) {
-                                const selectedFile = event.target.files[0];
-                                const fileTypeDoc = selectedFile.type;
-
-                                if (!fileTypeDoc.startsWith('application/pdf')) {
-                                  // Display error message and highlight the file input field's border
-                                  errorMessageDoc5.textContent = 'You can upload only a PDF file';
-                                  fileInputDoc5.classList.add('error');
-                                  fileInputDoc5.style.border = '1px solid red';
-                                  
-                                  // Prevent form submission
-                                  event.preventDefault();
-                                } else {
-                                  // Clear error message and remove highlight from file input field
-                                  errorMessageDoc5.textContent = '';
-                                  fileInputDoc5.classList.remove('error');
-                                  fileInputDoc5.style.border = '';
-                                }
-                              });
-                              
-                              fileInputDoc6.addEventListener('change', function(event) {
-                                const selectedFile = event.target.files[0];
-                                const fileTypeDoc = selectedFile.type;
-
-                                if (!fileTypeDoc.startsWith('application/pdf')) {
-                                  // Display error message and highlight the file input field's border
-                                  errorMessageDoc6.textContent = 'You can upload only a PDF file';
-                                  fileInputDoc6.classList.add('error');
-                                  fileInputDoc6.style.border = '1px solid red';
-                                  
-                                  // Prevent form submission
-                                  event.preventDefault();
-                                } else {
-                                  // Clear error message and remove highlight from file input field
-                                  errorMessageDoc6.textContent = '';
-                                  fileInputDoc6.classList.remove('error');
-                                  fileInputDoc6.style.border = '';
-                                }
-                              });
-
-                              fileInputDoc7.addEventListener('change', function(event) {
-                                const selectedFile = event.target.files[0];
-                                const fileTypeDoc = selectedFile.type;
-
-                                if (!fileTypeDoc.startsWith('application/pdf')) {
-                                  // Display error message and highlight the file input field's border
-                                  errorMessageDoc7.textContent = 'You can upload only a PDF file';
-                                  fileInputDoc7.classList.add('error');
-                                  fileInputDoc7.style.border = '1px solid red';
-                                  
-                                  // Prevent form submission
-                                  event.preventDefault();
-                                } else {
-                                  // Clear error message and remove highlight from file input field
-                                  errorMessageDoc7.textContent = '';
-                                  fileInputDoc7.classList.remove('error');
-                                  fileInputDoc7.style.border = '';
-                                }
-                              });
-                            </script>
-                            
-                            <style>
-                              #error_message_doc1 {
-                                color: red;
-                                margin-top: -20px;
-                                margin-bottom: 10px;
+                                // Prevent form submission
+                                event.preventDefault();
+                              } else {
+                                // Clear error message and remove highlight from file input field
+                                errorMessageDoc1.textContent = '';
+                                fileInputDoc1.classList.remove('error');
+                                fileInputDoc1.style.border = '';
                               }
-                              #error_message_doc2 {
-                                color: red;
-                                margin-top: -20px;
-                                margin-bottom: 10px;
+                            });
+
+                            fileInputDoc2.addEventListener('change', function(event) {
+                              const selectedFile = event.target.files[0];
+                              const fileTypeDoc = selectedFile.type;
+
+                              if (!fileTypeDoc.startsWith('application/pdf')) {
+                                // Display error message and highlight the file input field's border
+                                errorMessageDoc2.textContent = 'You can upload only a PDF file';
+                                fileInputDoc2.classList.add('error');
+                                fileInputDoc2.style.border = '1px solid red';
+
+                                // Prevent form submission
+                                event.preventDefault();
+                              } else {
+                                // Clear error message and remove highlight from file input field
+                                errorMessageDoc2.textContent = '';
+                                fileInputDoc2.classList.remove('error');
+                                fileInputDoc2.style.border = '';
                               }
-                              #error_message_doc3 {
-                                color: red;
-                                margin-top: -10px;
-                                margin-bottom: 10px;
+                            });
+
+                            fileInputDoc3.addEventListener('change', function(event) {
+                              const selectedFile = event.target.files[0];
+                              const fileTypeDoc = selectedFile.type;
+
+                              if (!fileTypeDoc.startsWith('application/pdf')) {
+                                // Display error message and highlight the file input field's border
+                                errorMessageDoc3.textContent = 'You can upload only a PDF file';
+                                fileInputDoc3.classList.add('error');
+                                fileInputDoc3.style.border = '1px solid red';
+
+                                // Prevent form submission
+                                event.preventDefault();
+                              } else {
+                                // Clear error message and remove highlight from file input field
+                                errorMessageDoc3.textContent = '';
+                                fileInputDoc3.classList.remove('error');
+                                fileInputDoc3.style.border = '';
                               }
-                              #error_message_doc4 {
-                                color: red;
-                                margin-top: -10px;
-                                margin-bottom: 10px;
+                            });
+
+                            fileInputDoc4.addEventListener('change', function(event) {
+                              const selectedFile = event.target.files[0];
+                              const fileTypeDoc = selectedFile.type;
+
+                              if (!fileTypeDoc.startsWith('application/pdf')) {
+                                // Display error message and highlight the file input field's border
+                                errorMessageDoc4.textContent = 'You can upload only a PDF file';
+                                fileInputDoc4.classList.add('error');
+                                fileInputDoc4.style.border = '1px solid red';
+
+                                // Prevent form submission
+                                event.preventDefault();
+                              } else {
+                                // Clear error message and remove highlight from file input field
+                                errorMessageDoc4.textContent = '';
+                                fileInputDoc4.classList.remove('error');
+                                fileInputDoc4.style.border = '';
                               }
-                              #error_message_doc5 {
-                                color: red;
-                                margin-top: -10px;
-                                margin-bottom: 10px;
+                            });
+
+                            fileInputDoc5.addEventListener('change', function(event) {
+                              const selectedFile = event.target.files[0];
+                              const fileTypeDoc = selectedFile.type;
+
+                              if (!fileTypeDoc.startsWith('application/pdf')) {
+                                // Display error message and highlight the file input field's border
+                                errorMessageDoc5.textContent = 'You can upload only a PDF file';
+                                fileInputDoc5.classList.add('error');
+                                fileInputDoc5.style.border = '1px solid red';
+
+                                // Prevent form submission
+                                event.preventDefault();
+                              } else {
+                                // Clear error message and remove highlight from file input field
+                                errorMessageDoc5.textContent = '';
+                                fileInputDoc5.classList.remove('error');
+                                fileInputDoc5.style.border = '';
                               }
-                              #error_message_doc6 {
-                                color: red;
-                                margin-top: -10px;
-                                margin-bottom: 10px;
+                            });
+
+                            fileInputDoc6.addEventListener('change', function(event) {
+                              const selectedFile = event.target.files[0];
+                              const fileTypeDoc = selectedFile.type;
+
+                              if (!fileTypeDoc.startsWith('application/pdf')) {
+                                // Display error message and highlight the file input field's border
+                                errorMessageDoc6.textContent = 'You can upload only a PDF file';
+                                fileInputDoc6.classList.add('error');
+                                fileInputDoc6.style.border = '1px solid red';
+
+                                // Prevent form submission
+                                event.preventDefault();
+                              } else {
+                                // Clear error message and remove highlight from file input field
+                                errorMessageDoc6.textContent = '';
+                                fileInputDoc6.classList.remove('error');
+                                fileInputDoc6.style.border = '';
                               }
-                              #error_message_doc7 {
-                                color: red;
-                                margin-top: -10px;
-                                margin-bottom: 10px;
+                            });
+
+                            fileInputDoc7.addEventListener('change', function(event) {
+                              const selectedFile = event.target.files[0];
+                              const fileTypeDoc = selectedFile.type;
+
+                              if (!fileTypeDoc.startsWith('application/pdf')) {
+                                // Display error message and highlight the file input field's border
+                                errorMessageDoc7.textContent = 'You can upload only a PDF file';
+                                fileInputDoc7.classList.add('error');
+                                fileInputDoc7.style.border = '1px solid red';
+
+                                // Prevent form submission
+                                event.preventDefault();
+                              } else {
+                                // Clear error message and remove highlight from file input field
+                                errorMessageDoc7.textContent = '';
+                                fileInputDoc7.classList.remove('error');
+                                fileInputDoc7.style.border = '';
                               }
-                            </style>   
+                            });
+                          </script>
+
+
 
                           <!--ninth row-->
                           <div class="row" style="margin-top: 3%">
                             <div class="col-xl-12 col-lg-12">
-                              <h4 class="card-title"><b>Declaration</b></h4> 
+                              <h4 class="card-title"><b>Declaration</b></h4>
                               <hr style="border-top: 1px solid" />
                             </div>
                           </div>
@@ -1494,25 +1426,24 @@ else
                             <div class="col-xl-12 col-lg-12">
                               <h5><b>I hereby state that the facts mentioned above are true to the best of my knowledge and belief.</b></h5>
                             </div>
-                          </div>    
-                                               
+                          </div>
+
                           <!--eleventh row-->
-                          <div class="row"> 
+                          <div class="row">
                             <div class="col-xl-4 col-lg-12">
                               <fieldset>
-                                <input class="form-control white_bg" id="signature" name="signature" placeholder="Your Name for Signature"  type="text"> 
-                              </fieldset>  
+                                <input class="form-control white_bg" id="signature" name="signature" placeholder="Your Name for Signature" type="text">
+                              </fieldset>
                             </div>
                           </div>
 
                           <!--twelfth row-->
                           <div class="row" style="margin-top: 2%">
                             <div class="col-xl-6 col-lg-12">
-                              <button type="submit" onclick="return confirm('You will not be able to change or edit your application once submitted! Do you want to submit your application?')" 
-                                      name="submit" class="btn btn-info btn-min-width mr-1 mb-1">Submit</button>
+                              <button type="submit" onclick="return confirm('You will not be able to change or edit your application once submitted! Do you want to submit your application?')" name="submit" class="btn btn-info btn-min-width mr-1 mb-1">Submit</button>
                             </div>
                           </div>
-                        
+
                         </div>
                       </div>
                     </div>
@@ -1520,28 +1451,48 @@ else
                 </div>
               </section>
               <!--section end-->
-        <?php } ?>
-          <!-- Formatter end -->
-          </form>  
+            <?php } ?>
+            <!-- Formatter end -->
+            </form>
         </div>
       </div>
     </div>
+    <?php include('includes/footer.php'); ?>
 
+    <!--Purpose Specific Scripts-->
+    <!--applicant image input validator-->
+    <script>
+      const fileInput = document.querySelector('#userpic');
+      const errorMessage = document.querySelector('#error-message');
 
-  <?php include('includes/footer.php');?>
+      fileInput.addEventListener('change', function(event) {
+        const selectedFile = event.target.files[0];
+        const fileTypePic = selectedFile.type;
+
+        if (!fileTypePic.startsWith('image/')) {
+          // Display error message and highlight the file input field
+          errorMessage.textContent = 'Please select an image file';
+          fileInput.classList.add('error');
+          fileInput.style.border = '1px solid red';
+
+          // Prevent form submission
+          event.preventDefault();
+        } else {
+          // Clear error message and remove highlight from file input field
+          errorMessage.textContent = '';
+          fileInput.classList.remove('error');
+          fileInput.style.border = '';
+        }
+      });
+    </script>
+
     <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/typeahead/typeahead.bundle.min.js"
-    type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/typeahead/bloodhound.min.js"
-    type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/typeahead/handlebars.js"
-    type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/inputmask/jquery.inputmask.bundle.min.js"
-    type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/formatter/formatter.min.js"
-    type="text/javascript"></script>
-    <script src="../../../app-assets/vendors/js/forms/extended/maxlength/bootstrap-maxlength.js"
-    type="text/javascript"></script>
+    <script src="app-assets/vendors/js/forms/extended/typeahead/typeahead.bundle.min.js" type="text/javascript"></script>
+    <script src="app-assets/vendors/js/forms/extended/typeahead/bloodhound.min.js" type="text/javascript"></script>
+    <script src="app-assets/vendors/js/forms/extended/typeahead/handlebars.js" type="text/javascript"></script>
+    <script src="app-assets/vendors/js/forms/extended/inputmask/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
+    <script src="app-assets/vendors/js/forms/extended/formatter/formatter.min.js" type="text/javascript"></script>
+    <script src="../../../app-assets/vendors/js/forms/extended/maxlength/bootstrap-maxlength.js" type="text/javascript"></script>
     <script src="app-assets/vendors/js/forms/extended/card/jquery.card.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app.js" type="text/javascript"></script>
@@ -1553,7 +1504,7 @@ else
     <script src="app-assets/js/scripts/forms/extended/form-card.js" type="text/javascript"></script>
 
     <script>
-      $(document).ready(function(){
+      $(document).ready(function() {
         // Hide the table by default
         $('#my-table').hide();
 
@@ -1575,6 +1526,7 @@ else
     </script>
 
   </body>
+
   </html>
-  <?php  
+<?php
 } ?>
