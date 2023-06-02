@@ -36,7 +36,6 @@ if (strlen($_SESSION['uid']) == 0) {
         <div class="content-body">
           <?php
           $uid = $_SESSION['uid'];
-          echo "$uid"; //temp
           //taking out only the date
           $sql = mysqli_query($con, "SELECT DATE(CourseApplieddate) AS date_part FROM tbladmapplications WHERE UserId='$uid'");
           $result = mysqli_fetch_array($sql);
@@ -56,6 +55,7 @@ if (strlen($_SESSION['uid']) == 0) {
           $decision_date = $row['AdminRemarkDate'];
 
           if ($admission_status == "1") { ?>
+            <?php echo $uid;?>
             <h4><strong>Application reference number:</strong> <?php echo $application_ID ?> <br><br>
               <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date)) ?> <br><br>
               Dear <?php echo $full_name ?>, <br><br>
@@ -129,16 +129,19 @@ if (strlen($_SESSION['uid']) == 0) {
 
       // declining an offer
       function confirmDecline() {
-        var confirmMessage = "Are you sure you want to decline the admission offer? \nThis action cannot be undone.";
+        var confirmMessage = "Are you sure you want to decline the admission offer?\nThis action cannot be undone.";
         if (confirm(confirmMessage)) {
-          // delete application from tbladmissions, tbladmapplications, and tbldocument.
-          <?php
-          mysqli_query($con, "DELETE FROM tbladmapplications WHERE UserId='$uid'");
-          mysqli_query($con, "DELETE FROM tbldocument WHERE UserID='$uid'");
-          mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID='$uid'");
-          ?>
-          window.location.href = "decline-acknowledgement.php";
+          window.location.href = "delete-admission.php?uid=<?php echo $uid; ?>";
         }
+      }
+
+      // to prevent accidental triggering of the decline-offer when the user clicks the "go back" button. 
+      // this snippet prevents the user from going back using the browser's history, maintaining the current page URL.
+      if (window.history && window.history.pushState) {
+        window.history.pushState(null, null, window.location.href);
+        window.onpopstate = function() {
+          window.history.pushState(null, null, window.location.href);
+        };
       }
     </script>
 

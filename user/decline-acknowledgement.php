@@ -35,25 +35,14 @@ if (strlen($_SESSION['uid']) == 0) {
         <div class="content-body">
           <?php
           $uid = $_SESSION['uid'];
-          //taking only the date out of the stamp
-          $sql = mysqli_query($con, "SELECT DATE(CourseApplieddate) AS date_part FROM tbladmapplications WHERE UserID='$uid'");
-          $result = mysqli_fetch_array($sql);
-          $application_date = $row['date_part'];
-
-          $ret = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE UserID='$uid'");
+          //will need the name from tbluser as it has been deleted from tbladmapplications
+          $ret = mysqli_query($con, "SELECT FirstName FROM tbluser WHERE ID='$uid'");
           $row = mysqli_fetch_array($ret);
           $fname = $row['FirstName'];
 
-          $admission_status = $row['AdminStatus'];
-          $application_ID = $row['ID'];
-          $full_name = $row['FirstName'] . " " . $row['MiddleName'];
-          $course_name = $row['CourseApplied'];
-          $application_date = $row['CourseApplieddate'];
-          $decision_date = $row['AdminRemarkDate'];
-
           ?>
           <h4>
-            Dear <?php echo $full_name ?>, <br><br>
+            Dear <?php echo $fname ?>, <br><br>
 
             We have received your decision on our admission offer and We want to take a moment to acknowledge and appreciate your decision.
             We genuinely value your interest in our institution and the time and effort you invested in your application. Your application

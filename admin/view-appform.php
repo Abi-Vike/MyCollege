@@ -32,15 +32,13 @@ if (strlen($_SESSION['aid'] == 0)) {
     $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark='$admrmk', AdminStatus='$admsta' WHERE UserId='$cid'");
     if ($query) {
       // add application to tbladmissions
-      $query_admitted = mysqli_query($con, "INSERT INTO tbladmissions (Adm_App_ID, Adm_Course) VALUES ('$cid', '$CourseApplied_i')");
+      $query_admitted = mysqli_query($con, "INSERT INTO tbladmissions (Adm_App_ID, Adm_Course) VALUES ('$ID_i', '$CourseApplied_i')");
       if ($query_admitted) {
         // call a function from emailer.php
         SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);  
       } else{
         echo "<script>alert('Unable to add application to admitted students list')</script>";
       }
-      
-      
     } else {
       echo "<script>alert('Sorry, query was unable to return value!')</script>";
     }
