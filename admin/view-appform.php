@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 require_once 'includes/emailer.php';
 
 include('includes/dbconnection.php');
-if (strlen($_SESSION['aid'] == 0)) {   
+if (strlen($_SESSION['aid'] == 0)) {
   header('location:logout.php');
 } else {
 
@@ -18,26 +18,40 @@ if (strlen($_SESSION['aid'] == 0)) {
 
     // will need to extract application information first here
     $query_application_info = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE tbladmapplications.UserId='$cid'");
-      if ($info = mysqli_fetch_array($query_application_info)) {
-        // we'll need those for the emailer function below
-        $ID_i = $info['ID'];
-        $CourseApplied_i = $info['CourseApplied'];
-        $AdmissionType_i = $info['AdmissionType'];
-        $FirstName_i = $info['FirstName'];
-      } 
-      else {
-        echo "<script>alert('info fetch failed!')</script>";
-      }
-
+    if ($info = mysqli_fetch_array($query_application_info)) {
+      // we'll need those for the emailer function below
+      $ID_i = $info['ID'];
+      $CourseApplied_i = $info['CourseApplied'];
+      $AdmissionType_i = $info['AdmissionType'];
+      $FirstName_i = $info['FirstName'];
+    } else {
+      echo "<script>alert('info fetch failed!')</script>";
+    }
     $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark='$admrmk', AdminStatus='$admsta' WHERE UserId='$cid'");
+
     if ($query) {
-      // add application to tbladmissions
-      $query_admitted = mysqli_query($con, "INSERT INTO tbladmissions (Adm_App_ID, Adm_Course) VALUES ('$ID_i', '$CourseApplied_i')");
-      if ($query_admitted) {
-        // call a function from emailer.php
-        SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);  
-      } else{
-        echo "<script>alert('Unable to add application to admitted students list')</script>";
+      if ($admsta == '1') {
+        $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
+        if (mysqli_fetch_row($query_admitted_check)) {
+          // means user already accepted and is already inside admissions table
+          // but wouldn't normally come inside this if unless there is a problem
+          header('location:error.php');
+        } else {
+          // add application to tbladmissions
+          $query_admitted = mysqli_query($con, "INSERT INTO tbladmissions (Adm_App_ID, Adm_Course) VALUES ('$ID_i', '$CourseApplied_i')");
+          if ($query_admitted) {
+            // call a function from emailer.php
+            SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
+          } else {
+            echo "<script>alert('Unable to add application to admitted students list')</script>";
+          }
+        }
+      }else{ // incases of rejection or put to waiting list
+        $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
+        if (mysqli_fetch_row($query_admitted_check)) {
+          // means user is inside admissions table and needs to be removed now as he's no more admitted
+          $query_remove_admission = mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
+        }
       }
     } else {
       echo "<script>alert('Sorry, query was unable to return value!')</script>";
@@ -382,7 +396,6 @@ if (strlen($_SESSION['aid'] == 0)) {
                   <tr align="center">
                     <td colspan="2"><button type="submit" id="submit_button" name="submit" class="btn btn-primary disabled">Update</button></td>
                   </tr>
-
                 </form>
               <?php } else { ?>
                 <tr>
@@ -406,7 +419,6 @@ if (strlen($_SESSION['aid'] == 0)) {
                         echo "Waiting List";
                       }; ?>
                   </td>
-                </tr>
                 </tr>
               <?php } ?>
             </table>
