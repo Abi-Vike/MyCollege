@@ -122,6 +122,8 @@ if (strlen($_SESSION['uid']) == 0) {
             </section>
           </form>
         </div>
+
+
       </div>
     </div>
 

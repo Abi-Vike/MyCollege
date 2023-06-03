@@ -124,7 +124,8 @@ if (strlen($_SESSION['uid']) == 0) {
     <script>
       // accepting an offer
       function acceptOffer() {
-        window.location.href = "register.php";
+        // update offer status in tbladmissions
+        window.location.href = "accept-offer.php?uid=<?php echo $uid; ?>";
       }
 
       // declining an offer

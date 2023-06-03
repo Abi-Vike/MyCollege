@@ -582,19 +582,19 @@ if (strlen($_SESSION['uid'] == 0)) {
                   <th>Application Status</th>
                   <td><?php
                       if ($row_s['AdminStatus'] == '') {
-                        echo "Your application is under review";
+                        echo "Your application is under review.";
                       }
 
                       if ($row_s['AdminStatus'] == '1') {
-                        echo "You have been admitted to the progam";
+                        echo "Congratulations! You have been offered admission to the progam.";
                       }
 
                       if ($row_s['AdminStatus'] == '2') {
-                        echo "Your application has been Rejected";
+                        echo "Unfortunately, Your application has been Rejected.";
                       }
 
                       if ($row_s['AdminStatus'] == '3') {
-                        echo "Your application has been put to waiting list";
+                        echo "Your application has been put to waiting list.";
                       }
                       ?></td>
                 </tr>

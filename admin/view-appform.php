@@ -34,9 +34,11 @@ if (strlen($_SESSION['aid'] == 0)) {
         $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
         if (mysqli_fetch_row($query_admitted_check)) {
           // means user already accepted and is already inside admissions table
-          // but wouldn't normally come inside this if unless there is a problem
+          // but wouldn't normally come inside this if unless there is a serious flaw
           header('location:error.php');
-        } else {
+        } 
+        else {
+          // if application is a fresh admission
           // add application to tbladmissions
           $query_admitted = mysqli_query($con, "INSERT INTO tbladmissions (Adm_App_ID, Adm_Course) VALUES ('$ID_i', '$CourseApplied_i')");
           if ($query_admitted) {
