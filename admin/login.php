@@ -28,7 +28,7 @@ if(isset($_POST['login']))
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
 
-  <title>Admin Login
+  <title>Gada AMS || Admin Login
   </title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles-merged.css">

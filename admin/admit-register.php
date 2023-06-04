@@ -11,7 +11,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
 <html class="loading" lang="en" data-textdirection="ltr">
 
   <head>
-    <title>RVU-GADA Admission Management System||Application Form</title>
+    <title>Gada AMS || Admitted Students</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
     rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
@@ -108,26 +108,26 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
             <thead>
               <tr>
                 <th>S.NO</th>
-                <th>Course Applied</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Mobile Number</th>
-                <th>Email</th>
+                <th>Application ID</th>
+                <th>Name</th>
+                <th>Course</th>
+                <th>Offer</th>
+                <th>Registration</th>
                 <th>Action</th>
               </tr>
             </thead>
             <?php
-              $ret=mysqli_query($con,"select tbladmapplications.CourseApplied,tbladmapplications.ID as apid, tbluser.FirstName,tbluser.LastName,tbluser.MobileNumber,tbluser.Email from  tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId");
+              $ret=mysqli_query($con,"SELECT * FROM tbladmissions, tbladmapplications.CourseApplied, tbladmapplications.ID, tbladmapplications.FirstName, tbladmapplications.MiddleName FROM tbladmapplications INNER JOIN tbladmissions on tbladmapplications.ID=tbladmissions.Adm_App_ID");
               $cnt=1;
               while ($row=mysqli_fetch_array($ret)) {?>
                 <tr>
-                  <td><?php echo $cnt;?></td>
+                  <td><?php  echo $cnt;?></td>
                   <td><?php  echo $row['CourseApplied'];?></td>
                   <td><?php  echo $row['FirstName'];?></td>
-                  <td><?php  echo $row['LastName'];?></td>
-                  <td><?php  echo $row['MobileNumber'];?></td>
-                  <td><?php  echo $row['Email'];?></td>
-                  <td><a href="view-appform.php?aticid=<?php echo $row['apid'];?>">View Details</a></td>
+                  <td><?php  echo $row['MiddleName'];?></td>
+                  <td><?php  echo $row['ID'];?></td>
+                  <td><?php  echo $row['Adm_App_ID'];?></td>
+                  <td><a href="view-appform.php?aticid=<?php echo $row['ID'];?>">View Details</a></td>
                 </tr>
                 <?php 
                   $cnt=$cnt+1;

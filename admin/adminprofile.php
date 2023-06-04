@@ -23,7 +23,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
   <head>
-    <title>RVU-GADA Admission Management System-Admin Profile</title>
+    <title>Gada AMS || Admin Profile</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700"
     rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"

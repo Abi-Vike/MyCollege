@@ -10,7 +10,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
     <!DOCTYPE html>
     <html class="loading" lang="en" data-textdirection="ltr">
     <head>
-      <title>College Admission Management System - Accepted Application</title>
+      <title>Gada AMS || Accepted Applications</title>
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
       <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
@@ -114,7 +114,7 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
                 </tr>
               </thead>
               <?php
-              $ret=mysqli_query($con,"select tbladmapplications.CourseApplied, tbldocument.ID as docid, tbladmapplications.UserId as appID, tbladmapplications.PhoneNumber, tbladmapplications.AdminStatus, tbluser.FirstName, tbluser.MiddleName, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId left join tbldocument on tbldocument.UserID=tbladmapplications.UserId where tbladmapplications.AdminStatus='1'");
+              $ret=mysqli_query($con,"SELECT tbladmapplications.CourseApplied, tbldocument.ID AS docid, tbladmapplications.UserId AS appID, tbladmapplications.PhoneNumber, tbladmapplications.AdminStatus, tbluser.FirstName, tbluser.MiddleName, tbluser.Email FROM tbladmapplications INNER JOIN tbluser ON tbluser.ID=tbladmapplications.UserId LEFT JOIN tbldocument ON tbldocument.UserID=tbladmapplications.UserId WHERE tbladmapplications.AdminStatus='1'");
               $cnt=1;
               
               while ($row=mysqli_fetch_array($ret)) {
