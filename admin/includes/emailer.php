@@ -54,7 +54,7 @@ function SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, 
 
     if($mail -> send()){
     //header("Location: ./dashboard.php");
-    echo "<script>alert('Application status updated & Email notification sent to applicant!')>window.close();</script>";
+    echo "<script>alert('Application status updated & Email notification just sent to applicant!')>window.close();</script>";
     }else{
     echo "<script>alert(Something's wrong my man!)</script>";
     }

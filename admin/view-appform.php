@@ -11,13 +11,13 @@ if (strlen($_SESSION['aid'] == 0)) {
 } else {
 
   if (isset($_POST['submit'])) {
-    $cid = $_GET['aticid'];
+    $uid = $_GET['aticid'];
     $admrmk = $_POST['AdminRemark'];
     $admsta = $_POST['status'];
     $toemail = $_POST['useremail'];
 
     // will need to extract application information first here
-    $query_application_info = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE tbladmapplications.UserId='$cid'");
+    $query_application_info = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE tbladmapplications.UserId='$uid'");
     if ($info = mysqli_fetch_array($query_application_info)) {
       // we'll need those for the emailer function below
       $ID_i = $info['ID'];
@@ -27,18 +27,16 @@ if (strlen($_SESSION['aid'] == 0)) {
     } else {
       echo "<script>alert('info fetch failed!')</script>";
     }
-    $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark='$admrmk', AdminStatus='$admsta' WHERE UserId='$cid'");
 
+    $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark='$admrmk', AdminStatus='$admsta' WHERE UserId='$uid'");
     if ($query) {
-      if ($admsta == '1') {
+      if ($admsta == '1') { // accepted
         $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
         if (mysqli_fetch_row($query_admitted_check)) {
-          // means user already accepted and is already inside admissions table
-          // but wouldn't normally come inside this if unless there is a serious flaw
-          header('location:error.php');
-        } 
-        else {
-          // if application is a fresh admission
+          // user already accepted and is already inside admissions table
+          echo "<script>alert('An admission offer already sent to the applicant!\\nThe request will be ignored.')>window.close();</script>";
+        } else {
+          // application is a fresh admission
           // add application to tbladmissions
           $query_admitted = mysqli_query($con, "INSERT INTO tbladmissions (Adm_App_ID, Adm_Course) VALUES ('$ID_i', '$CourseApplied_i')");
           if ($query_admitted) {
@@ -48,11 +46,42 @@ if (strlen($_SESSION['aid'] == 0)) {
             echo "<script>alert('Unable to add application to admitted students list')</script>";
           }
         }
-      }else{ // incases of rejection or put to waiting list
+      } 
+      elseif ($admsta == '2') { // rejected
+        $query_admitted_check = mysqli_query($con, "SELECT * FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
+        if ($row = mysqli_fetch_assoc($query_admitted_check)) {
+          // an offer was already made to applicant
+          $admStatus = $row['Adm_Status'];
+          $adm = $row['Adm_Accept_Date'];
+
+          if ($admStatus == 'accepted') {
+            // user already accepted the offer and it wouldn't be revoked
+            echo "<script>alert('A previously sent admission offer has already been accepted by the applicant!\\nAny changes made will be reversed and your request will be ignored safely.')>window.close();</script>";
+            $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark=NULL, AdminStatus='1' WHERE UserId='$uid'");
+            
+          } else {
+            $query_remove_admission = mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
+            if ($query_remove_admission) {
+              SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
+            } else {
+              echo "<script>alert('System unable to remove admission offer that was already sent!')</script>";
+            }
+          }
+        }else{
+          // applicant was not offered an admission
+          
+        } 
+      } 
+      else { // incases of rejection or put to waiting list
         $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
         if (mysqli_fetch_row($query_admitted_check)) {
           // means user is inside admissions table and needs to be removed now as he's no more admitted
           $query_remove_admission = mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
+          if ($query_remove_admission) {
+            SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
+          } else {
+            echo "<script>alert('System unable to remove admission offer that was already sent!')</script>";
+          }
         }
       }
     } else {
@@ -112,7 +141,6 @@ if (strlen($_SESSION['aid'] == 0)) {
                   <li class="breadcrumb-item">
                     <a href="dashboard.php">Dashboard</a>
                   </li>
-
                   <li class="breadcrumb-item active">Application Form</li>
                 </ol>
               </div>
@@ -122,17 +150,16 @@ if (strlen($_SESSION['aid'] == 0)) {
 
         <div class="content-body">
           <!-- Input Mask start -->
-
           <!-- Formatter start -->
           <?php
-          $cid = $_GET['aticid'];
-          $query_person = mysqli_query($con, "select tbladmapplications.*, tbluser.FirstName, tbluser.MiddleName, tbluser.LastName, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.UserId='$cid'");
+          $uid = $_GET['aticid'];
+          $query_person = mysqli_query($con, "select tbladmapplications.*, tbluser.FirstName, tbluser.MiddleName, tbluser.LastName, tbluser.Email from tbladmapplications inner join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.UserId='$uid'");
           $cnt = 1;
           while ($row = mysqli_fetch_array($query_person)) {
             $tom = $row['UserId'];
           ?>
             <!--<table border="1" class="table table-bordered mg-b-0">-->
-            <!--<script>alert(<?php $cid ?>)</script>-->
+            <!--<script>alert(<?php $uid ?>)</script>-->
             <table border="1" class="table mb-0">
               <tr>
                 <th>Application made on</th>
