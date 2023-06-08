@@ -1,7 +1,7 @@
 <?php
 session_start();
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 require_once 'includes/emailer.php';
 
@@ -46,42 +46,52 @@ if (strlen($_SESSION['aid'] == 0)) {
             echo "<script>alert('Unable to add application to admitted students list')</script>";
           }
         }
-      } 
-      elseif ($admsta == '2') { // rejected
+      } elseif ($admsta == '2') { // rejected
         $query_admitted_check = mysqli_query($con, "SELECT * FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
         if ($row = mysqli_fetch_assoc($query_admitted_check)) {
           // an offer was already made to applicant
           $admStatus = $row['Adm_Status'];
-          $adm = $row['Adm_Accept_Date'];
 
           if ($admStatus == 'accepted') {
             // user already accepted the offer and it wouldn't be revoked
-            echo "<script>alert('A previously sent admission offer has already been accepted by the applicant!\\nAny changes made will be reversed and your request will be ignored safely.')>window.close();</script>";
+            echo "<script>alert('An admission offer has already been accepted by the applicant! Any changes made will be reversed and your request will be ignored safely.')>window.close();</script>";
             $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark=NULL, AdminStatus='1' WHERE UserId='$uid'");
-            
-          } else {
-            $query_remove_admission = mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
+          } elseif ($admStatus == 'offered') {
+            $query_remove_admission = mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID = '$ID_i'");
+
             if ($query_remove_admission) {
               SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
             } else {
               echo "<script>alert('System unable to remove admission offer that was already sent!')</script>";
             }
           }
-        }else{
-          // applicant was not offered an admission
-          
-        } 
-      } 
-      else { // incases of rejection or put to waiting list
+        } else {
+          // applicant was in waiting list or decision was not made at all
+          echo '<script>alert("Application rejected and Notification has been sent to applicant!")</script>';
+          SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
+        }
+      } else { // apart from acceptance and rejection
         $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
-        if (mysqli_fetch_row($query_admitted_check)) {
-          // means user is inside admissions table and needs to be removed now as he's no more admitted
-          $query_remove_admission = mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
-          if ($query_remove_admission) {
-            SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
-          } else {
-            echo "<script>alert('System unable to remove admission offer that was already sent!')</script>";
+        if ($row = mysqli_fetch_assoc($query_admitted_check)) {
+          // an offer was already made to applicant
+          $admStatus = $row['Adm_Status'];
+
+          if ($admStatus == 'accepted') {
+            // user already accepted the offer and it wouldn't be revoked
+            echo "<script>alert('An admission offer has already been accepted by the applicant! Any changes made will be reversed and your request will be ignored safely.')>window.close();</script>";
+            $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark=NULL, AdminStatus='1' WHERE UserId='$uid'");
+          } elseif ($admStatus == 'offered') {
+            $query_remove_admission = mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID = '$ID_i'");
+
+            if ($query_remove_admission) {
+              SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
+            } else {
+              echo "<script>alert('System unable to remove admission offer that was already sent!')</script>";
+            }
           }
+        } else {
+          // applicant was in waiting list or decision was not made at all
+          SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
         }
       }
     } else {
