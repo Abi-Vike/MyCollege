@@ -111,22 +111,25 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
                 <th>Application ID</th>
                 <th>Name</th>
                 <th>Course</th>
-                <th>Offer</th>
-                <th>Registration</th>
+                <th>Offer Accept Date</th>
+                <th>Reg-Payment</th>
                 <th>Action</th>
               </tr>
             </thead>
             <?php
-              $ret=mysqli_query($con,"SELECT * FROM tbladmissions, tbladmapplications.CourseApplied, tbladmapplications.ID, tbladmapplications.FirstName, tbladmapplications.MiddleName FROM tbladmapplications INNER JOIN tbladmissions on tbladmapplications.ID=tbladmissions.Adm_App_ID");
+              //$ret=mysqli_query($con,"SELECT * FROM tbladmissions, tbladmapplications.CourseApplied, tbladmapplications.ID, tbladmapplications.FirstName, tbladmapplications.MiddleName FROM tbladmissions INNER JOIN tbladmapplications on tbladmissions.Adm_App_ID=tbladmissions.Adm_App_ID");
+              //$ret = mysqli_query($con, "SELECT * FROM tbladmissions Where Adm_App_ID = '63' AND Adm_Status='accepted'");
+              $new = mysqli_query($con, "SELECT tbladmissions.*, tbladmapplications.FirstName, tbladmapplications.MiddleName, tbladmapplications.CourseApplied FROM tbladmissions INNER JOIN tbladmapplications ON tbladmissions.Adm_App_ID = tbladmapplications.ID WHERE tbladmissions.Adm_Status = 'accepted'");
               $cnt=1;
-              while ($row=mysqli_fetch_array($ret)) {?>
+              while ($row=mysqli_fetch_array($new)) {
+                ?>
                 <tr>
                   <td><?php  echo $cnt;?></td>
-                  <td><?php  echo $row['CourseApplied'];?></td>
-                  <td><?php  echo $row['FirstName'];?></td>
-                  <td><?php  echo $row['MiddleName'];?></td>
-                  <td><?php  echo $row['ID'];?></td>
                   <td><?php  echo $row['Adm_App_ID'];?></td>
+                  <td><?php  echo $row['FirstName'].' '.$row['MiddleName'];?></td>
+                  <td><?php  echo $row['CourseApplied'];?></td>
+                  <td><?php  echo $row['Adm_Accept_Date'];?></td>
+                  <td><?php  echo $row['Adm_Payment_Status'];?></td>
                   <td><a href="view-appform.php?aticid=<?php echo $row['ID'];?>">View Details</a></td>
                 </tr>
                 <?php 

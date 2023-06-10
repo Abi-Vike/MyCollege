@@ -109,7 +109,7 @@ if (strlen($_SESSION['uid'] == 0)) {
     // Validation for allowed extensions .in_array() function searches an array for a specific value.
 
     if (!in_array($extension_pic, $allowed_extensions_pic)) {
-      echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
+      echo "<script>alert('Invalid format. Only image files are allowed');</script>";
     } elseif (!in_array($extension_passport, $allowed_extensions_doc)) {
       echo "<script>alert('Invalid format. Only PDF formats are allowed');</script>";
     } elseif (!in_array($extension_highSchool_transcript, $allowed_extensions_doc)) {
@@ -123,7 +123,7 @@ if (strlen($_SESSION['uid'] == 0)) {
       // rename user pic
       $userpic = $firstname . "_" . md5($upic) . $extension_pic;
       move_uploaded_file($_FILES["userpic"]["tmp_name"], "userimages/" . $userpic);
-      // Only now it should upload to the database
+      // Only now should it upload to the database
       $query1 = mysqli_query($con, "insert into tbladmapplications( 
             UserId, CourseApplied, AdmissionType, FirstName, MiddleName, LastName, Nationality, DobGregorian, 
             DobEthiopian, Gender, UserPic, CountryOfBirth, TownOfBirth, WoredaOfBirth,
@@ -208,7 +208,7 @@ if (strlen($_SESSION['uid'] == 0)) {
       }
     }
   }
-?>
+  ?>
   <!DOCTYPE html>
   <html class="loading" lang="en" data-textdirection="ltr">
 

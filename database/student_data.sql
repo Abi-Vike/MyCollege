@@ -206,11 +206,24 @@ CREATE TABLE `tbladmissions` (
 
 
 CREATE TABLE `tblregistered` (
-  `Reg_ID` int NOT NULL, --same as the application ID
-  `Reg_User_ID` int NOT NULL, --same as the user ID
+  `Reg_ID` int NOT NULL, --same as application ID
+  `Reg_User_ID` int NOT NULL, --same as user ID
   `Reg_Course` varchar(120) DEFAULT NULL,
-  `Reg_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `Reg_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `tblpayments` (
+  `Application_ID` int NOT NULL, -- same as application ID
+  `Payer_ID` int NOT NULL, -- same as user ID
+  `Payer_Name` varchar(120) DEFAULT NULL, 
+  `Pay_Ref` varchar(120) DEFAULT NULL, 
+  `Pay_Date` varchar(25) DEFAULT NULL,
+  `Pay_Receipt` varchar(200) DEFAULT NULL,
+  `Pay_Confirmed` varchar(60) NOT NULL DEFAULT 'unverified',
+  `Pay_Reg_Date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for table `tbladmapplications`
 --
@@ -258,6 +271,12 @@ ALTER TABLE `tbladmissions`
 --
 ALTER TABLE `tblregistered`
   ADD PRIMARY KEY (`Reg_ID`);
+
+--
+-- Indexes for table `tblregistered`
+--
+ALTER TABLE `tblpayments`
+  ADD PRIMARY KEY (`Application_ID`);
 
 
 

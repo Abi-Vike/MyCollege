@@ -48,6 +48,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           ?>
                           <h3 class="info"><?php echo $cntcourse; ?></h3>
                           <h6>Available Courses</h6>
+                          <!--associated with manage-course.php-->
                         </div>
                         <div>
                           <i class="icon-book-open success font-large-2 float-right"></i>
@@ -76,6 +77,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           ?>
                           <h3 class="warning"><?php echo $cntuser; ?></h3>
                           <h6>Registered Users</h6>
+                          <!--associated with user-detail.php-->
                         </div>
                         <div>
                           <i class="icon-users success font-large-2 float-right"></i>
@@ -104,6 +106,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           ?>
                           <h3 class="success"><?php echo $cntapp; ?></h3>
                           <h6>All Applications</h6>
+                          <!--associated with all-application.php-->
                         </div>
                         <div>
                           <i class="icon-docs success font-large-2 float-right"></i>
@@ -131,6 +134,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           ?>
                           <h3 class="info"><?php echo $penapp; ?></h3>
                           <h6>Pending For Review</h6>
+                          <!--associated with pending-application.php-->
                         </div>
                         <div>
                           <i class="icon-hourglass success font-large-2 float-right"></i>
@@ -159,6 +163,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           ?>
                           <h3 class="warning"><?php echo $selapp; ?></h3>
                           <h6>Accepted Applications</h6>
+                          <!--associated with selected-application.php-->
                         </div>
                         <div>
                           <i class="icon-check success font-large-2 float-right"></i>
@@ -187,6 +192,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           ?>
                           <h3 class="success"><?php echo $rejapp; ?></h3>
                           <h6>Rejected Applications</h6>
+                          <!--associated with rejected-application.php-->
                         </div>
                         <div>
                           <i class="icon-trash success font-large-2 float-right"></i>
@@ -215,6 +221,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           ?>
                           <h3 class="success"><?php echo $wailis; ?></h3>
                           <h6>Waiting List</h6>
+                          <!--associated with waiting-list.php-->
                         </div>
                         <div>
                           <i class="icon-clock success font-large-2 float-right"></i>
@@ -233,22 +240,46 @@ if (strlen($_SESSION['aid'] == 0)) {
             <div class="col-xl-4 col-lg-6 col-12">
               <div class="card pull-up">
                 <div class="card-content">
-                  <a href="admit-register.php">
+                  <a href="admitted-applicants.php">
                     <div class="card-body">
                       <div class="media d-flex">
                         <div class="media-body text-left">
                           <?php
-                          //$sql_adm = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions JOIN tbladmapplications ON tbladmissions.Adm_App_ID = tbladmapplications.ID WHERE tbladmissions.Adm_Status = 'accepted'");
                           $sql_adm = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_Status = 'accepted'");
                           $adms = mysqli_num_rows($sql_adm);
-                          if (mysqli_num_rows($sql_adm)){
-                            echo "tom";
-                          }else{
-                            echo "hey";
-                          }
                           ?>
                           <h3 class="success"><?php echo $adms; ?></h3>
                           <h6>Admissions & Registrations</h6>
+                          <!--associated with admitted-applicants.php-->
+                        </div>
+                        <div>
+                          <i class="icon-clok success font-large-2 float-right"></i>
+                        </div>
+                      </div>
+
+                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-xl-4 col-lg-6 col-12">
+              <div class="card pull-up">
+                <div class="card-content">
+                  <a href="payments.php">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <?php
+                          $sql_adm = mysqli_query($con, "SELECT Application_ID FROM tblpayments");
+                          $adms = mysqli_num_rows($sql_adm);
+                          ?>
+                          <h3 class="success"><?php echo $adms; ?></h3>
+                          <h6>Payments</h6>
+                          <!--associated with admitted-applicants.php-->
                         </div>
                         <div>
                           <i class="icon-clok success font-large-2 float-right"></i>

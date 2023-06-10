@@ -63,12 +63,7 @@ if (strlen($_SESSION['uid']) == 0) {
               // a fresh offer
 
               if ($admission_status == "1") {
-                // admission offer
-
-                // temporarily here
-                echo "User ID:" . $uid; ?><br><?php
-                                              echo "Status: " . $adm_stat; ?>
-
+                // admission offer?>
                 <h4><strong>Application reference number:</strong> <?php echo $application_ID ?> <br><br>
                   <strong>Date:</strong> <?php echo date('d-M-Y', strtotime($decision_date)) ?> <br><br>
                   Dear <?php echo $full_name ?>, <br><br>
