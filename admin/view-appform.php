@@ -28,8 +28,12 @@ if (strlen($_SESSION['aid'] == 0)) {
       echo "<script>alert('info fetch failed!')</script>";
     }
 
-    $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark='$admrmk', AdminStatus='$admsta' WHERE UserId='$uid'");
-    if ($query) {
+    // sanitizing input to escape troublesome characters and also prevent from sql injection
+    $admrmk = mysqli_real_escape_string($con, $admrmk);
+    $query = mysqli_prepare($con, "UPDATE tbladmapplications SET AdminRemark=?, AdminStatus=? WHERE UserId=?");
+    mysqli_stmt_bind_param($query, "sss", $admrmk, $admsta, $uid);
+
+    if (mysqli_stmt_execute($query)){
       if ($admsta == '1') { // accepted
         $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
         if (mysqli_fetch_row($query_admitted_check)) {
@@ -46,7 +50,8 @@ if (strlen($_SESSION['aid'] == 0)) {
             echo "<script>alert('Unable to add application to admitted students list')</script>";
           }
         }
-      } elseif ($admsta == '2') { // rejected
+      } 
+      elseif ($admsta == '2') { // rejected
         $query_admitted_check = mysqli_query($con, "SELECT * FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
         if ($row = mysqli_fetch_assoc($query_admitted_check)) {
           // an offer was already made to applicant
@@ -56,7 +61,8 @@ if (strlen($_SESSION['aid'] == 0)) {
             // user already accepted the offer and it wouldn't be revoked
             echo "<script>alert('An admission offer has already been accepted by the applicant! Any changes made will be reversed and your request will be ignored safely.')>window.close();</script>";
             $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark=NULL, AdminStatus='1' WHERE UserId='$uid'");
-          } elseif ($admStatus == 'offered') {
+          } 
+          elseif ($admStatus == 'offered') {
             $query_remove_admission = mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID = '$ID_i'");
 
             if ($query_remove_admission) {
@@ -67,10 +73,10 @@ if (strlen($_SESSION['aid'] == 0)) {
           }
         } else {
           // applicant was in waiting list or decision was not made at all
-          echo '<script>alert("Application rejected and Notification has been sent to applicant!")</script>';
           SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
         }
-      } else { // apart from acceptance and rejection
+      } 
+      elseif ($admsta == '3') { // put to waiting list
         $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
         if ($row = mysqli_fetch_assoc($query_admitted_check)) {
           // an offer was already made to applicant
@@ -90,7 +96,6 @@ if (strlen($_SESSION['aid'] == 0)) {
             }
           }
         } else {
-          // applicant was in waiting list or decision was not made at all
           SendApplicationStatus($toemail, $ID_i, $FirstName_i, $CourseApplied_i, $AdmissionType_i);
         }
       }
@@ -404,74 +409,54 @@ if (strlen($_SESSION['aid'] == 0)) {
                   {<?php echo $row['Signature']; ?>}
                 </th>
               </tr>
-              <?php if ($row['AdminRemark'] == "") { ?>
-                <form name="submit" method="post" enctype="multipart/form-data">
-                  <input type="hidden" name="useremail" value="<?php echo $row['Email']; ?>">
-                  <tr>
-                    <th>Admission Committee's Remark :</th>
-                    <td>
-                      <textarea name="AdminRemark" placeholder="" rows="10" cols="14" class="form-control wd-450"></textarea>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th>Application Status :</th>
-                    <td>
-                      <select id="mySelect" onchange="checkSelection()" name="status" class="form-control wd-450" required="true">
-                        <option value=""> Decision not made </option>
-                        <option value="1" <?php if ($row['AdminStatus'] == "1") {
-                                            echo "selected";
-                                          } ?>> Accepted</option>
-                        <option value="2" <?php if ($row['AdminStatus'] == "2") {
-                                            echo "selected";
-                                          } ?>> Rejected</option>
-                        <option value="3" <?php if ($row['AdminStatus'] == "3") {
-                                            echo "selected";
-                                          } ?>> Waiting List</option>
-                      </select>
-                    </td>
-                  </tr>
-
-                  <tr align="center">
-                    <td colspan="2"><button type="submit" id="submit_button" name="submit" class="btn btn-primary disabled">Update</button></td>
-                  </tr>
-                </form>
-              <?php } else { ?>
+              <?php if ($row['AdminRemark'] != "") { ?>
                 <tr>
-                  <th>Admin Remark</th>
+                  <th>Committee's Previous Remark</th>
                   <td><?php echo $row['AdminRemark']; ?></td>
                 </tr>
-
+              <?php } ?>
+              <form name="submit" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="useremail" value="<?php echo $row['Email']; ?>">
                 <tr>
-                  <th>Admin Remark date</th>
-                  <td><?php echo $row['AdminRemarkDate']; ?> </td>
-                <tr>
-                  <th>Admin Status</th>
-                  <td><?php
-                      if ($row['AdminStatus'] == "1") {
-                        echo "Accepted";
-                      }
-                      if ($row['AdminStatus'] == "2") {
-                        echo "Rejected";
-                      }
-                      if ($row['AdminStatus'] == "3") {
-                        echo "Waiting List";
-                      }; ?>
+                  <th>Admissions Committee's Remark :</th>
+                  <td>
+                    <textarea name="AdminRemark" placeholder="" rows="10" cols="14" class="form-control wd-450"></textarea>
                   </td>
                 </tr>
-              <?php } ?>
+
+                <tr>
+                  <th>Application Status :</th>
+                  <td>
+                    <select id="mySelect" onchange="checkSelection()" name="status" class="form-control wd-450" required="true">
+                      <option value=""> Decision not made </option>
+                      <option value="1" <?php if ($row['AdminStatus'] == "1") {
+                                          echo "selected";
+                                        } ?>> Accepted</option>
+                      <option value="2" <?php if ($row['AdminStatus'] == "2") {
+                                          echo "selected";
+                                        } ?>> Rejected</option>
+                      <option value="3" <?php if ($row['AdminStatus'] == "3") {
+                                          echo "selected";
+                                        } ?>> Waiting List</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr align="center">
+                  <td colspan="2"><button type="submit" id="submit_button" name="submit" class="btn btn-primary disabled">Update</button></td>
+                </tr>
+              </form>
             </table>
           <?php
           }
           ?>
 
-          <div class="row" style="margin-top: 2%">
-            <?php
+          <!--<div class="row" style="margin-top: 2%">
+            <?php /*
             $myObj = $query_person;
             var_dump($myObj)
-            ?>
+            */?>
             <div class="col-xl-6 col-lg-12">
-
+          -->
             </div>
           </div>
         </div>
