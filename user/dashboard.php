@@ -50,10 +50,6 @@ if (strlen($_SESSION['uid']) == 0) {
           $dec = mysqli_query($con, "SELECT Adm_Status from tbladmissions where Adm_App_ID='$aid'");
           $row2 = mysqli_fetch_array($dec);
 
-          // use this to chnage info when the student found in tblregistered
-          $reg = mysqli_query($con, "SELECT * from tblregistered where Reg_User_ID='$uid'");
-          $row3 = mysqli_fetch_array($reg);
-
           // use this to change info when offer accepted
           $offer_status = $row2['Adm_Status'];
 
@@ -84,7 +80,6 @@ if (strlen($_SESSION['uid']) == 0) {
 
                     // application accepted
                     elseif ($adsts == "1") {?>
-                      
                       <a href="app-status.php">
                         <div class="card-body">
                         <?php 
@@ -102,6 +97,7 @@ if (strlen($_SESSION['uid']) == 0) {
                           </div>
                         <?php 
                         }elseif ($offer_status == "accepted") {
+                          $reg = mysqli_query($con, "SELECT * from tblregistered where Reg_User_ID='$uid'");
                           if (mysqli_fetch_array($reg)){
                             // payment verified
                             ?>
@@ -114,7 +110,7 @@ if (strlen($_SESSION['uid']) == 0) {
                               </div>
                             </div>
                             <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                              <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                              <div class="progress-bar bg-gradient-x-cyan" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                           <?php 
                           }else { ?>

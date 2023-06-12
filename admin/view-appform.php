@@ -38,7 +38,7 @@ if (strlen($_SESSION['aid'] == 0)) {
         $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
         if (mysqli_fetch_row($query_admitted_check)) {
           // user already accepted and is already inside admissions table
-          echo "<script>alert('An admission offer already sent to the applicant!\\nThe request will be ignored.')>window.close();</script>";
+          echo "<script>alert('An admission offer was already sent to the applicant!\\nThe request will be ignored safely.')>window.close();</script>";
         } else {
           // application is a fresh admission
           // add application to tbladmissions
@@ -59,7 +59,7 @@ if (strlen($_SESSION['aid'] == 0)) {
 
           if ($admStatus == 'accepted') {
             // user already accepted the offer and it wouldn't be revoked
-            echo "<script>alert('An admission offer has already been accepted by the applicant! Any changes made will be reversed and your request will be ignored safely.')>window.close();</script>";
+            echo "<script>alert('An admission offer has already been accepted by the applicant!\\n Your request will be ignored safely.')>window.close();</script>";
             $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark=NULL, AdminStatus='1' WHERE UserId='$uid'");
           } 
           elseif ($admStatus == 'offered') {
@@ -77,14 +77,14 @@ if (strlen($_SESSION['aid'] == 0)) {
         }
       } 
       elseif ($admsta == '3') { // put to waiting list
-        $query_admitted_check = mysqli_query($con, "SELECT Adm_App_ID FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
+        $query_admitted_check = mysqli_query($con, "SELECT * FROM tbladmissions WHERE Adm_App_ID='$ID_i'");
         if ($row = mysqli_fetch_assoc($query_admitted_check)) {
           // an offer was already made to applicant
           $admStatus = $row['Adm_Status'];
 
           if ($admStatus == 'accepted') {
             // user already accepted the offer and it wouldn't be revoked
-            echo "<script>alert('An admission offer has already been accepted by the applicant! Any changes made will be reversed and your request will be ignored safely.')>window.close();</script>";
+            echo "<script>alert('An admission offer has already been accepted by the applicant!\\n Your request will be ignored safely.')>window.close();</script>";
             $query = mysqli_query($con, "UPDATE tbladmapplications SET AdminRemark=NULL, AdminStatus='1' WHERE UserId='$uid'");
           } elseif ($admStatus == 'offered') {
             $query_remove_admission = mysqli_query($con, "DELETE FROM tbladmissions WHERE Adm_App_ID = '$ID_i'");
@@ -140,7 +140,7 @@ if (strlen($_SESSION['aid'] == 0)) {
 
   </head>
 
-  <body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+  <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
     <?php include('includes/header.php'); ?>
     <?php include('includes/leftbar.php'); ?>
     <div class="app-content content">

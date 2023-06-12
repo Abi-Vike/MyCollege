@@ -53,7 +53,6 @@ if (isset($_GET['uid'])) {
         $query_adm = mysqli_query($con, "UPDATE tbladmissions SET Adm_Payment_Status = 'paid', Adm_Pay_Date = CURRENT_TIMESTAMP WHERE Adm_App_ID = '$app_id'");
 
         if ($query_pay && $query_adm) {
-          echo "tommy wahid";
           // Create a hidden form and submit it dynamically
           echo '<form id="hiddenForm" action="pay-ver-parser.php" method="post">';
           echo  '<input type="hidden" name="payRef" value="' . $payRef . '">';
