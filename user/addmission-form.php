@@ -600,7 +600,7 @@ if (strlen($_SESSION['uid'] == 0)) {
                 </tr>
                 <tr>
                   <th>Admission Committee's Remark</th>
-                  <td><?php echo $row['AdminRemark']; ?></td>
+                  <td><?php echo $row_s['AdminRemark']; ?></td>
                 </tr>
                 <tr>
                   <th>Admission Committee's Decision Date</th>

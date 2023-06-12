@@ -32,12 +32,6 @@ if (strlen($_SESSION['uid']) == 0) {
       <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
       <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
       <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
-      <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
-      <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css">
-      <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/charts/morris.css">
-      <link rel="stylesheet" type="text/css" href="app-assets/fonts/simple-line-icons/style.css">
-      <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
-      <link rel="stylesheet" type="text/css" href="assets/css/style.css">
       <style>
         #error-message {
           color: red;
@@ -58,7 +52,7 @@ if (strlen($_SESSION['uid']) == 0) {
             <h4>
               Dear <?php echo $row['FirstName'] ?>, <br><br>
               Please follow the mentioned steps to fully register for the program and obtain a student ID.<br><br>
-              Make a deposit of 250 ETB to one of the accounts mentioned below and then fill all the fields with the accurate
+              Make a deposit of 300 ETB to one of the accounts mentioned below and then fill all the fields with the accurate
               information from your payment reciept. You also need to submit a screenshot or photo of the payment receipt. <br><br>
               It might take us sometime to confirm your payment so we would really appreciate your patience. But if you don't hear
               from us in <b>two working days</b>, please don't hesitate to reach us through <a style="color:coral">rvu.admissions.sup@gmail.com</a>.<br><br>
@@ -99,7 +93,7 @@ if (strlen($_SESSION['uid']) == 0) {
   
                             <div class="col-xl-4 col-lg-6">
                               <fieldset>
-                                <h5>Payment Date</h5>
+                                <h5>Payment Date (As written in the receipt)</h5>
                                 <div class="form-group">
                                   <input class="form-control white_bg" id="pay_date" name="pay_date" type="date" required>
                                 </div>
@@ -159,23 +153,8 @@ if (strlen($_SESSION['uid']) == 0) {
         });
       </script>
       <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-      <!-- BEGIN VENDOR JS-->
-      <!-- BEGIN PAGE VENDOR JS-->
-      <script src="app-assets/vendors/js/charts/chart.min.js" type="text/javascript"></script>
-      <script src="app-assets/vendors/js/charts/raphael-min.js" type="text/javascript"></script>
-      <script src="app-assets/vendors/js/charts/morris.min.js" type="text/javascript"></script>
-      <script src="app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js" type="text/javascript"></script>
-      <script src="app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js" type="text/javascript"></script>
-      <script src="app-assets/data/jvector/visitor-data.js" type="text/javascript"></script>
-      <!-- END PAGE VENDOR JS-->
-      <!-- BEGIN MODERN JS-->
       <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
       <script src="app-assets/js/core/app.js" type="text/javascript"></script>
-      <script src="app-assets/js/scripts/customizer.js" type="text/javascript"></script>
-      <!-- END MODERN JS-->
-      <!-- BEGIN PAGE LEVEL JS-->
-      <script src="app-assets/js/scripts/pages/dashboard-sales.js" type="text/javascript"></script>
-      <!-- END PAGE LEVEL JS-->
     </body>
   
     </html>

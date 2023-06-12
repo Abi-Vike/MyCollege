@@ -32,23 +32,30 @@ if (strlen($_SESSION['uid']) == 0) {
     <div class="app-content content">
       <div class="content-wrapper">
         <div class="content-header row"></div>
-        <div class="content-body">
-          <?php
-          $uid = $_SESSION['uid'];
-          $ret = mysqli_query($con, "select FirstName from tbluser where ID='$uid'");
-          $row = mysqli_fetch_array($ret);
-          $name = $row['FirstName'];
-          ?>
+        <div class="content-body">         
           <h3>
-            <font color="red">Welcome,</font>
-            <?php echo $name; ?>
+            <font color="red">Information Panel</font>
           </h3>
           <hr />
+          
           <?php
           $uid = $_SESSION['uid'];
-          $rtp = mysqli_query($con, "SELECT AdminStatus from tbladmapplications where UserID='$uid'");
-          $row = mysqli_fetch_array($rtp);
+          // fetching basic application and admission status info
+          $app = mysqli_query($con, "SELECT ID, AdminStatus from tbladmapplications where UserId='$uid'");
+          $row = mysqli_fetch_array($app);
+          $aid = $row['ID'];
           $adsts = $row['AdminStatus'];
+
+          // now fetching some decision and payment related info
+          $dec = mysqli_query($con, "SELECT Adm_Status from tbladmissions where Adm_App_ID='$aid'");
+          $row2 = mysqli_fetch_array($dec);
+
+          // use this to chnage info when the student found in tblregistered
+          $reg = mysqli_query($con, "SELECT * from tblregistered where Reg_User_ID='$uid'");
+          $row3 = mysqli_fetch_array($reg);
+
+          // use this to change info when offer accepted
+          $offer_status = $row2['Adm_Status'];
 
           if ($row > 0) { ?>
             <div class="row">
@@ -75,8 +82,61 @@ if (strlen($_SESSION['uid']) == 0) {
                       </a><?php 
                     }
 
+                    // application accepted
+                    elseif ($adsts == "1") {?>
+                      
+                      <a href="app-status.php">
+                        <div class="card-body">
+                        <?php 
+                        if ($offer_status == "offered") {?>
+                          <div class="media d-flex">
+                            <div class="media-body text-left">
+                                <h4 align="center">Decision has been made on your application. Click here for details</h4>
+                            </div>
+                            <div>
+                              <i class="icon-file success font-large-2 float-right"></i>
+                            </div>
+                          </div>
+                          <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                            <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        <?php 
+                        }elseif ($offer_status == "accepted") {
+                          if (mysqli_fetch_array($reg)){
+                            // payment verified
+                            ?>
+                            <div class="media d-flex">
+                              <div class="media-body text-left">
+                                <h4 align="center">Continue to Student Portal</h4>
+                              </div>
+                              <div>
+                                <i class="icon-file success font-large-2 float-right"></i>
+                              </div>
+                            </div>
+                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                              <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          <?php 
+                          }else { ?>
+                            <div class="media d-flex">
+                              <div class="media-body text-left">
+                                <h4 align="center">Continue to Registration</h4>
+                              </div>
+                              <div>
+                                <i class="icon-file success font-large-2 float-right"></i>
+                              </div>
+                            </div>
+                            <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                              <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          <?php }
+                        } ?>
+                        </div>
+                      </a><?php 
+                    } 
+
                     // status updated by registrar 
-                    elseif ($adsts != "") { ?>
+                    else {?>
                       <a href="app-status.php">
                         <div class="card-body">
                           <div class="media d-flex">
