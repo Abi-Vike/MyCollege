@@ -87,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           // either report hasn't been mailed in or applicant hasn't paid
           // redirect to admin for manual verification
           header("Location: ". "payment-verihhhhhhhfy.php?uid=".urlencode($uid));
+          //instead, call payment-verify again at this point for the user.
           exit();
         }
       } else {

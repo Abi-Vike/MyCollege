@@ -109,28 +109,36 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
               <tr>
                 <th>S.NO</th>
                 <th>Application ID</th>
+                <th>Applicant ID</th>
                 <th>Name</th>
                 <th>Course</th>
-                <th>Offer Accept Date</th>
-                <th>Reg-Payment</th>
-                <th>Action</th>
+                <th>Program Type</th>
+                <th>Registration Payment</th>
               </tr>
             </thead>
             <?php
               //$ret=mysqli_query($con,"SELECT * FROM tbladmissions, tbladmapplications.CourseApplied, tbladmapplications.ID, tbladmapplications.FirstName, tbladmapplications.MiddleName FROM tbladmissions INNER JOIN tbladmapplications on tbladmissions.Adm_App_ID=tbladmissions.Adm_App_ID");
               //$ret = mysqli_query($con, "SELECT * FROM tbladmissions Where Adm_App_ID = '63' AND Adm_Status='accepted'");
-              $new = mysqli_query($con, "SELECT tbladmissions.*, tbladmapplications.FirstName, tbladmapplications.MiddleName, tbladmapplications.CourseApplied FROM tbladmissions INNER JOIN tbladmapplications ON tbladmissions.Adm_App_ID = tbladmapplications.ID WHERE tbladmissions.Adm_Status = 'accepted'");
+              $data = mysqli_query($con, "SELECT tbladmissions.*, tbladmapplications.UserID ,tbladmapplications.FirstName, tbladmapplications.MiddleName, tbladmapplications.CourseApplied, tbladmapplications.AdmissionType FROM tbladmissions INNER JOIN tbladmapplications ON tbladmissions.Adm_App_ID = tbladmapplications.ID WHERE tbladmissions.Adm_Status = 'accepted'");
               $cnt=1;
-              while ($row=mysqli_fetch_array($new)) {
+              while ($row=mysqli_fetch_array($data)) {
+                $pay = mysqli_fetch_array(mysqli_query($con, "SELECT Pay_Confirmed FROM tblpayments WHERE Application_ID = ". $row["Adm_App_ID"]));
                 ?>
                 <tr>
-                  <td><?php  echo $cnt;?></td>
-                  <td><?php  echo $row['Adm_App_ID'];?></td>
-                  <td><?php  echo $row['FirstName'].' '.$row['MiddleName'];?></td>
-                  <td><?php  echo $row['CourseApplied'];?></td>
-                  <td><?php  echo $row['Adm_Accept_Date'];?></td>
-                  <td><?php  echo $row['Adm_Payment_Status'];?></td>
-                  <td><a href="view-appform.php?aticid=<?php echo $row['ID'];?>">View Details</a></td>
+                  <td><?php echo $cnt;?></td>
+                  <td><?php echo $row['Adm_App_ID'];?></td>
+                  <td><?php echo $row['UserID'];?></td>
+                  <td><?php echo $row['FirstName'].' '.$row['MiddleName'];?></td>
+                  <td><?php echo $row['CourseApplied'];?></td>
+                  <td><?php echo $row['AdmissionType'];?></td>
+                  <?php 
+                    if ($pay['Pay_Confirmed'] == 'unverified'){ ?>
+                      <td>Payment Unconfirmed - <a href="verify-payment.php?aticid=<?php echo $row['Adm_App_ID'];?>">Verify Manually</a></td>
+                    <?php 
+                    }else if ($pay['Pay_Confirmed'] == 'verified') { ?>
+                      <td>Paid - Verified</td>
+                    <?php }
+                  ?>
                 </tr>
                 <?php 
                   $cnt=$cnt+1;

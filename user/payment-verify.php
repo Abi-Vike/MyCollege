@@ -25,10 +25,10 @@ if (isset($_GET['uid'])) {
       // applicant has already submitted payment information.
       if ($row['Pay_Confirmed'] == 'verified') {
         // redirect to congratulations page and show generated ID.
-        echo "Payment Verified!";
-        //$redirectUrl = "student.php?uid=".urlencode($uid); 
-        //header("Location: ". $redirectUrl);
-        //exit();
+        //echo "Payment Verified!";
+        $redirectUrl = "student.php?uid=" . urlencode($uid);
+        header("Location: " . $redirectUrl);
+        exit();
       } else {
         // payment not yet verified
         //echo "You have submitted your payment details successfully. Please wait to hear from us!";
@@ -91,7 +91,7 @@ if (isset($_GET['uid'])) {
       <div class="content-wrapper">
         <div class="content-header row"></div>
         <div class="content-body">
-          <?php if ($pay_data['Pay_Confirmed'] === 'verified'){
+          <?php if ($pay_data['Pay_Confirmed'] === 'verified') {
             // fetch data from tblregistered
             $fetch_reg = mysqli_query($con, "SELECT * FROM tblregistered WHERE Reg_User_ID = '$uid'");
             $row = mysqli_fetch_array($fetch_reg);
@@ -100,25 +100,32 @@ if (isset($_GET['uid'])) {
             $R_Course = $row['Reg_Course'];
             $R_Date = $row['Reg_date'];
           ?>
-            
-            <h4>
-              <strong>Dear <?php echo $pay_data['Payer_Name'] ?>, <br><br></strong>
-              <strong>Congratulations! Your payment has been verified.</strong> <br><br>
-              <strong>Registration Date:</strong> <?php echo date('d-M-Y', strtotime($R_Date)) ?> <br><br>
-
-              You are now officially registered for the September 2023 degree program in <?php echo $R_Course?>. <br>
-              We are excited to have you as part of our esteemed institution, and we look forward to witnessing
-              your growth and success as you pursue your Bachelors in <?php echo $R_Course?>.<br><br>
-              Should you have any questions or require any assistance, please do not hesitate to our dedicated 
-              support team at <a style="color:coral">rvu.admissions.sup@gmail.com</a><br><br>
-              <strong>Sincerely,<br><br>
-                Rift Valley University Admissions Office<br>
-              </strong><br><br><br>
-              <div align="center" class="mt-2 mb-2">
-                <button type="submit" id="submit_button" name="submit" class="btn btn-success mx-2" style="width: 300px;">Continue to Student Portal</button>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-12">
+                <div class="card pull-up">
+                  <div class="card-content">
+                    <a href="Pay-cond.php">
+                      <div class="card-body">
+                        <div class="media d-flex">
+                          <div class="media-body text-left">
+                            <h4 align="center">Registration Completed successfully</h4>
+                          </div>
+                          <div>
+                            <i class="icon-file success font-large-2 float-right"></i>
+                          </div>
+                        </div>
+                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                          <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
               </div>
-            </h4>
-          <?php }else{ ?>
+            </div>
+            <hr>
+            
+          <?php } else { ?>
             <h4>
               <strong>Payment reference:</strong> <?php echo $pay_data['Pay_Ref'] ?> <br><br>
               <strong>Payment Date:</strong> <?php echo date('d-M-Y', strtotime($pay_data['Pay_Date'])) ?> <br><br>
@@ -132,7 +139,6 @@ if (isset($_GET['uid'])) {
               </strong>
             </h4>
           <?php } ?>
-          
         </div>
       </div>
     </div>

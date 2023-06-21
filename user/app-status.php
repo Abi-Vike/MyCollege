@@ -119,11 +119,11 @@ if (strlen($_SESSION['uid']) == 0) {
                   <strong>Kind regards,<br><br>
                     Rift Valley University Admissions Office</strong>
                 </h4>
-          <?php
+                <?php
               } else {
                 echo "What the heck has happened here?";
               }
-            } else {
+            }else {
               // student has already accepted an offer
               $redirect_to_register = "accept-offer.php?uid=" . $uid;
               echo '<script type="text/javascript">';

@@ -58,7 +58,6 @@ if (strlen($_SESSION['uid']) == 0) {
               <div class="col-xl-12 col-lg-12 col-12">
                 <div class="card pull-up">
                   <div class="card-content"> <?php
-
                     // application still under review
                     if ($adsts == "") { ?>
                       <a href="addmission-form.php">

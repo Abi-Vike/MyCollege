@@ -75,7 +75,7 @@ if (strlen($_SESSION['uid']) == 0) {
                           <div class="row">
                             <div class="col-xl-4 col-lg-6">
                               <fieldset>
-                                <h5>First Name </h5>
+                                <h5>First Name (As written on the receipt)</h5>
                                 <div class="form-group">
                                   <input class="form-control white_bg" id="pay_name" name="pay_name" type="text" required>
                                 </div>
