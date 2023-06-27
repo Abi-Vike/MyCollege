@@ -245,7 +245,8 @@ if (strlen($_SESSION['uid'] == 0)) {
         position: absolute;
         top: 10px;
         right: 10px;
-        padding: 5px;
+        padding: 10px;
+        width: 100px;
         background-color: #007bff;
         color: #fff;
         border: none;

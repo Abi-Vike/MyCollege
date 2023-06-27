@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $subjectKeyword = 'Fwd: Transaction Alert - BoA';
       $receiptCode = $payRef;
       $receiptDate = $formattedPayDate;
-      $receiptAmount = 'Amount: ETB 300.00';
+      $receiptAmount = 'Amount: ETB 100.00';
 
       // retrieve specific emails
       $emails = imap_search($inbox, 'SUBJECT "' . $subjectKeyword . '"');
@@ -86,6 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }else {
           // either report hasn't been mailed in or applicant hasn't paid
           // redirect to admin for manual verification
+          // redirect user to payment-verify.php
           header("Location: ". "payment-verihhhhhhhfy.php?uid=".urlencode($uid));
           //instead, call payment-verify again at this point for the user.
           exit();

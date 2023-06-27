@@ -117,7 +117,7 @@ if (isset($_POST['submit'])) {
       if ($mail->send()) {
       ?>
         <script>
-          alert("Verification link has been sent to your account. Please check in the Spam-box if you couldn't find it in the inbox.")
+          alert("Verification link has been sent to your email address. Please check in the Spam-box if you couldn't find it in your inbox.")
           window.location.href = "login.php";
         </script>';
       <?php

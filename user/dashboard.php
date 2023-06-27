@@ -16,12 +16,6 @@ if (strlen($_SESSION['uid']) == 0) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/charts/morris.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/fonts/simple-line-icons/style.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
 
   <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
@@ -53,7 +47,10 @@ if (strlen($_SESSION['uid']) == 0) {
           // use this to change info when offer accepted
           $offer_status = $row2['Adm_Status'];
 
-          if ($row > 0) { ?>
+          if ($row > 0) { 
+            // hide the admission form link from left bar this point onwards
+            $_SESSION['hideAdmissionFormLink'] = true;
+            ?>
             <div class="row">
               <div class="col-xl-12 col-lg-12 col-12">
                 <div class="card pull-up">
@@ -92,24 +89,25 @@ if (strlen($_SESSION['uid']) == 0) {
                             </div>
                           </div>
                           <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         <?php 
                         }elseif ($offer_status == "accepted") {
                           $reg = mysqli_query($con, "SELECT * from tblregistered where Reg_User_ID='$uid'");
                           if (mysqli_fetch_array($reg)){
                             // payment verified
+                            //$hideAdmissionFormLink = true; // to hide the admission-form link from leftbar.php 
                             ?>
                             <div class="media d-flex">
                               <div class="media-body text-left">
-                                <h4 align="center">Continue to Student Portal</h4>
+                                <h4 align="center">Registration Successful</h4>
                               </div>
                               <div>
                                 <i class="icon-file success font-large-2 float-right"></i>
                               </div>
                             </div>
                             <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                              <div class="progress-bar bg-gradient-x-cyan" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                              <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                           <?php 
                           }else { ?>
@@ -143,7 +141,7 @@ if (strlen($_SESSION['uid']) == 0) {
                             </div>
                           </div>
                           <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </a><?php 
@@ -153,7 +151,35 @@ if (strlen($_SESSION['uid']) == 0) {
                 </div>
               </div>
             </div>
+            <?php 
+            // only after applicant registered successfully
+            $reg = mysqli_query($con, "SELECT * from tblregistered where Reg_User_ID='$uid'");
+            if (mysqli_fetch_array($reg)){ ?>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-12">
+                <div class="card pull-up">
+                  <div class="card-content">
+                    <a href="St-Portal.php">
+                      <div class="card-body">
+                        <div class="media d-flex">
+                          <div class="media-body text-left">
+                              <h4 align="center">Student Portal</h4>
+                          </div>
+                          <div>
+                            <i class="icon-file success font-large-2 float-right"></i>
+                          </div>
+                        </div>
+                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                          <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
           <?php
+            }
           } else { ?>
             <div class="row">
               <div class="col-12">
@@ -248,25 +274,10 @@ if (strlen($_SESSION['uid']) == 0) {
     </div>
 
     <?php include('includes/footer.php'); ?>
-    <!-- BEGIN VENDOR JS-->
+
     <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-    <!-- BEGIN VENDOR JS-->
-    <!-- BEGIN PAGE VENDOR JS-->
-    <script src="app-assets/vendors/js/charts/chart.min.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/charts/raphael-min.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/charts/morris.min.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js" type="text/javascript"></script>
-    <script src="app-assets/data/jvector/visitor-data.js" type="text/javascript"></script>
-    <!-- END PAGE VENDOR JS-->
-    <!-- BEGIN MODERN JS-->
     <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app.js" type="text/javascript"></script>
-    <script src="app-assets/js/scripts/customizer.js" type="text/javascript"></script>
-    <!-- END MODERN JS-->
-    <!-- BEGIN PAGE LEVEL JS-->
-    <script src="app-assets/js/scripts/pages/dashboard-sales.js" type="text/javascript"></script>
-    <!-- END PAGE LEVEL JS-->
   </body>
 
   </html>

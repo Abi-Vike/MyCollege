@@ -121,10 +121,10 @@ if (isset($_GET['uid'])) {
       } else {
         $return_app_id = mysqli_query($con, "SELECT ID FROM tbladmapplications WHERE UserId = $uid");
         $row_id = mysqli_fetch_array($ret);
-        $app_id = $row['ID'];
+        $app_id = $row_id['ID'];
 
-        $pay_receipt = $name . "_" . md5($payPic) . $extension_pic;
-        move_uploaded_file($_FILES["pay_pic"]["tmp_name"], "userimages/payments" . $pay_receipt);
+        $pay_receipt = $name . "receipt" .  "_" . md5($payPic) . $extension_pic;
+        move_uploaded_file($_FILES["pay_pic"]["tmp_name"], "userimages/payments/" . $pay_receipt);
         // now the system can push the data into tblpayments
         $query_pay = mysqli_query($con, "INSERT INTO tblpayments (Application_ID, Payer_ID, Payer_Name, Pay_Ref, Pay_Date, Pay_Receipt)
                   VALUES('$app_id', '$uid', '$name', '$payRef', '$payDate', '$payPic')");

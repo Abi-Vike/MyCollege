@@ -28,159 +28,46 @@ if (strlen($_SESSION['aid'] == 0)) {
         <div class="content-header row"></div>
         <div class="content-body">
           <h3>
-            <font color="blue">Classes - Undergraduate</font>
+            Departments
           </h3>
           <hr />
 
           <div class="row">
-            <div class="col-lg-4 col-12">
-              <div class="card pull-up">
-                <div class="card-content">
-                  <a href="manage-course.php">
-                    <div class="card-body" style="height:200px;">
-                      <div class="media d-flex">
-                        <div class="media-body text-center">
-                          <?php
-                          $sql_course = mysqli_query($con, "SELECT ID from tblcourse");
-                          $cntcourse = mysqli_num_rows($sql_course);
-                          ?>
-                          <h1 class="info">Computer Science</h1>
-                          <h5 class="danger">Enrolled Students: <?php echo $cntcourse; ?></h5>
-                        </div>
-                      </div>
-                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
+            <?php
+            $ret = mysqli_query($con, "SELECT * FROM tblcourse");
 
-            <div class="col-lg-4 col-12">
-              <div class="card pull-up">
-                <div class="card-content">
-                  <a href="manage-course.php">
-                    <div class="card-body" style="height:200px;">
-                      <div class="media d-flex">
-                        <div class="media-body text-center">
-                          <?php
-                          $sql_course = mysqli_query($con, "SELECT ID from tblcourse");
-                          $cntcourse = mysqli_num_rows($sql_course);
-                          ?>
-                          <h1 class="info">Nursing</h1>
-                          <h5 class="danger">Enrolled Students: <?php echo $cntcourse; ?></h5>
+            while ($row = mysqli_fetch_array($ret)) {
+              $course_name = $row['CourseName'];
+            ?>
+              <div class="col-lg-4 col-12">
+                <div class="card pull-up">
+                  <div class="card-content">
+                    <a href="ready-class.php?course_name=<?php echo urlencode($course_name); ?>">
+                      <div class="card-body" style="height:200px;">
+                        <div class="media d-flex">
+                          <div class="media-body text-center">
+                            <?php
+                            $std_cnt = 0;
+                            $std = mysqli_query($con, "SELECT Reg_ID FROM tblregistered WHERE Reg_Course = '$course_name'");
+                            while ($row = mysqli_fetch_array($std)) {
+                              $std_cnt += 1;
+                            }
+                            ?>
+                            <h1 class="info"><?php echo $course_name; ?></h1>
+                            <h5 class="danger">Enrolled Students: <?php echo $std_cnt; ?></h5>
+                          </div>
+                        </div>
+                        <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                          <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                       </div>
-                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </a>
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            <div class="col-lg-4 col-12">
-              <div class="card pull-up">
-                <div class="card-content">
-                  <a href="manage-course.php">
-                    <div class="card-body" style="height:200px;">
-                      <div class="media d-flex">
-                        <div class="media-body text-center">
-                          <?php
-                          $sql_course = mysqli_query($con, "SELECT ID from tblcourse");
-                          $cntcourse = mysqli_num_rows($sql_course);
-                          ?>
-                          <h1 class="info">Pharmacy</h1>
-                          <h5 class="danger">Enrolled Students: <?php echo $cntcourse; ?></h5>
-                        </div>
-                      </div>
-                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
+            <?php
+            } ?>
           </div>
-
-          <div class="row">
-            <div class="col-lg-4 col-12">
-              <div class="card pull-up">
-                <div class="card-content">
-                  <a href="manage-course.php">
-                    <div class="card-body" style="height:200px;">
-                      <div class="media d-flex">
-                        <div class="media-body text-center">
-                          <?php
-                          $sql_course = mysqli_query($con, "SELECT ID from tblcourse");
-                          $cntcourse = mysqli_num_rows($sql_course);
-                          ?>
-                          <h1 class="info">Marketing Management</h1>
-                          <h5 class="danger">Enrolled Students: <?php echo $cntcourse; ?></h5>
-                        </div>
-                      </div>
-                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-12">
-              <div class="card pull-up">
-                <div class="card-content">
-                  <a href="manage-course.php">
-                    <div class="card-body" style="height:200px;">
-                      <div class="media d-flex">
-                        <div class="media-body text-center">
-                          <?php
-                          $sql_course = mysqli_query($con, "SELECT ID from tblcourse");
-                          $cntcourse = mysqli_num_rows($sql_course);
-                          ?>
-                          <h1 class="info">Business Administration</h1>
-                          <h5 class="danger">Enrolled Students: <?php echo $cntcourse; ?></h5>
-                        </div>
-                      </div>
-                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-4 col-12">
-              <div class="card pull-up">
-                <div class="card-content">
-                  <a href="manage-course.php">
-                    <div class="card-body" style="height:200px;">
-                      <div class="media d-flex">
-                        <div class="media-body text-center">
-                          <?php
-                          $sql_course = mysqli_query($con, "SELECT ID from tblcourse");
-                          $cntcourse = mysqli_num_rows($sql_course);
-                          ?>
-                          <h1 class="info">Accounting and Finance</h1>
-                          <h5 class="danger">Enrolled Students: <?php echo $cntcourse; ?></h5>
-                        </div>
-                      </div>
-                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
         </div>
       </div>
     </div>
