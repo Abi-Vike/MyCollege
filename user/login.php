@@ -25,8 +25,7 @@ if (isset($_POST['login'])) {
 <html class="loading" lang="en" data-textdirection="ltr">
 
 <head>
-  <title>Login Portal
-  </title>
+  <title>RVU-GADA : Student || Login</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles-merged.css">
   <link rel="stylesheet" href="../css/style.min.css">
@@ -104,7 +103,7 @@ if (isset($_POST['login'])) {
                       
                       <br>
                       <div class="col-12 col-sm-12 col-md-12" tabindex="4">
-                        <p><a href="forget-password.php" class="text-primary" style="font-weight:bold">Forgot password?</a></p>
+                        <p><a href="forgot-password.php" class="text-primary" style="font-weight:bold">Forgot password?</a></p>
                       </div>
                       <div class="col-12 col-sm-12 col-md-12" tabindex="4">
                         <p style="font-weight:bold;">You dont't have an account ? <a href="signup.php" class="text-primary">Click here to register</a></p>

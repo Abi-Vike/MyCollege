@@ -139,7 +139,7 @@ if (isset($_POST['submit'])) {
 
 <head>
 
-  <title>College Admission Management System || User Signup
+  <title>RVU-GADA : Student || Signup
   </title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles-merged.css">
