@@ -28,14 +28,13 @@ if (strlen($_SESSION['aid'] == 0)) {
         <div class="content-header row"></div>
         <div class="content-body">
           <h3>
-            Departments
+            Departments | Classes
           </h3>
           <hr />
 
           <div class="row">
             <?php
             $ret = mysqli_query($con, "SELECT * FROM tblcourse");
-
             while ($row = mysqli_fetch_array($ret)) {
               $course_name = $row['CourseName'];
             ?>
@@ -43,7 +42,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                 <div class="card pull-up">
                   <div class="card-content">
                     <a href="ready-class.php?course_name=<?php echo urlencode($course_name); ?>">
-                      <div class="card-body" style="height:200px;">
+                      <div class="card-body" style="height:150px;">
                         <div class="media d-flex">
                           <div class="media-body text-center">
                             <?php
@@ -53,7 +52,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                               $std_cnt += 1;
                             }
                             ?>
-                            <h1 class="info"><?php echo $course_name; ?></h1>
+                            <h4><?php echo $course_name; ?></h4>
                             <h5 class="danger">Enrolled Students: <?php echo $std_cnt; ?></h5>
                           </div>
                         </div>

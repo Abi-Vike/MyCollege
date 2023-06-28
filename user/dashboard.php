@@ -19,7 +19,6 @@ if (strlen($_SESSION['uid']) == 0) {
   </head>
 
   <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
-    <!-- fixed-top-->
     <?php include_once('includes/header.php'); ?>
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <?php include_once('includes/leftbar.php'); ?>
@@ -149,13 +148,13 @@ if (strlen($_SESSION['uid']) == 0) {
                       </a>
                     <?php
                     } ?>
-
                   </div>
                 </div>
               </div>
             </div>
             <?php
             if ($adsts == "") { ?>
+              <div><br><br></div>
               <div class="text-center">
                 <button type="submit" id="submit_button" name="submit" class="btn btn-primary" onclick="confirmWithdrawal()">Withdraw Application</button>
               </div>

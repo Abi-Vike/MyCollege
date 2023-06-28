@@ -24,12 +24,8 @@
           <li class="dropdown dropdown-user nav-item">
             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
               <?php $admid = $_SESSION['aid']; ?>
-              <span class="mr-1">(Admin-<?php echo json_encode($admid) ?>), Registrar
-                <?php //might want to un-block these lines when you have multiple Admins
-                //$ret=mysqli_query($con,"select AdminuserName from tbladmin where ID='$admid'");
-                //$row=mysqli_fetch_array($ret);
-                //$name=$row['AdminuserName'];
-                ?>
+              <span class="mr-1">
+                Officer No.<?php echo ' ' . $admid ?>
               </span>
               <span class="avatar avatar-online">
                 <img src="app-assets/images/user.png" alt="avatar"><i></i>
@@ -68,7 +64,7 @@
                       <div class="media-body">
                         <h6 class="media-heading"><b><?php echo $row['FirstName']; ?></b> applied for admission</h6>
                         <small>
-                          <time class="media-meta text-muted" datetime="2023-05-11T18:29:20+08:00">at <?php echo $row['CourseApplieddate']; ?></time>
+                          <time class="media-meta text-muted">at <?php echo $row['CourseApplieddate']; ?></time>
                         </small>
                       </div>
                     </div>

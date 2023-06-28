@@ -33,7 +33,7 @@
         <li class=" nav-item">
           <a href="search-application.php">
             <i class="la la-search"></i>
-            <span class="menu-title" data-i18n="nav.dash.main">Search An Application</span>
+            <span class="menu-title" data-i18n="nav.dash.main">Search</span>
           </a>
         </li>
 
@@ -44,18 +44,18 @@
           </a>
           <ul class="menu-content">
             <li><a class="menu-item" href="add-course.php" data-i18n="nav.footers.footer_light">Add Course</a></li>
-            <li><a class="menu-item" href="manage-course.php" data-i18n="nav.footers.footer_dark">Manage Course</a></li>
+            <li><a class="menu-item" href="manage-course.php" data-i18n="nav.footers.footer_dark">Manage Courses</a></li>
           </ul>
         </li>
 
         <li class=" nav-item">
           <a href="#">
-            <i class="la la-download"></i>
-            <span class="menu-title" data-i18n="nav.footers.main">Public Notice</span>
+            <i class="la la-bell"></i>
+            <span class="menu-title" data-i18n="nav.footers.main">Public Anouncements</span>
           </a>
           <ul class="menu-content">
-            <li><a class="menu-item" href="add-notice.php" data-i18n="nav.footers.footer_light">Add Notice</a></li>
-            <li><a class="menu-item" href="manage-notice.php" data-i18n="nav.footers.footer_dark">Manage Notice</a></li>
+            <li><a class="menu-item" href="add-notice.php" data-i18n="nav.footers.footer_light">New Anouncement</a></li>
+            <li><a class="menu-item" href="manage-notice.php" data-i18n="nav.footers.footer_dark">Manage Anouncements</a></li>
           </ul>
         </li>
       </ul>

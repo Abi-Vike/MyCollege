@@ -82,7 +82,8 @@ if (strlen($_SESSION['aid'] == 0)) {
                   <?php if ($row['status'] == 'confirmed') {
                     echo "Yes";
                   } else {
-                    echo "Not Confirmed";
+                    $signUp_date = date('d-M-Y', strtotime($row['PostingDate']));
+                    echo "Unverified ($signUp_date)";
                   } ?>
                 </td>
                 <td>

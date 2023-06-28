@@ -24,7 +24,7 @@ if (strlen($_SESSION['aid'] == 0)) {
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
 
-  <body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+  <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
     <?php include_once('includes/header.php'); ?>
     <?php //include_once('../user/includes/header.php')
     ?>
@@ -46,8 +46,8 @@ if (strlen($_SESSION['aid'] == 0)) {
                           $sql_course = mysqli_query($con, "SELECT ID from tblcourse");
                           $cntcourse = mysqli_num_rows($sql_course);
                           ?>
-                          <h3 class="info"><?php echo $cntcourse; ?></h3>
-                          <h6>Available Courses</h6>
+                          <h3 class="success"><?php echo $cntcourse; ?></h3>
+                          <h4>Available Courses</h4>
                           <!--associated with manage-course.php-->
                         </div>
                         <div>
@@ -56,7 +56,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                       </div>
 
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </a>
@@ -75,8 +75,8 @@ if (strlen($_SESSION['aid'] == 0)) {
                           $sql_user = mysqli_query($con, "SELECT ID from tbluser");
                           $cntuser = mysqli_num_rows($sql_user);
                           ?>
-                          <h3 class="warning"><?php echo $cntuser; ?></h3>
-                          <h6>Registered Users</h6>
+                          <h3 class="success"><?php echo $cntuser; ?></h3>
+                          <h4>Registered Users</h4>
                           <!--associated with user-detail.php-->
                         </div>
                         <div>
@@ -85,7 +85,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                       </div>
 
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </a>
@@ -101,20 +101,19 @@ if (strlen($_SESSION['aid'] == 0)) {
                       <div class="media d-flex">
                         <div class="media-body text-left">
                           <?php
-                          $sql_adm = mysqli_query($con, "SELECT Application_ID FROM tblpayments");
+                          $sql_adm = mysqli_query($con, "SELECT CourseName FROM tblcourse");
                           $adms = mysqli_num_rows($sql_adm);
                           ?>
                           <h3 class="success"><?php echo $adms; ?></h3>
-                          <h6>Classes</h6>
-                          <!--associated with admitted-applicants.php-->
+                          <h4>Departments and Classes</h4>
                         </div>
                         <div>
-                          <i class="icon-clok success font-large-2 float-right"></i>
+                          <i class="icon-flag success font-large-2 float-right"></i>
                         </div>
                       </div>
 
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </a>
@@ -134,7 +133,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           $cntapp = mysqli_num_rows($sql_apps);
                           ?>
                           <h3 class="success"><?php echo $cntapp; ?></h3>
-                          <h6>All Applications</h6>
+                          <h4>All Applications</h4>
                           <!--associated with all-application.php-->
                         </div>
                         <div>
@@ -142,7 +141,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                         </div>
                       </div>
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </a>
@@ -161,8 +160,8 @@ if (strlen($_SESSION['aid'] == 0)) {
                           $sql_pen = mysqli_query($con, "SELECT ID from tbladmapplications where AdminStatus is null");
                           $penapp = mysqli_num_rows($sql_pen);
                           ?>
-                          <h3 class="info"><?php echo $penapp; ?></h3>
-                          <h6>Pending For Review</h6>
+                          <h3 class="success"><?php echo $penapp; ?></h3>
+                          <h4>Pending For Review</h4>
                           <!--associated with pending-application.php-->
                         </div>
                         <div>
@@ -171,7 +170,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                       </div>
 
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </a>
@@ -190,8 +189,8 @@ if (strlen($_SESSION['aid'] == 0)) {
                           $sql_acc = mysqli_query($con, "SELECT ID from tbladmapplications where AdminStatus='1'");
                           $selapp = mysqli_num_rows($sql_acc);
                           ?>
-                          <h3 class="warning"><?php echo $selapp; ?></h3>
-                          <h6>Accepted Applications</h6>
+                          <h3 class="success"><?php echo $selapp; ?></h3>
+                          <h4>Accepted Applications</h4>
                           <!--associated with selected-application.php-->
                         </div>
                         <div>
@@ -200,7 +199,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                       </div>
 
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </a>
@@ -220,7 +219,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           $rejapp = mysqli_num_rows($sql_rej);
                           ?>
                           <h3 class="success"><?php echo $rejapp; ?></h3>
-                          <h6>Rejected Applications</h6>
+                          <h4>Rejected Applications</h4>
                           <!--associated with rejected-application.php-->
                         </div>
                         <div>
@@ -229,7 +228,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                       </div>
 
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </a>
@@ -249,7 +248,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                           $wailis = mysqli_num_rows($sql_wai);
                           ?>
                           <h3 class="success"><?php echo $wailis; ?></h3>
-                          <h6>Waiting List</h6>
+                          <h4>Waiting List</h4>
                           <!--associated with waiting-list.php-->
                         </div>
                         <div>
@@ -258,7 +257,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                       </div>
 
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </a>
@@ -278,26 +277,51 @@ if (strlen($_SESSION['aid'] == 0)) {
                           $adms = mysqli_num_rows($sql_adm);
                           ?>
                           <h3 class="success"><?php echo $adms; ?></h3>
-                          <h6>Admissions & Registrations</h6>
+                          <h4>Admissions & Registrations</h4>
                           <!--associated with admitted-applicants.php-->
                         </div>
                         <div>
-                          <i class="icon-clok success font-large-2 float-right"></i>
+                          <i class="icon-pencil success font-large-2 float-right"></i>
                         </div>
                       </div>
 
                       <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </a>
                 </div>
               </div>
             </div>
-            
-            
 
+            <div class="col-xl-4 col-lg-6 col-12">
+              <div class="card pull-up">
+                <div class="card-content">
+                  <a href="manage-notice.php">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <?php
+                          $sql_adm = mysqli_query($con, "SELECT ID FROM tblnotice");
+                          $adms = mysqli_num_rows($sql_adm);
+                          ?>
+                          <h3 class="success"><?php echo $adms; ?></h3>
+                          <h4>Public Announcements</h4>
+                          <!--associated with admitted-applicants.php-->
+                        </div>
+                        <div>
+                          <i class="icon-info success font-large-2 float-right"></i>
+                        </div>
+                      </div>
 
+                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                        <div class="progress-bar bg-gradient-x-primary" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

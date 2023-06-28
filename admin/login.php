@@ -48,13 +48,6 @@ if (isset($_POST['login'])) {
         </button>
         <img src="app-assets/images/RVU-logo.png" alt="rvulogo" class="img-sm-responsive img-rounded img-fluid" style="width: auto; height: 75px; margin-top:7px" href="index.php">
       </div>
-
-      <div id="navbar-collapse" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="../index.php">Home</a></li>
-          <li><a href="tech_sup.html">Technical Support</a></li>
-        </ul>
-      </div>
     </div>
   </nav>
 

@@ -43,15 +43,15 @@ if (isset($_POST['login'])) {
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <img src="app-assets/images/RVU-logo.png" alt="rvulogo" class="img-sm-responsive img-rounded img-fluid" style="width: auto; height: 75px; margin-top:7px" href="index.php">
+        <img src="app-assets/images/RVU-logo.png" alt="rvulogo" class="img-sm-responsive img-rounded img-fluid" style="width: auto; height: 75px; margin-top:7px" href="index.html">
       </div>
 
       <div id="navbar-collapse" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="../index.php">Home</a></li>
-          <li><a href="news.html">News</a></li>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="https://riftvalleyuniversity.org/blog/">News</a></li>
           <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="../index.html#footer">Contact</a></li>
         </ul>
       </div>
     </div>
