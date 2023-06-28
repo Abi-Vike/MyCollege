@@ -74,7 +74,7 @@ if (isset($_POST['submit'])) {
       //$mail -> setFrom($email, $name);
       $mail->setFrom($email, "RVU Registrar office");
       $mail->addAddress($email);  // receiver's email
-      $mail->Subject = "Please confirm your email address";
+      $mail->Subject = "Please confirm your account";
     }
 
     if ($url) {
@@ -156,16 +156,12 @@ if (isset($_POST['submit'])) {
       return true;
     }
   </script>
-
 </head>
 
 <body class="vertical-layout vertical-menu 1-column  bg-cyan bg-lighten-2 menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="1-column">
   <nav class="navbar navbar-default probootstrap-navbar">
     <div class="container">
       <div class="navbar-header">
-        <div class="btn-more js-btn-more visible-xs">
-          <a href="#"><i class="icon-dots-three-vertical "></i></a>
-        </div>
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
@@ -177,52 +173,32 @@ if (isset($_POST['submit'])) {
 
       <div id="navbar-collapse" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="teachers.html">Teachers</a></li>
-          <li><a href="events.html">Events</a></li>
-          <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Pages</a>
-            <ul class="dropdown-menu">
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="courses.html">Courses</a></li>
-              <li><a href="course-single.html">Course Single</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li class="dropdown-submenu dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span>Sub Menu</span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Second Level Menu</a></li>
-                  <li><a href="#">Second Level Menu</a></li>
-                  <li><a href="#">Second Level Menu</a></li>
-                  <li><a href="#">Second Level Menu</a></li>
-                </ul>
-              </li>
-              <li><a href="news.html">News</a></li>
-            </ul>
-          </li>
+          <li class="active"><a href="../index.php">Home</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
     </div>
   </nav>
-  <!-- ////////////////////////////////////////////////////////////////////////////-->
 
   <div class="app-content content" style="margin-top : 25px">
     <div class="content-wrapper">
       <div class="content-header row"></div>
       <div class="content-body">
+        <!--Card starts here-->
         <section class="flexbox-container">
-
           <div class="col-md-3 col-xs-2 box-shadow-2 p-0"></div>
           <div class="col-md-6 col-xs-8 box-shadow-2 p-0">
             <div class="card border-grey border-lighten-3 m-0">
               <div class="card-header border-0 pb-0">
                 <div class="card-title text-center">
-                  <h4 style="font-weight: bold"> SignUp</h4>
+                  <h4 style="font-weight: bold">SignUp</h4>
                 </div>
               </div>
               <div class="card-content">
                 <div class="card-body">
+
                   <form method="post" name="signup" onSubmit="return checkpass();">
                     <fieldset class="form-group position-relative has-icon-left">
                       <input type="text" name="firstname" id="firstname" required="true" class="form-control input-lg" placeholder="First Name" tabindex="1">
@@ -273,11 +249,10 @@ if (isset($_POST['submit'])) {
                         </fieldset>
                       </div>
                     </div>
-
+                    <br>
                     <div class="row">
                       <div class="col-12 col-sm-12 col-md-12" tabindex="6">
                         <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block"><i class="ft-user"></i> Register</button>
-
                       </div>
                     </div>
                     <br>
@@ -289,8 +264,6 @@ if (isset($_POST['submit'])) {
               </div>
             </div>
           </div>
-          <div class="col-md-3 col-xs-2 box-shadow-2 p-0"></div>
-
         </section>
       </div>
     </div>
@@ -299,7 +272,7 @@ if (isset($_POST['submit'])) {
 
   <footer class="footer fixed-bottom footer-dark navbar-border navbar-shadow text-center">
     <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2" style="margin-bottom : 20vh">
-    <p style="color:grey;">Copyright (C) - 2023 | Developed By <a href="index.php" class="text-primary">RVU Dev-Team </a> </p>
+    <p style="color:grey;">Copyright (C) - 2023 | Developed By <a href="about-us.html" class="text-primary">RVU Dev-Team </a> </p>
     </p>
   </footer>
 

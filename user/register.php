@@ -52,11 +52,14 @@ if (strlen($_SESSION['uid']) == 0) {
             <h4>
               Dear <?php echo $row['FirstName'] ?>, <br><br>
               Please follow the mentioned steps to fully register for the program and obtain a student ID.<br><br>
-              Make a deposit of 100 ETB to one of the accounts mentioned below and then fill all the fields with the accurate
+              Make a deposit of 100 ETB to the account mentioned below and then fill all the fields with the accurate
               information from your payment reciept. You also need to submit a screenshot or photo of the payment receipt. <br><br>
               It might take us sometime to confirm your payment so we would really appreciate your patience. But if you don't hear
               from us in <b>two working days</b>, please don't hesitate to reach us through <a style="color:coral">rvu.admissions.sup@gmail.com</a>.<br><br>
-              <em>Please mention your application reference number and also attach your payment receipt when contacting us!</em>
+              <em>Please mention your application reference number and also attach your payment receipt when contacting us!</em><br><br>
+              <hr>
+              <b><u>Bank of Abyssinia</u></b>
+              Name
             </h4>
             <br><br>
   

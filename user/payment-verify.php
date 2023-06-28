@@ -15,8 +15,8 @@ use phpMailer\PHPMailer\SMTP;
 if (isset($_GET['uid'])) {
   $uid = $_GET['uid'];
   // extract out info from tbladmapplications and tblregistered
-  $ret = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE UserId = $uid");
-  $ret2 = mysqli_query($con, "SELECT * FROM tblregistered WHERE Reg_User_ID = $uid");
+  $ret = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE UserId = '$uid'");
+  $ret2 = mysqli_query($con, "SELECT * FROM tblregistered WHERE Reg_User_ID = '$uid'");
   $row2 = mysqli_fetch_array($ret2);
 
   // ID card generator starts here
@@ -113,31 +113,60 @@ if (isset($_GET['uid'])) {
       $payDate = $_POST['pay_date'];
       $payPic = $_FILES["pay_pic"]["name"];
 
-      // image file validation
-      $extension_pic = substr($payPic, strlen($payPic) - 4, strlen($payPic));
-      $allowed_ext_pic = array(".jpg", ".png", ".jpeg", ".gif");
-      if (!in_array($extension_pic, $allowed_ext_pic)) {
-        echo "<script>alert('Invalid format. Only image files are allowed');</script>";
+      // check if reference number was already used
+      $check_ref = mysqli_query($con, "SELECT Payer_ID FROM tblpayments WHERE Pay_Ref = '$payRef'");
+      if ($row_id = mysqli_fetch_assoc($check_ref)) {
+        // reference number already in db
+        $payer_id = $row_id['Payer_ID'];
+        if ($payer_id != $uid) {
+          // different user trying with the same reference number
+          $alertMessage = "The receipt reference you entered was already used by another user. \nPlease use a new receipt reference.";
+          $redirectUrl = "register.php?uid=" . urlencode($uid);
+          // using json encoding here as I couldn't work right with the inline script echoing.
+          echo "<script>
+                  alert(" . json_encode($alertMessage) . ");
+                  window.location.href = " . json_encode($redirectUrl) . ";
+                </script>";
+          exit();
+        } else {
+          // reference was once used by the same applicant
+          $alertMessage = "You have already once used the receipt reference. \nPlease use a new receipt reference or contact the office if you think this is a mistake.";
+          $redirectUrl = "register.php?uid=" . urlencode($uid);
+          // using json encoding here as I couldn't work right with the inline script echoing.
+          echo "<script>
+                  alert(" . json_encode($alertMessage) . ");
+                  window.location.href = " . json_encode($redirectUrl) . ";
+                </script>";
+          exit();
+        }
       } else {
-        $return_app_id = mysqli_query($con, "SELECT ID FROM tbladmapplications WHERE UserId = $uid");
-        $row_id = mysqli_fetch_array($ret);
-        $app_id = $row_id['ID'];
+        // new reference has been issued
+        // image file validation
+        $extension_pic = substr($payPic, strlen($payPic) - 4, strlen($payPic));
+        $allowed_ext_pic = array(".jpg", ".png", ".jpeg", ".gif");
+        if (!in_array($extension_pic, $allowed_ext_pic)) {
+          echo "<script>alert('Invalid format. Only image files are allowed');</script>";
+        } else {
+          $return_app_id = mysqli_query($con, "SELECT ID FROM tbladmapplications WHERE UserId = '$uid'");
+          $row_id = mysqli_fetch_array($ret);
+          $app_id = $row_id['ID'];
 
-        $pay_receipt = $name . "receipt" .  "_" . md5($payPic) . $extension_pic;
-        move_uploaded_file($_FILES["pay_pic"]["tmp_name"], "userimages/payments/" . $pay_receipt);
-        // now the system can push the data into tblpayments
-        $query_pay = mysqli_query($con, "INSERT INTO tblpayments (Application_ID, Payer_ID, Payer_Name, Pay_Ref, Pay_Date, Pay_Receipt)
+          $pay_receipt = $name . "receipt" .  "_" . md5($payPic) . $extension_pic;
+          move_uploaded_file($_FILES["pay_pic"]["tmp_name"], "userimages/payments/" . $pay_receipt);
+          // now the system can push the data into tblpayments
+          $query_pay = mysqli_query($con, "INSERT INTO tblpayments (Application_ID, Payer_ID, Payer_Name, Pay_Ref, Pay_Date, Pay_Receipt)
                   VALUES('$app_id', '$uid', '$name', '$payRef', '$payDate', '$payPic')");
-        $query_adm = mysqli_query($con, "UPDATE tbladmissions SET Adm_Payment_Status = 'paid', Adm_Pay_Date = CURRENT_TIMESTAMP WHERE Adm_App_ID = '$app_id'");
+          $query_adm = mysqli_query($con, "UPDATE tbladmissions SET Adm_Payment_Status = 'paid', Adm_Pay_Date = CURRENT_TIMESTAMP WHERE Adm_App_ID = '$app_id'");
 
-        if ($query_pay && $query_adm) {
-          // Create a hidden form and submit it dynamically
-          echo '<form id="hiddenForm" action="pay-ver-parser.php" method="post">';
-          echo  '<input type="hidden" name="payRef" value="' . $payRef . '">';
-          echo  '<input type="hidden" name="payDate" value="' . $payDate . '">';
-          echo  '<input type="hidden" name="uid" value="' . $uid . '">';
-          echo '</form>';
-          echo '<script>document.getElementById("hiddenForm").submit();</script>';
+          if ($query_pay && $query_adm) {
+            // Create a hidden form and submit it dynamically
+            echo '<form id="hiddenForm" action="pay-ver-parser.php" method="post">';
+            echo  '<input type="hidden" name="payRef" value="' . $payRef . '">';
+            echo  '<input type="hidden" name="payDate" value="' . $payDate . '">';
+            echo  '<input type="hidden" name="uid" value="' . $uid . '">';
+            echo '</form>';
+            echo '<script>document.getElementById("hiddenForm").submit();</script>';
+          }
         }
       }
     }

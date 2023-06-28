@@ -135,6 +135,7 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
                 <th>Student ID</th>
                 <th>Full Name</th>
                 <th>Contact Number</th>
+                <th>Program Type</th>
               </tr>
             </thead>
             <?php
@@ -153,6 +154,7 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
                 <td><?php echo 'RVGDTR\\' . $row['Reg_ID'] . '\\' . date('Y', strtotime($row['Reg_date'])); ?></td>
                 <td><?php echo $row2['FirstName'] . ' - ' . $row2['MiddleName'] . ' - ' . $row2['LastName']; ?></td>
                 <td><?php echo $row2['PhoneNumber']; ?></td>
+                <td><?php echo $row2['AdmissionType']; ?></td>
               </tr>
             <?php
               $cnt = $cnt + 1;

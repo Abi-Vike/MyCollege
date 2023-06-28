@@ -3,28 +3,27 @@ session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
 
-if(isset($_POST['login']))
-  {
-    $emailcon=$_POST['emailcont'];
-    $password=md5($_POST['password']);
-    $query=mysqli_query($con,"select ID from tbluser where Email='$emailcon' && Password='$password' AND status='confirmed'");
-    $ret=mysqli_fetch_array($query);
-    
-    if($ret>0){
-      $_SESSION['uid']=$ret['ID'];
-      echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
-    }
-    else{
-      //$error = mysqli_error($con);
-      //echo "Error: $error";
-      echo "<script>alert('Invalid Credentials!');</script>";
-    }
+if (isset($_POST['login'])) {
+  $emailcon = $_POST['emailcont'];
+  $password = md5($_POST['password']);
+  $query = mysqli_query($con, "select ID from tbluser where Email='$emailcon' && Password='$password' AND status='confirmed'");
+  $ret = mysqli_fetch_array($query);
+
+  if ($ret > 0) {
+    $_SESSION['uid'] = $ret['ID'];
+    echo "<script type='text/javascript'> document.location ='dashboard.php'; </script>";
+  } else {
+    //$error = mysqli_error($con);
+    //echo "Error: $error";
+    echo "<script>alert('Invalid Credentials!');</script>";
   }
-  ?>
+}
+?>
 
 
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
+
 <head>
   <title>Login Portal
   </title>
@@ -33,8 +32,8 @@ if(isset($_POST['login']))
   <link rel="stylesheet" href="../css/style.min.css">
   <link rel="stylesheet" href="../css/custom.css">
 </head>
-<body class="vertical-layout vertical-menu 1-column  bg-cyan bg-lighten-2 menu-expanded fixed-navbar"
-data-open="click" data-menu="vertical-menu" data-col="1-column">
+
+<body class="vertical-layout vertical-menu 1-column  bg-cyan bg-lighten-2 menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="1-column">
 
   <nav class="navbar navbar-default probootstrap-navbar">
     <div class="container">
@@ -43,7 +42,7 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-          <span class="icon-bar"></span> 
+          <span class="icon-bar"></span>
         </button>
         <img src="app-assets/images/RVU-logo.png" alt="rvulogo" class="img-sm-responsive img-rounded img-fluid" style="width: auto; height: 75px; margin-top:7px" href="index.php">
       </div>
@@ -51,28 +50,8 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
       <div id="navbar-collapse" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="../index.php">Home</a></li>
-          <li><a href="courses.html">Courses</a></li>
-          <li><a href="teachers.html">Teachers</a></li>
-          <li><a href="events.html">Events</a></li>
-          <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Pages</a>
-            <ul class="dropdown-menu">
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="courses.html">Courses</a></li>
-              <li><a href="course-single.html">Course Single</a></li>
-              <li><a href="gallery.html">Gallery</a></li>
-              <li class="dropdown-submenu dropdown">
-                <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span>Sub Menu</span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Second Level Menu</a></li>
-                  <li><a href="#">Second Level Menu</a></li>
-                  <li><a href="#">Second Level Menu</a></li>
-                  <li><a href="#">Second Level Menu</a></li>
-                </ul>
-              </li>
-              <li><a href="news.html">News</a></li>
-            </ul>
-          </li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -98,34 +77,38 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
                 </div>
                 <div class="card-content">
                   <div class="card-body">
-                    
-                    <form class="form-horizontal" action="" name="login"  method="post">  
+
+                    <form class="form-horizontal" name="login" method="post">
                       <fieldset class="form-group position-relative has-icon-left">
-                        <input type="text" name="emailcont" id="email" class="form-control input-lg" placeholder="Email" tabindex="1" required="true" >
+                        <input type="text" name="emailcont" id="email" class="form-control input-lg" placeholder="Email" tabindex="1" required="true">
                         <div class="form-control-position">
                           <i class="ft-mail"></i>
                         </div>
                         <div class="help-block font-small-3"></div>
-                        </fieldset>
-                        <fieldset class="form-group position-relative has-icon-left">
-                          <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="2" required>
-                          <div class="form-control-position">
-                            <i class="la la-key"></i>
-                          </div>
-                          <div class="help-block font-small-3"></div>
-                        </fieldset> 
-                        <div class="row">
-                          <div class="col-12 col-sm-12 col-md-12">
-                            <button type="submit" name="login" class="btn btn-primary btn-lg btn-block" tabindex="3"><i class="ft-user"></i> Login</button>
-                          </div>
+                      </fieldset>
+
+                      <fieldset class="form-group position-relative has-icon-left">
+                        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="Password" tabindex="2" required>
+                        <div class="form-control-position">
+                          <i class="la la-key"></i>
                         </div>
-                        <br>
-                        <div class="col-12 col-sm-12 col-md-12" tabindex="4">
-                          <p><a href="forget-password.php" class="text-primary" style="font-weight:bold">Forgot password?</a></p>
+                        <div class="help-block font-small-3"></div>
+                      </fieldset>
+
+                      <br>
+                      <div class="row">
+                        <div class="col-12 col-sm-12 col-md-12">
+                          <button type="submit" name="login" class="btn btn-primary btn-lg btn-block" tabindex="3"><i class="ft-user"></i> Login</button>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-12" tabindex="4">
-                          <p style="font-weight:bold;">You dont't have an account ? <a href="signup.php" class="text-primary">Click here to register</a></p>
-                        </div>
+                      </div>
+                      
+                      <br>
+                      <div class="col-12 col-sm-12 col-md-12" tabindex="4">
+                        <p><a href="forget-password.php" class="text-primary" style="font-weight:bold">Forgot password?</a></p>
+                      </div>
+                      <div class="col-12 col-sm-12 col-md-12" tabindex="4">
+                        <p style="font-weight:bold;">You dont't have an account ? <a href="signup.php" class="text-primary">Click here to register</a></p>
+                      </div>
                     </form>
                   </div>
                 </div>
@@ -141,7 +124,7 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
   </div>
   <footer class="footer fixed-bottom footer-dark navbar-border navbar-shadow text-center">
     <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2" style="margin-bottom : 20vh">
-      <p style="color:grey;">Copyright (C) - 2023 | Developed By <a href="">RVU Dev-Team </a> </p>
+    <p style="color:grey;">Copyright (C) - 2023 | Developed By <a href="about-us.html">RVU Dev-Team </a> </p>
     </p>
   </footer>
 
@@ -149,4 +132,5 @@ data-open="click" data-menu="vertical-menu" data-col="1-column">
   <script src="../js/main.min.js"></script>
   <script src="../js/custom.js"></script>
 </body>
+
 </html>

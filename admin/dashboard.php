@@ -96,6 +96,35 @@ if (strlen($_SESSION['aid'] == 0)) {
             <div class="col-xl-4 col-lg-6 col-12">
               <div class="card pull-up">
                 <div class="card-content">
+                  <a href="classes.php">
+                    <div class="card-body">
+                      <div class="media d-flex">
+                        <div class="media-body text-left">
+                          <?php
+                          $sql_adm = mysqli_query($con, "SELECT Application_ID FROM tblpayments");
+                          $adms = mysqli_num_rows($sql_adm);
+                          ?>
+                          <h3 class="success"><?php echo $adms; ?></h3>
+                          <h6>Classes</h6>
+                          <!--associated with admitted-applicants.php-->
+                        </div>
+                        <div>
+                          <i class="icon-clok success font-large-2 float-right"></i>
+                        </div>
+                      </div>
+
+                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-6 col-12">
+              <div class="card pull-up">
+                <div class="card-content">
                   <a href="all-application.php">
                     <div class="card-body">
                       <div class="media d-flex">
@@ -266,34 +295,9 @@ if (strlen($_SESSION['aid'] == 0)) {
               </div>
             </div>
             
-            <div class="col-xl-4 col-lg-6 col-12">
-              <div class="card pull-up">
-                <div class="card-content">
-                  <a href="classes.php">
-                    <div class="card-body">
-                      <div class="media d-flex">
-                        <div class="media-body text-left">
-                          <?php
-                          $sql_adm = mysqli_query($con, "SELECT Application_ID FROM tblpayments");
-                          $adms = mysqli_num_rows($sql_adm);
-                          ?>
-                          <h3 class="success"><?php echo $adms; ?></h3>
-                          <h6>Classes</h6>
-                          <!--associated with admitted-applicants.php-->
-                        </div>
-                        <div>
-                          <i class="icon-clok success font-large-2 float-right"></i>
-                        </div>
-                      </div>
+            
 
-                      <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                        <div class="progress-bar bg-gradient-x" role="progressbar" style="width: 100%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
