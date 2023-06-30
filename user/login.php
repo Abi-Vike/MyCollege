@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
   } else {
     //$error = mysqli_error($con);
     //echo "Error: $error";
-    echo "<script>alert('Invalid Credentials!');</script>";
+    echo "<script>alert('Invalid Username or Password!');</script>";
   }
 }
 ?>
@@ -48,10 +48,10 @@ if (isset($_POST['login'])) {
 
       <div id="navbar-collapse" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="https://riftvalleyuniversity.org/blog/">News</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="../index.html#footer">Contact</a></li>
+          <li><a href="../index.html"><b>Home</b></a></li>
+          <li><a href="https://riftvalleyuniversity.org/blog/"><b>News</b></a></li>
+          <li><a href="../index.html#gallery"><b>Gallery</b></a></li>
+          <li><a href="../index.html#footer"><b>Contact</b></a></li>
         </ul>
       </div>
     </div>
@@ -106,7 +106,7 @@ if (isset($_POST['login'])) {
                         <p><a href="forgot-password.php" class="text-primary" style="font-weight:bold">Forgot password?</a></p>
                       </div>
                       <div class="col-12 col-sm-12 col-md-12" tabindex="4">
-                        <p style="font-weight:bold;">You dont't have an account ? <a href="signup.php" class="text-primary">Click here to register</a></p>
+                        <p style="font-weight:bold;">You dont't have an account? <a href="signup.php" class="text-primary">Click here to register</a></p>
                       </div>
                     </form>
                   </div>

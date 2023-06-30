@@ -88,8 +88,7 @@ if (isset($_POST['submit'])) {
         )
       );
 
-      if ($mail->send()) {
-?>
+      if ($mail->send()) { ?>
         <script>
           alert("Verification link has been sent to your email. Please check in the Spam-box if you couldn't find it in the inbox.")
           window.location.href = "login.php";
@@ -122,8 +121,7 @@ if (isset($_POST['submit'])) {
         </script>';
       <?php
 
-      } else {
-      ?>
+      } else { ?>
         <script>
           alert('Error.<?php $mail->ErrorInfo ?>')
         </script>';
@@ -145,17 +143,6 @@ if (isset($_POST['submit'])) {
   <link rel="stylesheet" href="../css/styles-merged.css">
   <link rel="stylesheet" href="../css/style.min.css">
   <link rel="stylesheet" href="../css/custom.css">
-
-  <script type="text/javascript">
-    function checkpass() {
-      if (document.signup.password.value != document.signup.repeatpassword.value) {
-        alert('Password and Repeat Password field do not match');
-        document.signup.repeatpassword.focus();
-        return false;
-      }
-      return true;
-    }
-  </script>
 </head>
 
 <body class="vertical-layout vertical-menu 1-column  bg-cyan bg-lighten-2 menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="1-column">
@@ -173,10 +160,10 @@ if (isset($_POST['submit'])) {
 
       <div id="navbar-collapse" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="../index.php">Home</a></li>
-          <li><a href="news.html">News</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="../index.html"><b>Home</b></a></li>
+          <li><a href="https://riftvalleyuniversity.org/blog/"><b>News</b></a></li>
+          <li><a href="../index.html#gallery"><b>Gallery</b></a></li>
+          <li><a href="../index.html#footer"><b>Contact</b></a></li>
         </ul>
       </div>
     </div>
@@ -257,7 +244,7 @@ if (isset($_POST['submit'])) {
                     </div>
                     <br>
                     <div class="col-12 col-sm-12 col-md-12" tabindex="7">
-                      <p style="font-weight : bold;">Already have an account ? <a href="login.php" class="text-primary">Click here to Login</a></p>
+                      <p style="font-weight : bold;">Already have an account? <a href="login.php" class="text-primary">Click here to Login</a></p>
                     </div>
                   </form>
                 </div>
@@ -276,6 +263,26 @@ if (isset($_POST['submit'])) {
     </p>
   </footer>
 
+  <!--script to control password properties-->
+  <script type="text/javascript">
+    function checkpass() {
+      var password = document.signup.password.value;
+      var repeatpassword = document.signup.repeatpassword.value;
+
+      if (password.length < 8) {
+        alert('Password should be at least 8 characters long');
+        document.signup.password.focus();
+        return false;
+      }
+
+      if (password !== repeatpassword) {
+        alert('New Password and Confirm New Password fields do not match');
+        document.signup.repeatpassword.focus();
+        return false;
+      }
+      return true;
+    }
+  </script>
   <script src="../js/scripts.min.js"></script>
   <script src="../js/main.min.js"></script>
   <script src="../js/custom.js"></script>
