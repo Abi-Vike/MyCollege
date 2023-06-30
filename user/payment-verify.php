@@ -183,8 +183,6 @@ if (isset($_GET['uid'])) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
-
 
     <style>
       #Student_ID {
@@ -497,8 +495,6 @@ if (isset($_GET['uid'])) {
     <?php //include('includes/footer.php'); 
     ?>
 
-    <!--to handle the forwarding of values to pay-ver-parser.php -->
-    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
     <script src="app-assets/vendors/js/jquery-3.6.0.min.js"></script>
     <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>

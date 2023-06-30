@@ -18,11 +18,6 @@ if (strlen($_SESSION['uid']) == 0) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/vendors/css/charts/morris.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/fonts/simple-line-icons/style.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   </head>
 
   <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">

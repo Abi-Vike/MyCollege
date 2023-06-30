@@ -16,6 +16,7 @@ if (strlen($_SESSION['uid']) == 0) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
   </head>
 
   <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">

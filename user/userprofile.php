@@ -1,6 +1,6 @@
 <?php
 session_start();
-error_reporting(1);
+error_reporting(0);
 include('includes/dbconnection.php');
 
 if (strlen($_SESSION['uid'] == 0)) {
@@ -17,25 +17,7 @@ if (strlen($_SESSION['uid'] == 0)) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
-    <style>
-      .errorWrap {
-        padding: 10px;
-        margin: 20px 0 0px 0;
-        background: #fff;
-        border-left: 4px solid #dd3d36;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-      }
-
-      .succWrap {
-        padding: 10px;
-        margin: 0 0 20px 0;
-        background: #fff;
-        border-left: 4px solid #5cb85c;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="app-assets/css/custom.css">
   </head>
 
   <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">

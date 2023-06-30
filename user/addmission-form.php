@@ -208,7 +208,7 @@ if (strlen($_SESSION['uid'] == 0)) {
       }
     }
   }
-  ?>
+?>
   <!DOCTYPE html>
   <html class="loading" lang="en" data-textdirection="ltr">
 
@@ -220,8 +220,6 @@ if (strlen($_SESSION['uid'] == 0)) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/extended/form-extended.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <style>
       .errorWrap {
         padding: 10px;
@@ -607,7 +605,8 @@ if (strlen($_SESSION['uid'] == 0)) {
                   <th>Admission Committee's Decision Date</th>
                   <td><?php echo $row_s['AdminRemarkDate']; ?></td>
                   <!-- would be better but has some issues when the value in DB is Null
-                    <td><?php //echo date('D, d-M-Y', strtotime($row_s['AdminRemarkDate'])); ?></td>
+                    <td><?php //echo date('D, d-M-Y', strtotime($row_s['AdminRemarkDate'])); 
+                        ?></td>
                   -->
                 </tr>
               </table>
@@ -1251,7 +1250,7 @@ if (strlen($_SESSION['uid'] == 0)) {
                               </fieldset>
                             </div>
                           </div>
-                          
+
                           <!--Uploaded documents validator scripts-->
                           <script>
                             const fileInputDoc1 = document.querySelector('#passport');
@@ -1487,23 +1486,6 @@ if (strlen($_SESSION['uid'] == 0)) {
       });
     </script>
 
-    <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/typeahead/typeahead.bundle.min.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/typeahead/bloodhound.min.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/typeahead/handlebars.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/inputmask/jquery.inputmask.bundle.min.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/formatter/formatter.min.js" type="text/javascript"></script>
-    <script src="../../../app-assets/vendors/js/forms/extended/maxlength/bootstrap-maxlength.js" type="text/javascript"></script>
-    <script src="app-assets/vendors/js/forms/extended/card/jquery.card.js" type="text/javascript"></script>
-    <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
-    <script src="app-assets/js/core/app.js" type="text/javascript"></script>
-    <script src="app-assets/js/scripts/customizer.js" type="text/javascript"></script>
-    <script src="app-assets/js/scripts/forms/extended/form-typeahead.js" type="text/javascript"></script>
-    <script src="app-assets/js/scripts/forms/extended/form-inputmask.js" type="text/javascript"></script>
-    <script src="app-assets/js/scripts/forms/extended/form-formatter.js" type="text/javascript"></script>
-    <script src="app-assets/js/scripts/forms/extended/form-maxlength.js" type="text/javascript"></script>
-    <script src="app-assets/js/scripts/forms/extended/form-card.js" type="text/javascript"></script>
-
     <script>
       $(document).ready(function() {
         // Hide the table by default
@@ -1519,6 +1501,12 @@ if (strlen($_SESSION['uid'] == 0)) {
         });
       });
     </script>
+
+    <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
+    <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
+    <script src="app-assets/js/core/app.js" type="text/javascript"></script>
+
+
     <script>
       // onbeforeunload function to warn the user if they try to refresh or leave the page. 
       //function myFunction() {

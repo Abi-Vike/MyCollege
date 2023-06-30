@@ -19,7 +19,7 @@ if (strlen($_SESSION['aid'] == 0)) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
   </head>
 
-  <body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+  <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
     <?php include_once('includes/header.php'); ?>
     <?php include_once('includes/leftbar.php'); ?>
 
@@ -53,7 +53,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                             }
                             ?>
                             <h4><?php echo $course_name; ?></h4>
-                            <h5 class="danger">Enrolled Students: <?php echo $std_cnt; ?></h5>
+                            <h5 class="info">Enrolled Students: <?php echo $std_cnt; ?></h5>
                           </div>
                         </div>
                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -72,6 +72,7 @@ if (strlen($_SESSION['aid'] == 0)) {
     </div>
 
     <?php include('includes/footer.php'); ?>
+    
     <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app.js" type="text/javascript"></script>
