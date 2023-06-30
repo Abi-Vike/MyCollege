@@ -213,107 +213,14 @@ if (strlen($_SESSION['uid'] == 0)) {
   <html class="loading" lang="en" data-textdirection="ltr">
 
   <head>
-    <title>Admission Form || RVU-GADA Admission Management System</title>
+    <title>RVU Gada: Student || Admission Form</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
-    <style>
-      .errorWrap {
-        padding: 10px;
-        margin: 20px 0 0px 0;
-        background: #fff;
-        border-left: 4px solid #dd3d36;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-      }
-
-      .succWrap {
-        padding: 10px;
-        margin: 0 0 20px 0;
-        background: #fff;
-        border-left: 4px solid #5cb85c;
-        -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-        box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .1);
-      }
-
-      #print-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        padding: 10px;
-        width: 100px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      #error-message {
-        color: red;
-        margin-top: -20px;
-      }
-
-      #error_message_doc1 {
-        color: red;
-        margin-top: -20px;
-        margin-bottom: 10px;
-      }
-
-      #error_message_doc2 {
-        color: red;
-        margin-top: -20px;
-        margin-bottom: 10px;
-      }
-
-      #error_message_doc3 {
-        color: red;
-        margin-top: -10px;
-        margin-bottom: 10px;
-      }
-
-      #error_message_doc4 {
-        color: red;
-        margin-top: -10px;
-        margin-bottom: 10px;
-      }
-
-      #error_message_doc5 {
-        color: red;
-        margin-top: -10px;
-        margin-bottom: 10px;
-      }
-
-      #error_message_doc6 {
-        color: red;
-        margin-top: -10px;
-        margin-bottom: 10px;
-      }
-
-      #error_message_doc7 {
-        color: red;
-        margin-top: -10px;
-        margin-bottom: 10px;
-      }
-
-      @media print {
-        body {
-          padding: 0;
-          margin-top: -90px;
-        }
-
-        #header_part,
-        #sidebar_part,
-        #footer_part,
-        #print-button,
-        .content-header {
-          display: none;
-        }
-      }
-    </style>
+    <link rel="stylesheet" type="text/css" href="app-assets/css//custom2.css">
   </head>
 
   <body onbeforeunload="return myFunction()" class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">

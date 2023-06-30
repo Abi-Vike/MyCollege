@@ -18,7 +18,7 @@ if (strlen($_SESSION['aid'] == 0)) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
     <link rel="stylesheet" type="text/css" href="app-assets/fonts/simple-line-icons/style.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/custom_css.css">
     </style>
   </head>
 

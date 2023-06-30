@@ -70,12 +70,13 @@ if (strlen($_SESSION['uid']) == 0) {
                   of 150 ETB within 20 days of you getting this email. This payment is essential for the processing of your documents
                   including the making of a student ID for the academic year.<br><br>
                   Should you have any questions or require any further assistance, please do not hesitate to reach out to our
-                  admissions office at <a style="color:coral">rvu.admissions.sup@gmail.com</a><br><br>
+                  admissions office at <a style="color:chocolate">rvu.admissions.sup@gmail.com</a><br><br>
                   We eagerly anticipate your response and look forward to welcoming you to our campus for the start of the academic
                   year. On behalf of the entire university community, the office of admissions extends warmest congratulations once again.<br><br>
                   <strong>Kind regards,<br><br>
                     Rift Valley University Admissions Office</strong>
                 </h4>
+                <br><br>
                 <div align="center">
                   <button onclick="acceptOffer()" type="submit" id="submit_button" name="submit" class="btn btn-success mx-2" style="width: 300px;">Accept Offer</button>
                   <button onclick="confirmDecline()" type="submit" id="submit_button" name="submit" class="btn btn-danger mx-2" style="width: 300px;">Decline Offer</button>
@@ -109,7 +110,7 @@ if (strlen($_SESSION['uid']) == 0) {
                   your application was not selected for the program. We will keep your application in a waiting list and if an alternative
                   opportunity becomes available, that you are qualified for, you will be contacted.<br><br>
                   Should you have any questions or require any further assistance, please do not hesitate to reach out to our
-                  admissions office at <a style="color:coral">rvu.admissions.sup@gmail.com</a><br><br>
+                  admissions office at <a style="color:chocolate">rvu.admissions.sup@gmail.com</a><br><br>
                   We wish you the very best in all your academic endeavors..<br><br>
                   <strong>Kind regards,<br><br>
                     Rift Valley University Admissions Office</strong>

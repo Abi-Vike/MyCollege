@@ -33,7 +33,6 @@ if (isset($_POST['login'])) {
 </head>
 
 <body class="vertical-layout vertical-menu 1-column  bg-cyan bg-lighten-2 menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="1-column">
-
   <nav class="navbar navbar-default probootstrap-navbar">
     <div class="container">
       <div class="navbar-header">

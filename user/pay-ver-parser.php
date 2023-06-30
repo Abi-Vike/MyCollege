@@ -1,6 +1,7 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+error_reporting(0);
 include('includes/dbconnection.php');
 
 require 'includes/PHPMailer/src/PHPMailer.php';
@@ -41,30 +42,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       // retrieve specific emails
       $emails = imap_search($inbox, 'SUBJECT "' . $subjectKeyword . '"');
       if ($emails) {
-        $count = 0; //just need to be one or more to verify payment N.B:- assuming that reference codes are uniqe 
-        echo "emails from BOA found.<br>";
-        // relevant emails found;
+        // emails from bank found
+        $count = 0; //count needs be one or more to verify payment N.B:- assuming that reference codes are uniqe 
         foreach ($emails as $emailId) {
           $emailBody = imap_body($inbox, $emailId);
-          //header("Location: ". "payment-viyyyyyeeeeeee.php?uid=".urlencode($uid));
-          //echo $emailBody;
-          //exit();
           // using stripos for case-insensitive search and applying strict comparison
-          if (stripos($emailBody, 'Transaction reference: '.$receiptCode) !== false && stripos($emailBody, $receiptDate) !== false) {
-            //header("Location: ". "payment-viyyyyy.php?uid=".urlencode($uid));
-            //exit();
-            if (stripos($emailBody, $receiptAmount)){
+          if (stripos($emailBody, 'Transaction reference: '.$receiptCode) !== false && stripos($emailBody, $receiptDate) !== false && stripos($emailBody, $receiptAmount)) {
               $count += 1;
-            }else{
-              echo "Payment found but not equal to 300 ETB.<br>";
-              // forward case to admin for manual confirmation
-            }
           }else{
-            echo "specific payment data not found.<br>";
-            //header("Location: ". "payment-viy.php?uid=".urlencode($uid));
-            //exit();
-            // problem in payment info submission or not paied
-            // forward to admin for manual confirmation
+            // unable to locate the exact payment
+            header("Location: ". "app-status.php");
+            exit();
           }
         }
         if ($count != 0) {
@@ -85,25 +73,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           }
         }else {
           // either report hasn't been mailed in or applicant hasn't paid
-          // redirect to admin for manual verification
-          // redirect user to payment-verify.php
-          header("Location: ". "payment-verihhhhhhhfy.php?uid=".urlencode($uid));
-          //instead, call payment-verify again at this point for the user.
+          header("Location: ". "app-status.php");
           exit();
         }
       } else {
-        header("Location: ". "payment-verihgvghhvfy.php?uid=".urlencode($uid));
+        header("Location: ". "error.php");
         exit();
       }
       imap_close($inbox);
     } else {
-      echo 'Failed to connect to the email server..<br>';
+      // system unable to connect to email server
+      header("Location: ". "error.php");
+      exit();
     }
   } else {
-    echo "Missing payRef or payDate values.<br>";
+    // Missing payRef or payDate values
+    header("Location: ". "app-status.php");
+    exit();
   }
 } else {
-  echo "Invalid request method.<br>";
+  header("Location: ". "error.php");
+  exit();
 }
 
 //$payRef = $_POST['pay_ref'];

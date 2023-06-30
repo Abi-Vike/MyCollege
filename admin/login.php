@@ -37,7 +37,7 @@ if (isset($_POST['login'])) {
 </head>
 
 <body class="vertical-layout vertical-menu 1-column  bg-cyan bg-lighten-2 menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="1-column">
-  <nav class="navbar navbar-default probootstrap-navbar">
+  <nav class="navbar navbar-default probootstrap-navbar" style="height:90px">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">

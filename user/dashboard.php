@@ -64,12 +64,9 @@ if (strlen($_SESSION['uid']) == 0) {
                             <div class="media-body text-left">
                               <h4 align="center">Your application has been submitted successfully and is under review !<br> Click here to see the summary of your application.</h4>
                             </div>
-                            <div>
-                              <i class="icon-file success font-large-2 float-right"></i>
-                            </div>
                           </div>
                           <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </a>
@@ -86,9 +83,6 @@ if (strlen($_SESSION['uid']) == 0) {
                               <div class="media-body text-left">
                                 <h4 align="center">Decision has been made on your application. Click here for details</h4>
                               </div>
-                              <div>
-                                <i class="icon-file success font-large-2 float-right"></i>
-                              </div>
                             </div>
                             <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
                               <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -103,9 +97,6 @@ if (strlen($_SESSION['uid']) == 0) {
                                 <div class="media-body text-left">
                                   <h4 align="center">Registration Successful</h4>
                                 </div>
-                                <div>
-                                  <i class="icon-file success font-large-2 float-right"></i>
-                                </div>
                               </div>
                               <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
                                 <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -115,9 +106,6 @@ if (strlen($_SESSION['uid']) == 0) {
                               <div class="media d-flex">
                                 <div class="media-body text-left">
                                   <h4 align="center">Continue to Registration</h4>
-                                </div>
-                                <div>
-                                  <i class="icon-file success font-large-2 float-right"></i>
                                 </div>
                               </div>
                               <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -138,9 +126,6 @@ if (strlen($_SESSION['uid']) == 0) {
                             <div class="media-body text-left">
                               <h4 align="center">Decision has been made on your application. Click here for details</h4>
                             </div>
-                            <div>
-                              <i class="icon-file success font-large-2 float-right"></i>
-                            </div>
                           </div>
                           <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
                             <div class="progress-bar bg-gradient-x-purple" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
@@ -157,7 +142,7 @@ if (strlen($_SESSION['uid']) == 0) {
             if ($adsts == "") { ?>
               <div><br><br></div>
               <div class="text-center">
-                <button type="submit" id="submit_button" name="submit" class="btn btn-primary" onclick="confirmWithdrawal()">Withdraw Application</button>
+                <button type="submit" id="submit_button" name="submit" class="btn btn-warning" onclick="confirmWithdrawal()">Withdraw Application</button>
               </div>
             <?php
             } ?>
@@ -175,9 +160,6 @@ if (strlen($_SESSION['uid']) == 0) {
                           <div class="media d-flex">
                             <div class="media-body text-left">
                               <h4 align="center">Student Portal</h4>
-                            </div>
-                            <div>
-                              <i class="icon-file success font-large-2 float-right"></i>
                             </div>
                           </div>
                           <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
@@ -203,9 +185,8 @@ if (strlen($_SESSION['uid']) == 0) {
                             <h4 align="center">Click here to fill an admission application form.</h4>
                           </div>
                         </div>
-
                         <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                          <div class="progress-bar bg-gradient-x-danger" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                       </div>
                     </a>
