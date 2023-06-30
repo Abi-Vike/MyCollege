@@ -7,8 +7,8 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
 } else {
 
   if (isset($_POST['submit'])) {
-    $coursename = $_POST['coursename'];
-
+    // input needs sanitization before injection into table    
+    $coursename = mysqli_real_escape_string($con, $_POST['coursename']);
     $query = mysqli_query($con, "insert into  tblcourse(CourseName) value('$coursename')");
     if ($query) {
       $msg = "Course has been added.";

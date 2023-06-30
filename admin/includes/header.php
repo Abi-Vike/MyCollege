@@ -37,10 +37,11 @@
           </li>
 
           <?php
+          // Not so well developed Notification Concept here
           $notification_count = mysqli_query($con, "SELECT tbladmapplications.UserId as appid, tbluser.FirstName, tbladmapplications.CourseApplieddate from tbladmapplications join tbluser on tbluser.ID=tbladmapplications.UserId where tbladmapplications.AdminStatus is null");
           $num = mysqli_num_rows($notification_count);
           ?>
-
+          <!--
           <li class="dropdown dropdown-notification nav-item">
             <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
               <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">
@@ -70,12 +71,11 @@
                     </div>
                   </a>
                 <?php } ?>
-
-
               </li>
-
             </ul>
           </li>
+          -->
+          
 
         </ul>
       </div>

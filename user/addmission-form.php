@@ -12,76 +12,77 @@ if (strlen($_SESSION['uid'] == 0)) {
     $admissionType = $_POST['admissionType'];
 
     // personal information
-    $firstname = $_POST['firstname'];
-    $middlename = $_POST['middlename'];
-    $lastname = $_POST['lastname'];
-    $nationality = $_POST['nationality'];
-
+    // sanitizing user inputs for errors and basic sql injection prevention
+    $firstname = mysqli_real_escape_string($con, $_POST['firstname']);
+    $middlename = mysqli_real_escape_string($con, $_POST['middlename']);
+    $lastname = mysqli_real_escape_string($con, $_POST['lastname']);
+    $nationality = mysqli_real_escape_string($con, $_POST['nationality']);
+    
     $dobGregorian = $_POST['dobGregorian'];
     $dobEthiopian = $_POST['dobEthiopian'];
     $gender = $_POST['gender'];
     $upic = $_FILES["userpic"]["name"];
 
-    $cobirth = $_POST['cobirth'];
-    $pobtown = $_POST['pobtown'];
-    $pobworeda = $_POST['pobworeda'];
-    $pobkebele = $_POST['pobkebele'];
+    $cobirth = mysqli_real_escape_string($con, $_POST['cobirth']);
+    $pobtown = mysqli_real_escape_string($con, $_POST['pobtown']);
+    $pobworeda = mysqli_real_escape_string($con, $_POST['pobworeda']);
+    $pobkebele = mysqli_real_escape_string($con, $_POST['pobkebele']);
 
     // father's information
-    $ffirstname = $_POST['ffirstname'];
-    $fmiddlename = $_POST['fmiddlename'];
-    $flastname = $_POST['flastname'];
+    $ffirstname = mysqli_real_escape_string($con, $_POST['ffirstname']);
+    $fmiddlename = mysqli_real_escape_string($con, $_POST['fmiddlename']);
+    $flastname = mysqli_real_escape_string($con, $_POST['flastname']);
 
     // mother's information
-    $mfirstname = $_POST['mfirstname'];
-    $mmiddlename = $_POST['mmiddlename'];
-    $mlastname = $_POST['mlastname'];
+    $mfirstname = mysqli_real_escape_string($con, $_POST['mfirstname']);
+    $mmiddlename = mysqli_real_escape_string($con, $_POST['mmiddlename']);
+    $mlastname = mysqli_real_escape_string($con, $_POST['mlastname']);
 
     // residence and contact
-    $restown = $_POST['restown'];
-    $resworeda = $_POST['resworeda'];
-    $reskebele = $_POST['reskebele'];
-    $reshouse = $_POST['reshouse'];
+    $restown = mysqli_real_escape_string($con, $_POST['restown']);
+    $resworeda = mysqli_real_escape_string($con, $_POST['resworeda']);
+    $reskebele = mysqli_real_escape_string($con, $_POST['reskebele']);
+    $reshouse = mysqli_real_escape_string($con, $_POST['reshouse']);
 
-    $phone1 = $_POST['phone1'];
-    $phone2 = $_POST['phone2'];
+    $phone1 = mysqli_real_escape_string($con, $_POST['phone1']);
+    $phone2 = mysqli_real_escape_string($con, $_POST['phone2']);
     $marital = $_POST['marital'];
 
-    $emename = $_POST['emename'];
-    $emephone = $_POST['emephone'];
-    $emetown = $_POST['emetown'];
+    $emename = mysqli_real_escape_string($con, $_POST['emename']);
+    $emephone = mysqli_real_escape_string($con, $_POST['emephone']);
+    $emetown = mysqli_real_escape_string($con, $_POST['emetown']);
     $emerelation = $_POST['emerelation'];
 
     // educational background
-    $sch_name_1 = $_POST['sch_name_1'];
-    $sch_town_1 = $_POST['sch_town_1'];
-    $sch_year_1 = $_POST['sch_year_1'];
-    $sch_stream_1 = $_POST['sch_stream_1'];
+    $sch_name_1 = mysqli_real_escape_string($con, $_POST['sch_name_1']);
+    $sch_town_1 = mysqli_real_escape_string($con, $_POST['sch_town_1']);
+    $sch_year_1 = mysqli_real_escape_string($con, $_POST['sch_year_1']);
+    $sch_stream_1 = mysqli_real_escape_string($con, $_POST['sch_stream_1']);
+    
+    $sch_name_2 = mysqli_real_escape_string($con, $_POST['sch_name_2']);
+    $sch_town_2 = mysqli_real_escape_string($con, $_POST['sch_town_2']);
+    $sch_year_2 = mysqli_real_escape_string($con, $_POST['sch_year_2']);
+    $sch_stream_2 = mysqli_real_escape_string($con, $_POST['sch_stream_2']);
+    
+    $sch_name_3 = mysqli_real_escape_string($con, $_POST['sch_name_3']);
+    $sch_town_3 = mysqli_real_escape_string($con, $_POST['sch_town_3']);
+    $sch_year_3 = mysqli_real_escape_string($con, $_POST['sch_year_3']);
+    $sch_stream_3 = mysqli_real_escape_string($con, $_POST['sch_stream_3']);
 
-    $sch_name_2 = $_POST['sch_name_2'];
-    $sch_town_2 = $_POST['sch_town_2'];
-    $sch_year_2 = $_POST['sch_year_2'];
-    $sch_stream_2 = $_POST['sch_stream_2'];
+    $ins_name_1 = mysqli_real_escape_string($con, $_POST['ins_name_1']);
+    $ins_country_1 = mysqli_real_escape_string($con, $_POST['ins_country_1']);
+    $ins_year_1 = mysqli_real_escape_string($con, $_POST['ins_year_1']);
+    $ins_major_1 = mysqli_real_escape_string($con, $_POST['ins_major_1']);
 
-    $sch_name_3 = $_POST['sch_name_3'];
-    $sch_town_3 = $_POST['sch_town_3'];
-    $sch_year_3 = $_POST['sch_year_3'];
-    $sch_stream_3 = $_POST['sch_stream_3'];
+    $ins_name_2 = mysqli_real_escape_string($con, $_POST['ins_name_1']);
+    $ins_country_2 = mysqli_real_escape_string($con, $_POST['ins_country_2']);
+    $ins_year_2 = mysqli_real_escape_string($con, $_POST['ins_year_2']);
+    $ins_major_2 = mysqli_real_escape_string($con, $_POST['ins_major_2']);
 
-    $ins_name_1 = $_POST['ins_name_1'];
-    $ins_country_1 = $_POST['ins_country_1'];
-    $ins_year_1 = $_POST['ins_year_1'];
-    $ins_major_1 = $_POST['ins_major_1'];
-
-    $ins_name_2 = $_POST['ins_name_1'];
-    $ins_country_2 = $_POST['ins_country_2'];
-    $ins_year_2 = $_POST['ins_year_2'];
-    $ins_major_2 = $_POST['ins_major_2'];
-
-    $ins_name_3 = $_POST['ins_name_3'];
-    $ins_country_3 = $_POST['ins_country_3'];
-    $ins_year_3 = $_POST['ins_year_3'];
-    $ins_major_3 = $_POST['ins_major_3'];
+    $ins_name_3 = mysqli_real_escape_string($con, $_POST['ins_name_3']);
+    $ins_country_3 = mysqli_real_escape_string($con, $_POST['ins_country_3']);
+    $ins_year_3 = mysqli_real_escape_string($con, $_POST['ins_year_3']);
+    $ins_major_3 = mysqli_real_escape_string($con, $_POST['ins_major_3']);
 
     $passport = $_FILES["passport"]["name"];
     $highSchool_transcript = $_FILES["highSchool_trans"]["name"];
@@ -101,7 +102,7 @@ if (strlen($_SESSION['uid'] == 0)) {
     $extension_additional_documents = substr($additional_documents, strlen($additional_documents) - 4, strlen($additional_documents));
 
     $dec = $_POST['declaration'];
-    $sign = $_POST['signature'];
+    $sign = mysqli_real_escape_string($con, $_POST['signature']);
 
     // allowed extensions for docs and applicant pic
     $allowed_extensions_pic = array(".jpg", ".png", ".jpeg", ".gif");
