@@ -1,6 +1,6 @@
 <?php
-//error_reporting(E_ALL);
-//ini_set('display_errors', 1);
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 error_reporting(0);
 include('includes/dbconnection.php');
 
@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // date needes to be formatted from Y-m-d to d/m/y for search convenience 
     $formattedPayDate = date('d/m/Y', strtotime($payDate));
 
-    echo $payRef."<br>";
-    echo $formattedPayDate."<br>";
+    echo $payRef . "<br>";
+    echo $formattedPayDate . "<br>";
 
     $mail = new PHPMailer();
     $emailHost = '{imap.gmail.com:993/ssl}';
@@ -37,23 +37,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $subjectKeyword = 'Fwd: Transaction Alert - BoA';
       $receiptCode = $payRef;
       $receiptDate = $formattedPayDate;
-      $receiptAmount = 'Amount: ETB 100.00';
+      $receiptAmount = 'Amount: ETB 300.00';
 
       // retrieve specific emails
       $emails = imap_search($inbox, 'SUBJECT "' . $subjectKeyword . '"');
       if ($emails) {
-        // emails from bank found
-        $count = 0; //count needs be one or more to verify payment N.B:- assuming that reference codes are uniqe 
+        $count = 0; //just need to be one or more to verify payment N.B:- assuming that reference codes are uniqe 
+        echo "emails from BOA found.<br>";
+        // relevant emails found;
         foreach ($emails as $emailId) {
           $emailBody = imap_body($inbox, $emailId);
           // using stripos for case-insensitive search and applying strict comparison
-          if (stripos($emailBody, 'Transaction reference: '.$receiptCode) !== false && stripos($emailBody, $receiptDate) !== false && stripos($emailBody, $receiptAmount)) {
+          if (stripos($emailBody, 'Transaction reference: ' . $receiptCode) !== false && stripos($emailBody, $receiptDate) !== false && (stripos($emailBody, $receiptAmount)) !== false) {
               $count += 1;
-          }else{
-            // unable to locate the exact payment
-            header("Location: ". "app-status.php");
-            exit();
-          }
+          } 
         }
         if ($count != 0) {
           // send email notifcation to user
@@ -64,35 +61,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $query_pay = mysqli_query($con, "UPDATE tblpayments SET Pay_Confirmed = 'verified' WHERE Payer_ID = '$uid'");
           $query_reg = mysqli_query($con, "INSERT INTO tblregistered (Reg_User_ID, Reg_Course) VALUES ('$uid', '$course')");
 
-          if ($query_pay && $query_reg){
-            header("Location: ". "payment-verify.php?uid=".urlencode($uid));
+          if ($query_pay && $query_reg) {
+            header("Location: ". "app-status.php");
+            //echo "Eureka - done<br>";
             exit();
-          }else{
-            header("Location: ". "payment-verify.php?uid=".urlencode($uid));
+          } else {
+            header("Location: ". "app-status.php");
+            //echo "query failed<br>";
             exit();
           }
-        }else {
+        } else {
           // either report hasn't been mailed in or applicant hasn't paid
           header("Location: ". "app-status.php");
-          exit();
+          //echo "count not greater zan 0<br>";
+          //exit();
         }
       } else {
         header("Location: ". "error.php");
+        //echo "emails with the subject not found<br>";
         exit();
       }
-      imap_close($inbox);
+      //imap_close($inbox);
     } else {
       // system unable to connect to email server
-      header("Location: ". "error.php");
+      header("Location: " . "error.php");
       exit();
     }
   } else {
     // Missing payRef or payDate values
-    header("Location: ". "app-status.php");
+    header("Location: " . "app-status.php");
     exit();
   }
 } else {
-  header("Location: ". "error.php");
+  header("Location: " . "error.php");
   exit();
 }
 

@@ -15,8 +15,8 @@ use phpMailer\PHPMailer\SMTP;
 if (isset($_GET['uid'])) {
   $uid = $_GET['uid'];
   // extract out info from tbladmapplications and tblregistered
-  $ret = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE UserId = '$uid'");
-  $ret2 = mysqli_query($con, "SELECT * FROM tblregistered WHERE Reg_User_ID = '$uid'");
+  $ret = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE UserId = $uid");
+  $ret2 = mysqli_query($con, "SELECT * FROM tblregistered WHERE Reg_User_ID = $uid");
   $row2 = mysqli_fetch_array($ret2);
 
   // ID card generator starts here
@@ -113,77 +113,286 @@ if (isset($_GET['uid'])) {
       $payDate = $_POST['pay_date'];
       $payPic = $_FILES["pay_pic"]["name"];
 
-      // check if reference number was already used
-      $check_ref = mysqli_query($con, "SELECT Payer_ID FROM tblpayments WHERE Pay_Ref = '$payRef'");
-      if ($row_id = mysqli_fetch_assoc($check_ref)) {
-        // reference number already in db
-        $payer_id = $row_id['Payer_ID'];
-        if ($payer_id != $uid) {
-          // different user trying with the same reference number
-          $alertMessage = "The receipt reference you entered was already used by another user. \nPlease use a new receipt reference.";
-          $redirectUrl = "register.php?uid=" . urlencode($uid);
-          // using json encoding here as I couldn't work right with the inline script echoing.
-          echo "<script>
-                  alert(" . json_encode($alertMessage) . ");
-                  window.location.href = " . json_encode($redirectUrl) . ";
-                </script>";
-          exit();
-        } else {
-          // reference was once used by the same applicant
-          $alertMessage = "You have already once used the receipt reference. \nPlease use a new receipt reference or contact the office if you think this is a mistake.";
-          $redirectUrl = "register.php?uid=" . urlencode($uid);
-          // using json encoding here as I couldn't work right with the inline script echoing.
-          echo "<script>
-                  alert(" . json_encode($alertMessage) . ");
-                  window.location.href = " . json_encode($redirectUrl) . ";
-                </script>";
-          exit();
-        }
+      // image file validation
+      $extension_pic = substr($payPic, strlen($payPic) - 4, strlen($payPic));
+      $allowed_ext_pic = array(".jpg", ".png", ".jpeg", ".gif");
+      if (!in_array($extension_pic, $allowed_ext_pic)) {
+        echo "<script>alert('Invalid format. Only image files are allowed');</script>";
       } else {
-        // new reference has been issued
-        // image file validation
-        $extension_pic = substr($payPic, strlen($payPic) - 4, strlen($payPic));
-        $allowed_ext_pic = array(".jpg", ".png", ".jpeg", ".gif");
-        if (!in_array($extension_pic, $allowed_ext_pic)) {
-          echo "<script>alert('Invalid format. Only image files are allowed');</script>";
-        } else {
-          $return_app_id = mysqli_query($con, "SELECT ID FROM tbladmapplications WHERE UserId = '$uid'");
-          $row_id = mysqli_fetch_array($ret);
-          $app_id = $row_id['ID'];
+        //$return_app_id = mysqli_query($con, "SELECT ID FROM tbladmapplications WHERE UserId = $uid");
+        $id = mysqli_fetch_array($ret);
+        $app_id = $id['ID'];
 
-          $pay_receipt = $name . "_" . "receipt" .  "_" . md5($payPic) . $extension_pic;
-          move_uploaded_file($_FILES["pay_pic"]["tmp_name"], "userimages/payments/" . $pay_receipt);
-          // now the system can push the data into tblpayments
-          $query_pay = mysqli_query($con, "INSERT INTO tblpayments (Application_ID, Payer_ID, Payer_Name, Pay_Ref, Pay_Date, Pay_Receipt)
+        $pay_receipt = $app_id . "_" . "receipt" . "_" . md5($payPic) . $extension_pic;
+        move_uploaded_file($_FILES["pay_pic"]["tmp_name"], "userimages/payments/" . $pay_receipt);
+        // now the system can push the data into tblpayments
+        $query_pay = mysqli_query($con, "INSERT INTO tblpayments (Application_ID, Payer_ID, Payer_Name, Pay_Ref, Pay_Date, Pay_Receipt)
                   VALUES('$app_id', '$uid', '$name', '$payRef', '$payDate', '$pay_receipt')");
-          $query_adm = mysqli_query($con, "UPDATE tbladmissions SET Adm_Payment_Status = 'paid', Adm_Pay_Date = CURRENT_TIMESTAMP WHERE Adm_App_ID = '$app_id'");
+        $query_adm = mysqli_query($con, "UPDATE tbladmissions SET Adm_Payment_Status = 'paid', Adm_Pay_Date = CURRENT_TIMESTAMP WHERE Adm_App_ID = '$app_id'");
 
-          if ($query_pay && $query_adm) {
-            // Create a hidden form and submit it dynamically
-            echo '<form id="hiddenForm" action="pay-ver-parser.php" method="post">';
-            echo  '<input type="hidden" name="payRef" value="' . $payRef . '">';
-            echo  '<input type="hidden" name="payDate" value="' . $payDate . '">';
-            echo  '<input type="hidden" name="uid" value="' . $uid . '">';
-            echo '</form>';
-            echo '<script>document.getElementById("hiddenForm").submit();</script>';
-          }
+        if ($query_pay && $query_adm) {
+          // Create a hidden form and submit it dynamically
+          echo '<form id="hiddenForm" action="pay-ver-parser.php" method="post">';
+          echo  '<input type="hidden" name="payRef" value="' . $payRef . '">';
+          echo  '<input type="hidden" name="payDate" value="' . $payDate . '">';
+          echo  '<input type="hidden" name="uid" value="' . $uid . '">';
+          echo '</form>';
+          echo '<script>document.getElementById("hiddenForm").submit();</script>';
         }
       }
     }
     //$query = mysqli_query($con, "");  
   }
-?>
+ ?>
   <!DOCTYPE html>
   <html class="loading" lang="en" data-textdirection="ltr">
 
   <head>
-    <title>RVU-GADA : Student || Payment Verification</title>
+    <title>RVU-GADA : Student || Registration</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/custom2.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
+
+    <style>
+      #Student_ID {
+        border: 2px solid brown;
+        /* Style the element to be printed */
+      }
+
+      .lavkush img {
+        border-radius: 8px;
+        border: 2px solid blue;
+      }
+
+      span {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 16px;
+      }
+
+      hr.new2 {
+        border-top: 1px dashed black;
+        width: 350px;
+        text-align: left;
+        align-items: left;
+      }
+
+      p {
+        font-size: 13px;
+        margin-top: -5px;
+      }
+
+      .container-0 {
+        width: 450px;
+        height: 295px;
+        margin: auto;
+        background-color: white;
+        box-shadow: 0 1px 10px rgb(146 161 176 / 50%);
+        overflow: hidden;
+        border-radius: 10px;
+      }
+
+      .header {
+        /* border: 2px solid black; */
+        width: 98%;
+        height: 50px;
+        margin: 3px auto;
+        background-color: white;
+        border-radius: 8px;
+        /* box-shadow: 0 1px 10px rgb(146 161 176 / 50%); */
+        /* border-radius: 10px; */
+        background-image: url(../images/rvu-poster.png);
+        overflow: hidden;
+        background-size: cover;
+        /* font-family: 'Poppins', sans-serif; */
+      }
+
+      .header h1 {
+        color: rgb(27, 27, 49);
+        text-align: right;
+        margin-right: 20px;
+        margin-top: 15px;
+      }
+
+      .header p {
+        color: rgb(157, 51, 0);
+        text-align: right;
+        margin-right: 22px;
+        margin-top: -10px;
+      }
+
+      .container-2 {
+        /* border: 2px solid red; */
+        width: 100%;
+        height: 40%;
+        margin: 0px auto;
+        margin-top: -20px;
+        display: flex;
+      }
+
+      .box-1 {
+        border: 1px solid black;
+        width: 30%;
+        height: 122px;
+        margin: -20px 15px;
+        border-radius: 3px;
+      }
+
+      .box-1 img {
+        width: 115px;
+        height: 120px;
+        border-radius: 3px;
+      }
+
+      .box-2 {
+        /* border: 2px solid purple; */
+        width: 75%;
+        height: 8vh;
+        margin: 25px 5px;
+        padding: 5px 7px 0px 0px;
+        text-align: left;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      .box-2 h2 {
+        font-size: 1.3rem;
+        margin-top: 0px;
+        color: rgb(27, 27, 49);
+      }
+
+      .box-2 p {
+        font-size: 0.7rem;
+        margin-top: -5px;
+        color: rgb(179, 116, 0);
+      }
+
+      .container-3 {
+        /* border: 2px solid rgb(111, 2, 161); */
+        width: 100%;
+        height: 50%;
+        margin: 0px auto;
+        margin-top: -5px;
+        display: flex;
+        font-family: 'Shippori Antique B1', sans-serif;
+        font-size: 0.7rem;
+      }
+
+      .info-1 {
+        /* border: 1px solid rgb(255, 38, 0); */
+        width: 40%;
+        height: 100%;
+        margin-left: 15px;
+        text-align: left;
+      }
+
+      .id {
+        /* border: 1px solid rgb(2, 92, 17); */
+        width: 17vh;
+        height: 30%;
+        margin: 4px 0px 0px 0px;
+      }
+
+      .id h4 {
+        color: rgb(179, 116, 0);
+        font-size: 15px;
+      }
+
+      .department {
+        /* border: 1px solid rgb(0, 46, 105); */
+        width: 17vh;
+        height: 30%;
+        margin: 4px 0px 0px 0px;
+      }
+
+      .department h4 {
+        color: rgb(179, 116, 0);
+        font-size: 15px;
+      }
+
+      .modality {
+        /* border: 1px solid rgb(0, 46, 105); */
+        width: 17vh;
+        height: 30%;
+        margin: 4px 0px 0px 0px;
+      }
+
+      .modality h4 {
+        color: rgb(179, 116, 0);
+        font-size: 15px;
+      }
+
+      .info-2 {
+        /* border: 1px solid rgb(4, 0, 59); */
+        width: 35%;
+        height: 100%;
+        margin: 0px;
+      }
+
+      .join-date {
+        /* border: 1px solid rgb(2, 92, 17); */
+        width: 17vh;
+        height: 30%;
+        margin: 4px 0px 0px 0px;
+      }
+
+      .join-date h4 {
+        color: rgb(179, 116, 0);
+        font-size: 15px;
+      }
+
+      .expire {
+        /* border: 1px solid rgb(0, 46, 105); */
+        width: 17vh;
+        height: 30%;
+        margin: 4px 0px 0px 0px;
+      }
+
+      .expire h4 {
+        color: rgb(179, 116, 0);
+        font-size: 15px;
+      }
+
+      .campus {
+        /* border: 1px solid rgb(0, 46, 105); */
+        width: 17vh;
+        height: 30%;
+        margin: 4px 0px 0px 0px;
+      }
+
+      .campus h4 {
+        color: rgb(179, 116, 0);
+        font-size: 15px;
+      }
+
+      .info-4 {
+        /* border: 2px solid rgb(255, 38, 0); */
+        width: 25%;
+        height: 100%;
+        margin-right: 10px;
+      }
+
+      .phone h4 {
+        color: rgb(179, 116, 0);
+        font-size: 15px;
+      }
+
+      .sign {
+        /* border: 1px solid rgb(0, 46, 105); */
+        width: auto;
+        height: 5vh;
+        margin: 10px 0px 0px 20px;
+        text-align: center;
+      }
+
+      #footer_part {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
   </head>
 
   <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
@@ -208,7 +417,7 @@ if (isset($_GET['uid'])) {
             $R_User = $row['Reg_User_ID'];
             $R_Course = $row['Reg_Course'];
             $R_Date = $row['Reg_date'];
-            ?>
+          ?>
             <div class="row">
               <div class="col-xl-12 col-lg-12 col-12">
                 <div class="card pull-up">
@@ -247,7 +456,7 @@ if (isset($_GET['uid'])) {
               We are pleased to learn that you have reached the last phase of your enrollement in our University.<br><br>
               We will process your payment as fast as possible and let you know of the outcome soon.<br><br>
               Should you require any further information or in case you have submitted wrong payment details,
-              you can reach us at <a style="color:chocolate">rvu.admissions.sup@gmail.com</a><br><br>
+              you can reach us at <a style="color:coral">rvu.admissions.sup@gmail.com</a><br><br>
               <strong>Kind regards,<br><br>
                 Rift Valley University Admissions Office
               </strong>
@@ -259,13 +468,11 @@ if (isset($_GET['uid'])) {
     <?php //include('includes/footer.php'); 
     ?>
 
+    <!--to handle the forwarding of values to pay-ver-parser.php -->
+    <!--<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>-->
     <script src="app-assets/vendors/js/jquery-3.6.0.min.js"></script>
     <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app.js" type="text/javascript"></script>
   </body>
-<?php
-} else {
-  header('location:error.php');
-}
-?>
+<?php } ?>

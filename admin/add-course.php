@@ -18,7 +18,7 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
       echo '<script>alert("Something Went Wrong. Please try again.")</script>';
     }
   }
-?>
+  ?>
   <!DOCTYPE html>
   <html class="loading" lang="en" data-textdirection="ltr">
 

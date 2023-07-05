@@ -506,10 +506,6 @@ if (strlen($_SESSION['uid'] == 0)) {
                       ?></td>
                 </tr>
                 <tr>
-                  <th>Admission Committee's Remark</th>
-                  <td><?php echo $row_s['AdminRemark']; ?></td>
-                </tr>
-                <tr>
                   <th>Admission Committee's Decision Date</th>
                   <td><?php echo $row_s['AdminRemarkDate']; ?></td>
                   <!-- would be better but has some issues when the value in DB is Null
