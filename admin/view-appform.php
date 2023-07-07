@@ -351,7 +351,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                 </tr>
                 <tr>
                   <th>10th Grade National Examination Report</th>
-                  <td><a href="../user/userdocs/<?php echo $rw['TenthCertificate']; ?>" target="_blank">View File </a></td>
+                  <td style="color:"><a href="../user/userdocs/<?php echo $rw['TenthCertificate']; ?>" target="_blank">View File </a></td>
                 </tr>
                 <tr>
                   <th>12th Grade National Examination Report</th>

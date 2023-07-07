@@ -20,7 +20,8 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/plugins/forms/extended/form-extended.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/custom_css.css">
+
 
     <style>
       table {
@@ -56,6 +57,7 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
         #header_part,
         #sidebar_part,
         #footer_part,
+        #last_col,
         #print-button,
         .breadcrumb-wrapper {
           display: none;
@@ -116,12 +118,11 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
                 </ol>
               </div>
             </div>
-            
+
           </div>
         </div>
         <div class="row">
-        <button id="print-button" class="btn btn-info" onclick="window.print()">Print</button>
-
+          <button id="print-button" class="btn btn-info" onclick="window.print()">Print</button>
         </div>
 
         <div class="content-body">
@@ -136,6 +137,7 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
                 <th>Full Name</th>
                 <th>Contact Number</th>
                 <th>Program Type</th>
+                <th id='last_col'></th>
               </tr>
             </thead>
             <?php
@@ -143,7 +145,7 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
             $cnt = 1;
 
             while ($row = mysqli_fetch_array($ret_std)) {
-              // retreive the registered user's user-ID 
+              // retreive the registered user's user-ID
               $reg_user_id = $row['Reg_User_ID'];
 
               $ret_std_info = mysqli_query($con, "SELECT * FROM tbladmapplications WHERE UserId = '$reg_user_id'");
@@ -155,6 +157,7 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
                 <td><?php echo $row2['FirstName'] . ' - ' . $row2['MiddleName'] . ' - ' . $row2['LastName']; ?></td>
                 <td><?php echo $row2['PhoneNumber']; ?></td>
                 <td><?php echo $row2['AdmissionType']; ?></td>
+                <td id='last_col'><a href='student_ID.php?uid=<?php echo $reg_user_id; ?>'><button class="btn btn-primary cust_but" name="verify-button">View ID</button></a></td>
               </tr>
             <?php
               $cnt = $cnt + 1;

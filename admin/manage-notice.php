@@ -72,7 +72,7 @@ if (strlen($_SESSION['aid'] == 0)) {
                   </a>
                 </td>
                 <td>
-                  <a href="manage-notice.php?delnotid=<?php echo $row['ID']; ?>" title="Delete Announcement" onClick="return confirm('Are you sure you want to delete this announcement?');">
+                  <a class="text-danger" href="manage-notice.php?delnotid=<?php echo $row['ID']; ?>" title="Delete Announcement" onClick="return confirm('Are you sure you want to delete this announcement?');">
                     Delete
                   </a>
                 </td>

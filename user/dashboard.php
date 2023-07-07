@@ -93,14 +93,16 @@ if (strlen($_SESSION['uid']) == 0) {
                             if (mysqli_fetch_array($reg)) {
                               // payment verified
                             ?>
-                              <div class="media d-flex">
-                                <div class="media-body text-left">
-                                  <h4 align="center">Registration Successful</h4>
+                              <a href="pay-cond.php">
+                                <div class="media d-flex">
+                                  <div class="media-body text-left">
+                                    <h4 align="center">Registration Successful</h4>
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                                <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                              </div>
+                                <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
+                                  <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                              </a>
                             <?php
                             } else { ?>
                               <div class="media d-flex">
@@ -155,7 +157,7 @@ if (strlen($_SESSION['uid']) == 0) {
                 <div class="col-xl-12 col-lg-12 col-12">
                   <div class="card pull-up">
                     <div class="card-content">
-                      <a href="St-Portal.php">
+                      <a href="student-portal.php">
                         <div class="card-body">
                           <div class="media d-flex">
                             <div class="media-body text-left">
