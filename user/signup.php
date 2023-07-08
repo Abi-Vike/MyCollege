@@ -21,7 +21,7 @@ $output = exec($command);
 
 // Check if ngrok is running
 if (strpos($output, 'ngrok.exe') !== false) {
-  echo '*temp-info* An ngrok session is running, ';
+  //echo '*temp-info* An ngrok session is running, ';
   // code to extract the ngrok generated url if exists
   // Define the ngrok API endpoint
   $apiEndpoint = 'http://localhost:4040/api/tunnels';
@@ -39,7 +39,7 @@ if (strpos($output, 'ngrok.exe') !== false) {
   $url = $tunnel['public_url'];
   echo 'URL: ', $url;
 } else {
-  echo '*temp-info* No ngrok session is running!';
+  //echo '*temp-info* No ngrok session is running!';
 }
 
 // when user clicks register / signup
@@ -137,8 +137,8 @@ if (isset($_POST['submit'])) {
 
 <head>
 
-  <title>RVU-GADA : Student || Signup
-  </title>
+  <title>RVU-GADA : Student || Signup </title>
+  <link rel="icon" type="image/png" href="../img/RVU-logo.png">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles-merged.css">
   <link rel="stylesheet" href="../css/style.min.css">

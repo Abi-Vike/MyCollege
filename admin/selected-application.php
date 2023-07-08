@@ -10,7 +10,8 @@ if (strlen($_SESSION['aid']==0)) {    // was ==0
     <!DOCTYPE html>
     <html class="loading" lang="en" data-textdirection="ltr">
     <head>
-      <title>Gada AMS || Accepted Applications</title>
+      <title>RVU Gada: Admin || Accepted Applications</title>
+      <link rel="icon" type="image/png" href="../img/RVU-logo.png">
       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
       <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
       <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">

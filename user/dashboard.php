@@ -11,6 +11,7 @@ if (strlen($_SESSION['uid']) == 0) {
 
   <head>
     <title>RVU-GADA : Student || Dashboard</title>
+    <link rel="icon" type="image/png" href="../img/RVU-logo.png">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
@@ -161,11 +162,11 @@ if (strlen($_SESSION['uid']) == 0) {
                         <div class="card-body">
                           <div class="media d-flex">
                             <div class="media-body text-left">
-                              <h4 align="center">Student Portal</h4>
+                              <h4 align="center">Announcements and Info</h4>
                             </div>
                           </div>
                           <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
-                            <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 100%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                       </a>

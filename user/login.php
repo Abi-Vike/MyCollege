@@ -26,6 +26,7 @@ if (isset($_POST['login'])) {
 
 <head>
   <title>RVU-GADA : Student || Login</title>
+  <link rel="icon" type="image/png" href="../img/RVU-logo.png">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700|Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="../css/styles-merged.css">
   <link rel="stylesheet" href="../css/style.min.css">
