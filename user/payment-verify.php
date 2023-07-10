@@ -143,7 +143,7 @@ if (isset($_GET['uid'])) {
     }
     //$query = mysqli_query($con, "");  
   }
- ?>
+?>
   <!DOCTYPE html>
   <html class="loading" lang="en" data-textdirection="ltr">
 
@@ -155,7 +155,7 @@ if (isset($_GET['uid'])) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/vendors.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css/custom_ID.css">    
+    <link rel="stylesheet" type="text/css" href="app-assets/css/custom_ID.css">
   </head>
 
   <body class="vertical-layout vertical-menu-modern 2-columns menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
@@ -204,6 +204,10 @@ if (isset($_GET['uid'])) {
                 </div>
                 <hr>
                 <h3><b>An ID will be issued to you on reporting to the university</b></h3>
+                <br><br><br>
+                <div class="text-center">
+                  <a href="dashboard.php"><button type="submit" name="submit" class="btn btn-primary mx-2" style="width: 300px;">Back to Dashboard</button></a>
+                </div>
               </div>
             </div>
 

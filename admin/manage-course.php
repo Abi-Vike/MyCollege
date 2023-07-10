@@ -8,7 +8,7 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
   //code for deletion
   if (isset($_GET['delid'])) {
     $rowid = $_GET['delid'];
-    $query = mysqli_query($con, "delete from tblcourse where ID='$rowid'");
+    $query = mysqli_query($con, "DELETE FROM tblcourse WHERE ID='$rowid'");
     echo "<script>alert('Course Deleted successfully');</script>";
     echo "<script>window.location.href='manage-course.php'</script>";
   }
@@ -76,15 +76,15 @@ if (strlen($_SESSION['aid'] == 0)) {    // was ==0
               // number of students enrolled in each course
               $std_cnt = 0;
               $std = mysqli_query($con, "SELECT Reg_ID FROM tblregistered WHERE Reg_Course = '$course_name'");
-              while ($row = mysqli_fetch_array($std)) {
+              while (mysqli_fetch_array($std)) {
                 $std_cnt += 1;
               } ?>
               <tr>
                 <td><?php echo $cnt; ?></td>
                 <td><?php echo $course_name; ?></td>
                 <td><?php echo $std_cnt; ?></td>
-                <td><a href="edit-course.php?editid=<?php echo $row['ID']; ?>">Edit-Name</a> |
-                  <a href="manage-course.php?delid=<?php echo $row['ID']; ?>" style="color:red" onclick="return confirm('Do you really want to delete this course?');">Delete-Course</a>
+                <td>
+                  <a href="manage-course.php?delid=<?php echo $row['ID']; ?>" style="color:brown" onclick="return confirm('Do you really want to delete this course?');">Delete</a>
               </tr>
             <?php
               $cnt = $cnt + 1;

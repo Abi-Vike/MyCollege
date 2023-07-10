@@ -65,12 +65,7 @@ if (strlen($_SESSION['uid']) == 0) {
                 <tr>
                   <td><?php echo $cnt; ?></td>
                   <td><?php echo $row['Title']; ?></td>
-                  <td>
-                    <a class="text-primary" href="edit-notice.php?notid=<?php echo $row['ID']; ?>" title="Edit Announcement">
-                      <b>View</b>
-                    </a>
-                  </td>
-                  
+                  <td><?php echo $row['Description']; ?></td>
                 </tr>
               <?php
                 $cnt = $cnt + 1;
