@@ -68,7 +68,7 @@ if (strlen($_SESSION['uid']) == 0) {
                   at our university has been thoroughly reviewed by our admissions committee. It is with great pleasure that we extend to
                   you an offer of admission to join our esteemed institution for the upcoming academic year. <br><br>
                   To secure your place in the program, please submit your acceptance and pay the required non-refundable registration fee
-                  of 150 ETB within 20 days of you getting this email. This payment is essential for the processing of your documents
+                  of 300 ETB within 20 days of you getting this email. This payment is essential for the processing of your documents
                   including the making of a student ID for the academic year.<br><br>
                   Should you have any questions or require any further assistance, please do not hesitate to reach out to our
                   admissions office at <a style="color:chocolate">rvu.admissions.sup@gmail.com</a><br><br>

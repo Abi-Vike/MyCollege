@@ -130,7 +130,7 @@ if (strlen($_SESSION['uid'] == 0)) {
             DobEthiopian, Gender, UserPic, CountryOfBirth, TownOfBirth, WoredaOfBirth,
             KebeleOfBirth, FatherFirstName, FatherMiddleName, FatherLastName, MotherFirstName, 
             MotherMiddleName, MotherLastName, ResidenceTown, ResidenceWoreda, ResidenceKebele, 
-            ResidenceHouse, PhoneNumber,PhoneNumber2, MaritalStatus, EmergencyName, 
+            ResidenceHouse, PhoneNumber,PhoneNumber2, Email, MaritalStatus, EmergencyName, 
             EmergencyPhone, EmergencyTown, EmergencyRelation, SchoolName1, SchoolTown1, 
             SchoolLastYear1, SchoolStream1, SchoolName2, SchoolTown2, SchoolLastYear2, 
             SchoolStream2, SchoolName3, SchoolTown3, SchoolLastYear3, SchoolStream3, InsName1, 
@@ -139,7 +139,7 @@ if (strlen($_SESSION['uid'] == 0)) {
             '$admissionType', '$firstname', '$middlename', '$lastname', '$nationality', '$dobGregorian', 
             '$dobEthiopian', '$gender', '$userpic', '$cobirth', '$pobtown', '$pobworeda', '$pobkebele', 
             '$ffirstname', '$fmiddlename', '$flastname', '$mfirstname', '$mmiddlename', '$mlastname', 
-            '$restown', '$resworeda', '$reskebele', '$reshouse', '$phone1', '$phone2', '$marital', 
+            '$restown', '$resworeda', '$reskebele', '$reshouse', '$phone1', '$phone2', '$res_email', '$marital', 
             '$emename', '$emephone', '$emetown', '$emerelation', '$sch_name_1', '$sch_town_1', 
             '$sch_year_1', '$sch_stream_1', '$sch_name_2', '$sch_town_2', '$sch_year_2', '$sch_stream_2', 
             '$sch_name_3', '$sch_town_3', '$sch_year_3', '$sch_stream_3', '$ins_name_1', '$ins_country_1', 
@@ -222,7 +222,7 @@ if (strlen($_SESSION['uid'] == 0)) {
     <link rel="stylesheet" type="text/css" href="app-assets/css/app.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/menu/menu-types/vertical-menu-modern.css">
     <link rel="stylesheet" type="text/css" href="app-assets/css/core/colors/palette-gradient.css">
-    <link rel="stylesheet" type="text/css" href="app-assets/css//custom2.css">
+    <link rel="stylesheet" type="text/css" href="app-assets/css/custom2.css">
   </head>
 
   <body onbeforeunload="return myFunction()" class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
@@ -255,7 +255,6 @@ if (strlen($_SESSION['uid'] == 0)) {
 
           $query_email = mysqli_query($con, "select Email from tbluser where Id=$stuid");
           $res_email = mysqli_fetch_assoc($query_email);
-
 
           if ($rw > 0) {
             $query_docs = mysqli_query($con, "select * from tbldocument where  UserID=$stuid");
@@ -1364,6 +1363,7 @@ if (strlen($_SESSION['uid'] == 0)) {
     </div>
     <?php include('includes/footer.php'); ?>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--Purpose Specific Scripts-->
     <!--applicant image input validator-->
     <script>
@@ -1410,15 +1410,6 @@ if (strlen($_SESSION['uid'] == 0)) {
     <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app.js" type="text/javascript"></script>
-
-
-    <script>
-      // onbeforeunload function to warn the user if they try to refresh or leave the page. 
-      //function myFunction() {
-      //  return "You have unsaved changes! ";
-      //}
-    </script>
-
   </body>
 
   </html>

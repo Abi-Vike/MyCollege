@@ -2,6 +2,8 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+require_once 'includes/emailer.php';
+
 if (strlen($_SESSION['aid'] == 0)) {
   header('location:logout.php');
 } else {
@@ -64,7 +66,7 @@ if (strlen($_SESSION['aid'] == 0)) {
             <?php
             //$ret=mysqli_query($con,"SELECT * FROM tbladmissions, tbladmapplications.CourseApplied, tbladmapplications.ID, tbladmapplications.FirstName, tbladmapplications.MiddleName FROM tbladmissions INNER JOIN tbladmapplications on tbladmissions.Adm_App_ID=tbladmissions.Adm_App_ID");
             //$ret = mysqli_query($con, "SELECT * FROM tbladmissions Where Adm_App_ID = '63' AND Adm_Status='accepted'");
-            $data = mysqli_query($con, "SELECT tbladmissions.*, tbladmapplications.UserID ,tbladmapplications.FirstName, tbladmapplications.MiddleName, tbladmapplications.CourseApplied, tbladmapplications.AdmissionType FROM tbladmissions INNER JOIN tbladmapplications ON tbladmissions.Adm_App_ID = tbladmapplications.ID WHERE tbladmissions.Adm_Status = 'accepted'");
+            $data = mysqli_query($con, "SELECT tbladmissions.*, tbladmapplications.UserID ,tbladmapplications.FirstName, tbladmapplications.MiddleName, tbladmapplications.CourseApplied, tbladmapplications.AdmissionType, tbladmapplications.Email FROM tbladmissions INNER JOIN tbladmapplications ON tbladmissions.Adm_App_ID = tbladmapplications.ID WHERE tbladmissions.Adm_Status = 'accepted'");
             $cnt = 1;
             while ($row = mysqli_fetch_array($data)) {
               $pay = mysqli_fetch_array(mysqli_query($con, "SELECT Pay_Confirmed FROM tblpayments WHERE Application_ID = " . $row["Adm_App_ID"]));
@@ -87,8 +89,15 @@ if (strlen($_SESSION['aid'] == 0)) {
                   <td>
                     <?php
                     $offer_acc_date = date('d-M', strtotime($row['Adm_Accept_Date']));
+                    $toemail = $row['Email'];
+                    $ID_i = $row['Adm_App_ID'];
+                    $FirstName_i = $row['FirstName'];
+                    $CourseApplied_i = $row['CourseApplied'];
+                    $AdmissionType_i = $row['AdmissionType'];
                     // need to make it send an email reminder to applicant
-                    echo "Unpaid (Offer Accepted On $offer_acc_date) - <a href='#'><button class='btn btn-warning cust_but'>Remind</button></a>"; ?>
+                    echo "Unpaid (Offer Accepted On $offer_acc_date) -";
+                    ?>
+                    <button type="button" name="submit" class="btn btn-warning cust_but" onclick="sendReminder('<?php echo $toemail; ?>', '<?php echo $ID_i; ?>', '<?php echo $FirstName_i; ?>', '<?php echo $CourseApplied_i; ?>', '<?php echo $AdmissionType_i; ?>')">Remind</button>
                   </td>
                 <?php
                 }
@@ -105,6 +114,32 @@ if (strlen($_SESSION['aid'] == 0)) {
 
     <!-- ////////////////////////////////////////////////////////////////////////////-->
     <?php include('includes/footer.php'); ?>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function sendReminder(toemail, ID_i, FirstName_i, CourseApplied_i, AdmissionType_i) {
+        $.ajax({
+          type: 'POST',
+          url: 'send_reminder.php',
+          data: {
+            toemail: toemail,
+            ID_i: ID_i,
+            FirstName_i: FirstName_i,
+            CourseApplied_i: CourseApplied_i,
+            AdmissionType_i: AdmissionType_i
+          },
+          success: function(response) {
+            // Handle the response from the PHP script if needed
+            alert("Email reminder just sent to applicant!");
+          },
+          error: function(xhr, status, error) {
+            // Handle errors if the AJAX request fails
+            console.error(error);
+            alert("System was unable to send an email reminder to the applicant! Please reach out to tech team.");
+          }
+        });
+      }
+    </script>
 
     <script src="app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
     <script src="app-assets/js/core/app-menu.js" type="text/javascript"></script>
