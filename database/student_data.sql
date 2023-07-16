@@ -95,16 +95,6 @@ CREATE TABLE `tbladmapplications` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbladmapplications`
---
-
-INSERT INTO `tbladmapplications` (`ID`, `UserId`, `CourseApplied`, `AdmissionType`, `FirstName`, `MiddleName`, `LastName`, `Nationality`, `DobGregorian`, `DobEthiopian`, `Gender`, `UserPic`, `CountryOfBirth`, `TownOfBirth`, `WoredaOfBirth`, `KebeleOfBirth`, `FatherFirstName`, `FatherMiddleName`, `FatherLastName`, `MotherFirstName`, `MotherMiddleName`, `MotherLastName`, `ResidenceTown`, `ResidenceWoreda`, `ResidenceKebele`, `ResidenceHouse`, `PhoneNumber`, `PhoneNumber2`, `Email`, `MaritalStatus`, `EmergencyName`, `EmergencyPhone`, `EmergencyTown`, `EmergencyRelation`, `SchoolName1`, `SchoolTown1`, `SchoolLastYear1`, `SchoolStream1`, `SchoolName2`, `SchoolTown2`, `SchoolLastYear2`, `SchoolStream2`, `SchoolName3`, `SchoolTown3`, `SchoolLastYear3`, `SchoolStream3`, `InsName1`, `InsCountry1`, `InsLastYear1`, `InsMajor1`, `InsName2`, `InsCountry2`, `InsLastYear2`, `InsMajor2`, `InsName3`, `InsCountry3`, `InsLastYear3`, `InsMajor3`, `Declaration`, `Signature`, `CourseApplieddate`, `AdminRemark`, `AdminStatus`, `AdminRemarkDate`) VALUES
-(68, '72', 'Business Administration', 'evening', 'Tomas', 'Yemane', 'Berhe', 'Eritrean', '1999-01-01', '1997-01-01', 'Male', 'Tomas_c1097ef51ec75eaa9c25f978dee477c1.jpg', 'Eritrea', 'Asmara', '', '', 'Abiel', 'Abrham', 'Yacob', 'Abiel', 'Abrham', 'Yacob', 'Asmara', '5', '5', '5', '+251996113866', '+251996113866', NULL, 'Single', 'Yosief Habtegabr', '+251996113866', 'Asmara', 'family', 'Failth Mission Highschool', 'Asmara', '2017', 'Science', '', '', '', '', '', 'Asmara', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, 'Romas Yemane Berhe', '2023-06-27 23:17:29', '', '1', '2023-06-27 23:18:28'),
-(75, '71', 'Computer Science', 'regular', 'Abiel', 'Abrham', 'Yacob', 'Eritrean', '2023-06-16', '2023-06-14', 'Male', 'Abiel_e285509fa183f85b08fa8dd951d91bdf.jpg', 'Eritrea', 'Asmara', '5', '6', 'Abiel', 'Abrham', 'Yacob', 'Abiel', 'Abrham', 'Yacob', 'Asmara', '5', '5', '', '+251996113866', '+251996113866', NULL, 'Single', 'Yosief Habtegabr', '+251996113866', 'Asmara', 'friend', 'Failth Mission Highschool', 'Asmara', '2017', 'Science', '', '', '', '', '', 'Asmara', '', '', '', '', '', '', '', '', '', '', '', '', '', '', NULL, 'Abiel Abrham Yacob', '2023-06-28 11:17:12', '', '1', '2023-06-30 22:10:19');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbladmin`
 --
 
@@ -138,16 +128,6 @@ CREATE TABLE `tbladmissions` (
   `Adm_Accept_Date` timestamp NULL DEFAULT NULL,
   `Adm_Pay_Date` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tbladmissions`
---
-
-INSERT INTO `tbladmissions` (`Adm_App_ID`, `Adm_Course`, `Adm_Status`, `Adm_Payment_Status`, `Adm_Offer_Date`, `Adm_Accept_Date`, `Adm_Pay_Date`) VALUES
-(68, 'Business Administration', 'accepted', 'paid', '2023-06-27 23:18:28', '2023-06-30 15:21:27', '2023-06-28 09:23:28'),
-(75, 'Computer Science', 'accepted', 'unpaid', '2023-06-30 22:10:19', '2023-06-30 22:14:44', NULL);
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `tblcourse`
@@ -190,11 +170,6 @@ CREATE TABLE `tbldocument` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbldocument`
---
---------------------------------------------------------
-
---
 -- Table structure for table `tblnotice`
 --
 
@@ -211,7 +186,7 @@ CREATE TABLE `tblnotice` (
 
 INSERT INTO `tblnotice` (`ID`, `Title`, `Description`, `CreationDate`) VALUES
 (3, 'Class Start Date for Fall 2023 Semester', 'Dear Student,\r\n\r\nWe are excited to announce that the Fall 2023 semester is just around the corner. Classes are scheduled to commence on the 20th of September, 2023. \r\n\r\nBefore the class start date, we kindly request that you report to the Registrar\'s Office and collect your student identification card (ID). It is mandatory for every student to have their physical IDs with them at all times during the academic year. Please ensure that you visit the Registrar\'s Office and obtain your ID no later than the 19th of September, 2023.\r\n\r\nWe wish you all the best for the upcoming semester. Should you have any questions or require further information, please don\'t hesitate to reach out to the Registrar\'s Office or email rvu.admissions.sup@gmail.com.\r\n\r\nBest regards,\r\nRift Valley University', '2021-10-26 03:36:07'),
-(5, 'Test', 'NEW ONE', '2023-06-28 15:42:36');
+(4, 'Exit Exam Information', 'You will have to pass the National Exit exam after four years in order to graduate.', '2023-06-28 15:42:36');
 
 -- --------------------------------------------------------
 
@@ -231,15 +206,6 @@ CREATE TABLE `tblpayments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tblpayments`
---
-
-INSERT INTO `tblpayments` (`Application_ID`, `Payer_ID`, `Payer_Name`, `Pay_Ref`, `Pay_Date`, `Pay_Receipt`, `Pay_Confirmed`, `Pay_Reg_Date`) VALUES
-(68, 72, 'Tomas', 'FT22274GL985', '2022-10-01', 'GRE report.jpg', 'verified', '2023-06-28 09:23:28');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tblregistered`
 --
 
@@ -249,15 +215,6 @@ CREATE TABLE `tblregistered` (
   `Reg_Course` varchar(120) DEFAULT NULL,
   `Reg_date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `tblregistered`
---
-
-INSERT INTO `tblregistered` (`Reg_ID`, `Reg_User_ID`, `Reg_Course`, `Reg_date`) VALUES
-(1008, 72, 'Business Administration', '2023-06-28 09:23:40');
-
--- --------------------------------------------------------
 
 --
 -- Table structure for table `tbluser`
